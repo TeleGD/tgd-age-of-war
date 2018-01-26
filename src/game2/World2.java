@@ -46,11 +46,13 @@ public class World2 extends BasicGameState {
     	
     	//les trucs
     	dieu.render(container, game, g);
+    	
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     	dieu.update(container, game, delta);
+    	//player.update(container, game, delta);
     }
     
     public static void reset() {
@@ -67,7 +69,7 @@ public class World2 extends BasicGameState {
 		dieu.keyPressed(key, c);
 	}
 	
-	public void keyRelead(int key, char c){
+	public void keyReleased(int key, char c){
 		dieu.keyReleased(key, c);
 	}
 	
