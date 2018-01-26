@@ -30,7 +30,7 @@ public class World2 extends BasicGameState {
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	player = new Player(0,0, new Rectangle(6, 0, 20, 32));
+    	player = new Player(10,400, new Rectangle(6, 0, 20, 32));
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
@@ -79,10 +79,12 @@ public class World2 extends BasicGameState {
 	
 	public void keyPressed(int key, char c){
 		dieu.keyPressed(key, c);
+		player.keyPressed(key, c);
 	}
 	
 	public void keyReleased(int key, char c){
 		dieu.keyReleased(key, c);
+		player.keyReleased(key, c);
 	}
 	
 	public static ArrayList<Tetris> getTetrisList(){
