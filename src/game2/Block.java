@@ -36,7 +36,7 @@ public class Block {
 		posy = y;
 	}
 	
-	public void setSprite(String url){
+	public void setSprite(String url) throws SlickException{
 		sprite = new Image(url);
 	}
 }
