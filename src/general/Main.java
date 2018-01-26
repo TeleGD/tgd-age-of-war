@@ -39,6 +39,8 @@ public class Main extends StateBasedGame{
 		addState(new WelcomeMenu());
 		addState(new MainMenu());
 		addState(new World());
+		addState(new game1.World1());
+		addState(new game2.World2());
 		this.enterState(WelcomeMenu.ID);
 	}
 }
