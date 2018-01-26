@@ -21,6 +21,8 @@ public class World1 extends BasicGameState {
 	public static int ID=7;
 	public static String name = "Age of War";
 	
+	public Image fond;
+	
 	public int goldInit = 50;
 	public int HPInit = 100;
 	
@@ -34,11 +36,12 @@ public class World1 extends BasicGameState {
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-
+    	fond = new Image("images/game1/fond.png");
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    	g.drawImage(fond,0,0);
     	g.setColor(Color.green);
     	g.fillRect(50, 50, 50, 50);
     	m1.render(container, game, g);
