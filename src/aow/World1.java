@@ -12,6 +12,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import aow.entity.Player;
+import aow.entity.minions.Minion1;
 
 import java.util.*;
 
@@ -26,6 +27,11 @@ public class World1 extends BasicGameState {
 	public Player p1 = new Player(1,goldInit,HPInit);
 	public Player p2 = new Player(2,goldInit,HPInit);
 	
+	public Board board = new Board(20,130,1150);
+	public Minion1 m1 = new Minion1(3,100, p1, board );
+	public Minion1 m2 = new Minion1(5,100, p1, board );
+
+	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
 
@@ -35,6 +41,8 @@ public class World1 extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
     	g.setColor(Color.green);
     	g.fillRect(50, 50, 50, 50);
+    	m1.render(container, game, g);
+    	m2.render(container, game, g);
     }
 
 
