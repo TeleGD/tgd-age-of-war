@@ -47,7 +47,8 @@ public class World1 extends BasicGameState {
     	g.drawImage(fond,0,0);
     	g.setColor(Color.green);
     	g.fillRect(50, 50, 50, 50);
-    	
+    	p1.render(container,game,g);
+    	p2.render(container,game,g);
     	for(Minion1 m : minions){
 			m.render(container,game,g);
 		}
