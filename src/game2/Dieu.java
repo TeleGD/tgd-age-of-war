@@ -65,7 +65,6 @@ public class Dieu {
 			upDown = true;
 			break;
 		case Input.KEY_Q:
-			System.out.println("q");
 			left = true;
 			rightLeft = true;
 			break;
