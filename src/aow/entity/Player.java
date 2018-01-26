@@ -1,13 +1,15 @@
 package aow.entity;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Player {
-	
 	
 	
 	private int PV; //pts de vie de la base
@@ -80,24 +82,25 @@ public class Player {
 		if(ID==1)
 		{
 			g.setColor(new Color(153,0,0));
-			g.fillRect(6, 247, 120, 18);
+			g.fillRect(6, 229, 120, 18);
 		
 			g.setColor(new Color(255,0,0));
-			g.fillRect(6, 247, 120*(int)(PV/PVMax), 18);
+			g.fillRect(6, 229, 120*(int)(PV/PVMax), 18);
 			
-			g.drawString(""+((double)(PV)/PVMax)*100, 6, 247);
-		}
-		
-		
+			g.setColor(Color.white);
+			g.drawString(""+((double)(PV)/PVMax)*100+" %", 8, 229);
+			
+		}		
 		else //deux joueur
 		{
 			g.setColor(new Color(153,0,0));
-			g.fillRect(594, 247, 120, 18); //
+			g.fillRect(1151, 229, 120, 18); //
 			
 			g.setColor(new Color(255,0,0));
-			g.fillRect(594, 247, 120*(int)(PV/PVMax), 18);
+			g.fillRect(1151, 229, 120*(int)(PV/PVMax), 18);
 			
-			g.drawString(""+((double)(PV)/PVMax)*100, 594, 247);
+			g.setColor(Color.white);
+			g.drawString(""+((double)(PV)/PVMax)*100+" %", 1153, 229);
 		}
 	}
 	
