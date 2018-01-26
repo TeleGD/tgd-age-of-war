@@ -1,5 +1,7 @@
 package game2;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -16,10 +18,10 @@ public class Dieu {
 	private Tetris controlledBlock;
 	
 	public Dieu() throws SlickException {
-		sprite = new Image("images/TetrisPolyBrdige/dieu.png");
+		sprite = new Image("images/TetrisPolyBridge/dieu.png");
 		x = 360;
 		y = 0;
-		speed = 0;
+		speed = 1;
 		controlledBlockX = 360;
 		controlledBlockY = 32;
 		left = false;
@@ -40,7 +42,6 @@ public class Dieu {
 	
 	public void nextBlock() {
 		double r = Math.random() * TETRIS_NUM;
-		
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
@@ -64,6 +65,7 @@ public class Dieu {
 			upDown = true;
 			break;
 		case Input.KEY_Q:
+			System.out.println("q");
 			left = true;
 			rightLeft = true;
 			break;
@@ -96,6 +98,7 @@ public class Dieu {
 			break;
 		case Input.KEY_Q:
 			left = false;
+			rightLeft = false;
 			break;
 		case Input.KEY_D:
 			right = false;
