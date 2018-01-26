@@ -4,11 +4,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Block {
+	//en haut à gauche
 	private int posx;
 	private int posy;
+	
 	private int angle;
 	private int vitesse;
-	private boolean hit;
 	
 	//sprite
 	private Image sprite;
@@ -20,10 +21,6 @@ public class Block {
 		angle = 0;
 		vitesse = 0;
 		hit = false;
-	}
-	
-	public void testHit(){
-		
 	}
 	
 	public int getPosx(){
