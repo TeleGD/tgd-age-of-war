@@ -20,7 +20,7 @@ public class World2 extends BasicGameState {
 	private Tetris tetris;
 	private Dieu dieu;
 	
-	private ArrayList<Tetris> tetrisList;
+	private static ArrayList<Tetris> tetrisList;
 	
 	//private Image fond;
 	//private String urlFond = "images/TetrisPolyBridge/fond.png";
