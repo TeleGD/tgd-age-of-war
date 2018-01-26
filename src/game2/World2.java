@@ -21,7 +21,7 @@ public class World2 extends BasicGameState {
 	private Dieu dieu;
 	
 	//private Image fond;
-	private String urlFond = "";
+	//private String urlFond = "images/TetrisPolyBrdige/fond.png";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
