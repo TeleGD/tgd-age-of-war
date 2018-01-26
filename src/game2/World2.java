@@ -19,18 +19,26 @@ public class World2 extends BasicGameState {
 	private Player player;
 	private Tetris tetris;
 	private Dieu dieu;
+	
+	//private Image fond;
+	private String urlFond = "";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	player = new Player(0,0);
+    	//player = new Player(0,0);
     	tetris = new Tetris(0);
     	dieu = new Dieu();
+    	//fond = new Image(urlFond);
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-    	g.setColor(Color.green);
-    	g.fillRect(50, 50, 50, 50);
+    	//ciel
+    	g.setColor(Color.cyan);
+    	g.fillRect(0,0, 1280, 720);
+    	
+    	//fond avec image
+    	//g.drawImage(fond, 0, 0);
     }
 
     @Override
