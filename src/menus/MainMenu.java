@@ -11,7 +11,7 @@ public class MainMenu extends Menu{
 	public static int ID = -3;	
 	
 	public MainMenu(){
-		super.setTitrePrincipal("CECI EST UN TITRE QU'IL FAUDRA CHANGER AVEC UN MAGNIFIQUE JEU DE MOT !");
+		super.setTitrePrincipal("TGD-LEBUREAUCTMIEUXAVANT-GAME");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
 		
 		super.setItems(aow.World1.name,game2.World2.name,"Scores", "Quitter");
