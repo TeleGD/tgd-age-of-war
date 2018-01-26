@@ -22,9 +22,9 @@ public class World2 extends BasicGameState {
 	private Tetris tetris;
 	private Dieu dieu;
 	
-	private Shape shape1;
-	private Shape shape2;
-	private Shape shape3;
+	private static Shape shape1;
+	private static Shape shape2;
+	private static Shape shape3;
 	
 	private static ArrayList<Tetris> tetrisList;
 	
@@ -50,10 +50,6 @@ public class World2 extends BasicGameState {
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-    	//ciel
-    	g.setColor(Color.cyan);
-    	g.fillRect(0,0, 1280, 720);
-    	
     	//fond avec image
     	g.drawImage(fond, 0, 0);
     	
@@ -107,15 +103,15 @@ public class World2 extends BasicGameState {
 		tetrisList = tetList;
 	}
 	
-	public Shape getShape1(){
+	public static Shape getShape1(){
 		return shape1;
 	}
 	
-	public Shape getShape2(){
+	public static Shape getShape2(){
 		return shape2;
 	}
 	
-	public Shape getShape3(){
+	public static Shape getShape3(){
 		return shape3;
 	}
 
