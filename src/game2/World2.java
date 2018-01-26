@@ -73,7 +73,7 @@ public class World2 extends BasicGameState {
 		dieu.keyReleased(key, c);
 	}
 	
-	public ArrayList<Tetris> getTetrisList(){
+	public static ArrayList<Tetris> getTetrisList(){
 		return tetrisList;
 	}
 
