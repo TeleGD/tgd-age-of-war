@@ -30,7 +30,7 @@ public class World2 extends BasicGameState {
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	player = new Player(10,400, new Rectangle(6, 0, 20, 32));
+    	player = new Player(45,400 - 16, new Rectangle(6, 0, 20, 32));
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
@@ -45,8 +45,6 @@ public class World2 extends BasicGameState {
     	//ciel
     	g.setColor(Color.cyan);
     	g.fillRect(0,0, 1280, 720);
-    	g.setColor(Color.black);
-    	g.fillRect(1080, 0, 1280, 720);
     	
     	//fond avec image
     	g.drawImage(fond, 0, 0);
@@ -54,7 +52,9 @@ public class World2 extends BasicGameState {
     	//les trucs
     	dieu.render(container, game, g);
     	player.render(container, game, g);
-    	
+
+    	g.setColor(Color.black);
+    	g.fillRect(1080, 0, 1280, 720);
     	g.setColor(Color.white);
     	g.drawString("Time : " + ((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1085, 100);
     	
