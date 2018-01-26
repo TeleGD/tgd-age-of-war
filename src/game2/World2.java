@@ -16,10 +16,15 @@ public class World2 extends BasicGameState {
 	
 	public static int ID=77;
 	public static String name = "Tetris PolyBridge";
+	private Player player;
+	private Tetris tetris;
+	private Dieu dieu;
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-
+    	player = new Player(0,0);
+    	tetris = new Tetris(0);
+    	dieu = new Dieu();
     }
 
     @Override

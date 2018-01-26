@@ -1,4 +1,4 @@
-package game1;
+package aow;
 
 import general.ui.Button;
 import general.ui.TGDComponent;
@@ -15,7 +15,7 @@ import java.util.*;
 public class World1 extends BasicGameState {
 	
 	public static int ID=7;
-	public static String name = "Bras de Fer";
+	public static String name = "Age of War";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
