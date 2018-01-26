@@ -20,22 +20,25 @@ public class World1 extends BasicGameState {
 	
 	public static int ID=7;
 	public static String name = "Age of War";
-	
-	public Image fond;
-	
+	public static ArrayList<Minion1> minions;
+
 	public int goldInit = 50;
 	public int HPInit = 100;
 	
+	public Image fond;
+	
+	public static Board board = new Board(20,130,1150);
+
 	public Player p1 = new Player(1,goldInit,HPInit);
 	public Player p2 = new Player(2,goldInit,HPInit);
-	
-	public Board board = new Board(20,130,1150);
-	public Minion1 m1 = new Minion1(3,100, p1, board );
-	public Minion1 m2 = new Minion1(5,100, p1, board );
+
 
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
+    	minions = new ArrayList<Minion1>();
+    	Minion1 m1 = new Minion1(3,100, 1 );
+    	Minion1 m2 = new Minion1(5,100, 1 );
     	fond = new Image("images/game1/fond.png");
     }
 
@@ -44,8 +47,10 @@ public class World1 extends BasicGameState {
     	g.drawImage(fond,0,0);
     	g.setColor(Color.green);
     	g.fillRect(50, 50, 50, 50);
-    	m1.render(container, game, g);
-    	m2.render(container, game, g);
+    	
+    	for(Minion1 m : minions){
+			m.render(container,game,g);
+		}
     }
 
 
