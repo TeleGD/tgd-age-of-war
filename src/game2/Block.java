@@ -1,10 +1,13 @@
 package game2;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class Block {
-	//en haut à gauche
+	//au centre du block
 	private int posx;
 	private int posy;
 	
@@ -14,12 +17,16 @@ public class Block {
 	//sprite
 	private Image sprite;
 	
-	public Block(String url) throws SlickException{
-		posx = 0;
-		posy = 0;
+	public Block(String url,int x, int y) throws SlickException{
+		posx = x;
+		posy = y;
 		sprite = new Image(url);
 		angle = 0;
 		vitesse = 0;
+	}
+	
+	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+		
 	}
 	
 	public int getPosx(){
