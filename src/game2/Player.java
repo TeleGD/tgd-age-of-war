@@ -37,7 +37,6 @@ public class Player {
 		this.hitBoxChar=hitBoxChar;
 		try {
 			image=new Image("images/TetrisPolyBridge/player.png");
-			image=image.getScaledCopy((float) 0.05);
 		} catch (SlickException e) {
 			// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 			e.printStackTrace();
@@ -64,6 +63,8 @@ public class Player {
 		}
 		tetrisList = World2.getTetrisList();
 		for (int i=0; i <= World2.getTetrisList().size(); i++){
+			if (i. 
+			
 		}
 	}
 	
