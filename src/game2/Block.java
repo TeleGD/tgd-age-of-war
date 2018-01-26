@@ -1,5 +1,7 @@
 package game2;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Block {
 	private int posx;
@@ -8,7 +10,7 @@ public class Block {
 	//sprite
 	private Image sprite;
 	
-	public Block(String url){
+	public Block(String url) throws SlickException{
 		posx = 0;
 		posy = 0;
 		sprite = new Image(url);
@@ -22,11 +24,19 @@ public class Block {
 		return posy;
 	}
 	
+	public Image getSprite(){
+		return sprite;
+	}
+	
 	public void setPosx(int x){
 		posx = x;
 	}
 	
 	public void setPosy(int y){
 		posy = y;
+	}
+	
+	public void setSprite(String url){
+		sprite = new Image(url);
 	}
 }
