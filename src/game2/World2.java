@@ -20,14 +20,19 @@ public class World2 extends BasicGameState {
 	private Tetris tetris;
 	private Dieu dieu;
 	
+	private ArrayList<Tetris> tetrisList;
+	
 	//private Image fond;
 	//private String urlFond = "images/TetrisPolyBrdige/fond.png";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	//player = new Player(0,0);
+    	player = new Player(0,0);
     	tetris = new Tetris(0);
     	dieu = new Dieu();
+    	
+    	tetrisList = new ArrayList<Tetris>();
+    	
     	//fond = new Image(urlFond);
     }
 
@@ -43,7 +48,7 @@ public class World2 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-
+    	
     }
     
     public static void reset() {
