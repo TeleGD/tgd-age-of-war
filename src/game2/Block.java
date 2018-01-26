@@ -20,7 +20,6 @@ public class Block {
 		sprite = new Image(url);
 		angle = 0;
 		vitesse = 0;
-		hit = false;
 	}
 	
 	public int getPosx(){
