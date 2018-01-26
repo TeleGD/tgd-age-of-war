@@ -1,4 +1,4 @@
-package game1;
+package aow;
 
 import general.ui.Button;
 import general.ui.TGDComponent;
