@@ -14,7 +14,7 @@ public class MainMenu extends Menu{
 		super.setTitrePrincipal("CECI EST UN TITRE QU'IL FAUDRA CHANGER AVEC UN MAGNIFIQUE JEU DE MOT !");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
 		
-		super.setItems("Tetris PolyBridge","Bras de fer","Scores", "Quitter");
+		super.setItems(game1.World1.name,game2.World2.name,"Scores", "Quitter");
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
