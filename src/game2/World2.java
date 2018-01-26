@@ -54,7 +54,7 @@ public class World2 extends BasicGameState {
     	dieu.render(container, game, g);
     	
     	g.setColor(Color.white);
-    	g.drawString("Time : " + ((time/1000)/60)/60 + "h " + (time/1000)/60 + "min " + ((time/1000)%60)%60  + "s", 1110, 100);
+    	g.drawString("Time : " + ((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1085, 100);
     	
     }
 
