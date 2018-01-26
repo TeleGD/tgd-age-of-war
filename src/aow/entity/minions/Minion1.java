@@ -35,7 +35,7 @@ public class Minion1 {
 //		this.board = board;
 //		this.player = player;
 		this.id = id;
-		this.x = World1.board.getCorner(posX);
+		this.x = World1.board.getX(posX);
 		this.y= y;
 		this.currentPosX = posX;
 		this.nextPosX = posX;
