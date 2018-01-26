@@ -28,7 +28,7 @@ public class World2 extends BasicGameState {
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	player = new Player(0,0);
-    	tetris = new Tetris(0);
+    	//tetris = new Tetris(0);
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
@@ -44,11 +44,14 @@ public class World2 extends BasicGameState {
     	
     	//fond avec image
     	//g.drawImage(fond, 0, 0);
+    	
+    	//les trucs
+    	dieu.render(container, game, g);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-    	
+    	dieu.update(container, game, delta);
     }
     
     public static void reset() {
