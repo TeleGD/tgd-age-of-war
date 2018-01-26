@@ -1,9 +1,18 @@
 package game2;
 
+import java.util.ArrayList;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
+import game2.World2;
+
 
 public class Player {
 
@@ -18,23 +27,44 @@ public class Player {
 	private double speedX;
 	private double speedY;
 	private double gravity;
+	private ArrayList<Tetris> tetrisList;
+	private Shape hitBoxChar ;
+	private Image image;
 	
-	
-	public Player (int x,  int y){
+	public Player (int x,  int y, Shape hitBoxChar ){
 		this.x=x;
 		this.y=y;
+		this.hitBoxChar=hitBoxChar;
+		try {
+			image=new Image("images/TetrisPolyBridge/player.png");
+			image=image.getScaledCopy((float) 0.05);
+		} catch (SlickException e) {
+			// nous donne la trace de l'erreur si on ne peut charger l'image correctement
+			e.printStackTrace();
+		}
 	}
+	
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
+		arg2.setColor(Color.green);
+		arg2.drawImage(image, (float)(x-image.getWidth()/2), (float)(y-image.getHeight()/2));
+	}
+	
+	
 	
 	public void update(GameContainer arg0, StateBasedGame arg1, int delta) throws SlickException {
 		move(delta);
 		speedY = speedY - gravity*delta;
+		collapse();
+	
 	}
 	
 	public void collapse() {
-		
-		
-	
-	
+		if (this.x-1 >= 500) {
+			speedY = 0;
+		}
+		tetrisList = World2.getTetrisList();
+		for (int i=0; i <= World2.getTetrisList().size(); i++){
+		}
 	}
 	
 	
@@ -78,6 +108,7 @@ public class Player {
 			if (isInJump = true && y<0 && y>720  ){
 				this.y = this.y + speedY*delta;
 		}
+			this.hitBoxChar = new Rectangle((int)x+6,(int)y,20,32);
 	}
 		
 	
