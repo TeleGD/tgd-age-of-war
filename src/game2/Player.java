@@ -63,7 +63,7 @@ public class Player {
 		}
 		tetrisList = World2.getTetrisList();
 		for (int i=0; i <= World2.getTetrisList().size(); i++){
-			if (i. 
+			
 			
 		}
 	}

@@ -6,6 +6,7 @@ import general.utils.FontUtils;
 import menus.MainMenu;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -29,7 +30,7 @@ public class World2 extends BasicGameState {
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	player = new Player(0,0);
+    	player = new Player(0,0, new Rectangle(6, 0, 20, 32));
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
@@ -52,6 +53,7 @@ public class World2 extends BasicGameState {
     	
     	//les trucs
     	dieu.render(container, game, g);
+    	player.render(container, game, g);
     	
     	g.setColor(Color.white);
     	g.drawString("Time : " + ((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1085, 100);
