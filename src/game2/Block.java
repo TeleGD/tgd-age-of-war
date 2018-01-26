@@ -89,4 +89,13 @@ public class Block {
 	public void setVity(double fast){
 		vity = fast;
 	}
+
+	public Shape getHitbox() {
+		return hitbox;
+	}
+
+	public void setHitbox(Shape hitbox) {
+		this.hitbox = hitbox;
+	}
+	
 }
