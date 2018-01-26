@@ -22,6 +22,8 @@ public class World2 extends BasicGameState {
 	
 	private static ArrayList<Tetris> tetrisList;
 	
+	private int time;
+	
 	//private Image fond;
 	//private String urlFond = "images/TetrisPolyBridge/fond.png";
 
@@ -32,6 +34,8 @@ public class World2 extends BasicGameState {
     	
     	tetrisList = new ArrayList<Tetris>();
     	
+    	time = 0;
+    	
     	//fond = new Image(urlFond);
     }
 
@@ -40,6 +44,8 @@ public class World2 extends BasicGameState {
     	//ciel
     	g.setColor(Color.cyan);
     	g.fillRect(0,0, 1280, 720);
+    	g.setColor(Color.black);
+    	g.fillRect(1080, 0, 1280, 720);
     	
     	//fond avec image
     	//g.drawImage(fond, 0, 0);
@@ -47,12 +53,16 @@ public class World2 extends BasicGameState {
     	//les trucs
     	dieu.render(container, game, g);
     	
+    	g.setColor(Color.white);
+    	g.drawString("Time : " + time/1000 + "h" + time/1000 + "min" + time/1000 + "s", 1100, 100);
+    	
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     	dieu.update(container, game, delta);
     	//player.update(container, game, delta);
+    	time += delta;
     }
     
     public static void reset() {
