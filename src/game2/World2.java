@@ -7,6 +7,7 @@ import menus.MainMenu;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -20,6 +21,10 @@ public class World2 extends BasicGameState {
 	private Player player;
 	private Tetris tetris;
 	private Dieu dieu;
+	
+	private Shape shape1;
+	private Shape shape2;
+	private Shape shape3;
 	
 	private static ArrayList<Tetris> tetrisList;
 	
@@ -36,8 +41,11 @@ public class World2 extends BasicGameState {
     	tetrisList = new ArrayList<Tetris>();
     	
     	time = 0;
-    	
     	fond = new Image(urlFond);
+    	
+    	shape1 = new Rectangle(0,400, 100, 720);
+    	shape2 = new Rectangle(980, 400, 1080, 720);
+    	shape3 = new Rectangle(100, 572, 980, 720);
     }
 
     @Override
@@ -97,6 +105,18 @@ public class World2 extends BasicGameState {
 
 	public static void setTetrisList(ArrayList<Tetris> tetList){
 		tetrisList = tetList;
+	}
+	
+	public Shape getShape1(){
+		return shape1;
+	}
+	
+	public Shape getShape2(){
+		return shape2;
+	}
+	
+	public Shape getShape3(){
+		return shape3;
 	}
 
 }
