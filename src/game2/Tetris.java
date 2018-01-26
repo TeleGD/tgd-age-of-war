@@ -64,4 +64,30 @@ public class Tetris {
 			}
 		} 
 	}
+
+	public Block[][] getMatrice() {
+		return matrice;
+	}
+
+	public void setMatrice(Block[][] matrice) {
+		this.matrice = matrice;
+	}
+
+	public int getXcentre() {
+		return xcentre;
+	}
+
+	public void setXcentre(int xcentre) {
+		this.xcentre = xcentre;
+	}
+
+	public int getYcentre() {
+		return ycentre;
+	}
+
+	public void setYcentre(int ycentre) {
+		this.ycentre = ycentre;
+	}
+	
+	
 }
