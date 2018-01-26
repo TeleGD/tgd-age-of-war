@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Tetris {
-	private Block[][] matrice;
+	private Block[][] matrice = new Block[4][4];
 	private int x,y,xcentre,ycentre;
 	private double angle,vx,vy;
 	private String sprite;
@@ -56,5 +56,38 @@ public class Tetris {
 	
 	public void rotate(double vangle) {
 		angle+=vangle;
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (matBool[i][j]) {
+					matrice[i][j].setAngle(angle);
+				}
+			}
+		} 
 	}
+
+	public Block[][] getMatrice() {
+		return matrice;
+	}
+
+	public void setMatrice(Block[][] matrice) {
+		this.matrice = matrice;
+	}
+
+	public int getXcentre() {
+		return xcentre;
+	}
+
+	public void setXcentre(int xcentre) {
+		this.xcentre = xcentre;
+	}
+
+	public int getYcentre() {
+		return ycentre;
+	}
+
+	public void setYcentre(int ycentre) {
+		this.ycentre = ycentre;
+	}
+	
+	
 }
