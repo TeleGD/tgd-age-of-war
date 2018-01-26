@@ -25,8 +25,8 @@ public class World2 extends BasicGameState {
 	
 	private int time;
 	
-	//private Image fond;
-	//private String urlFond = "images/TetrisPolyBridge/fond.png";
+	private Image fond;
+	private String urlFond = "images/TetrisPolyBridge/background.png";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
@@ -37,7 +37,7 @@ public class World2 extends BasicGameState {
     	
     	time = 0;
     	
-    	//fond = new Image(urlFond);
+    	fond = new Image(urlFond);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class World2 extends BasicGameState {
     	g.fillRect(1080, 0, 1280, 720);
     	
     	//fond avec image
-    	//g.drawImage(fond, 0, 0);
+    	g.drawImage(fond, 0, 0);
     	
     	//les trucs
     	dieu.render(container, game, g);
