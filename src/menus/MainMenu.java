@@ -14,7 +14,7 @@ public class MainMenu extends Menu{
 		super.setTitrePrincipal("CECI EST UN TITRE QU'IL FAUDRA CHANGER AVEC UN MAGNIFIQUE JEU DE MOT !");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
 		
-		super.setItems(game1.World1.name,game2.World2.name,"Scores", "Quitter");
+		super.setItems(aow.World1.name,game2.World2.name,"Scores", "Quitter");
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
@@ -30,8 +30,8 @@ public class MainMenu extends Menu{
 	public void onOptionItemSelected(int position) {
 		switch (position) {
 		case 0:
-			game1.World1.reset();
-			game.enterState(game1.World1.ID, new FadeOutTransition(),
+			aow.World1.reset();
+			game.enterState(aow.World1.ID, new FadeOutTransition(),
 					new FadeInTransition());
 			break;
 		case 1:
