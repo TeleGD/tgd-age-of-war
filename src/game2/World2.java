@@ -23,12 +23,11 @@ public class World2 extends BasicGameState {
 	private ArrayList<Tetris> tetrisList;
 	
 	//private Image fond;
-	//private String urlFond = "images/TetrisPolyBrdige/fond.png";
+	//private String urlFond = "images/TetrisPolyBridge/fond.png";
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	player = new Player(0,0);
-    	//tetris = new Tetris(0);
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
@@ -63,6 +62,21 @@ public class World2 extends BasicGameState {
 		// TODO Auto-generated method stub
 		return ID;
 	}
+	
+	public void keyPressed(int key, char c){
+		dieu.keyPressed(key, c);
+	}
+	
+	public void keyRelead(int key, char c){
+		dieu.keyReleased(key, c);
+	}
+	
+	public ArrayList<Tetris> getTetrisList(){
+		return tetrisList;
+	}
 
+	public void setTetrisList(ArrayList<Tetris> tetList){
+		tetrisList = tetList;
+	}
 
 }
