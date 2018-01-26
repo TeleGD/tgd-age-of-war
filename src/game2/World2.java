@@ -86,6 +86,10 @@ public class World2 extends BasicGameState {
 	public static ArrayList<Tetris> getTetrisList(){
 		return tetrisList;
 	}
+	
+	public void addTetrisList(Tetris tet){
+		tetrisList.add(tet);
+	}
 
 	public void setTetrisList(ArrayList<Tetris> tetList){
 		tetrisList = tetList;
