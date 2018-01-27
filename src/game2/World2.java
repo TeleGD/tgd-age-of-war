@@ -27,6 +27,7 @@ public class World2 extends BasicGameState {
 	
 	private static ArrayList<Tetris> tetrisList;
 	private ArrayList<Cloud> cloudList;
+	private ArrayList<Shark> sharkList;
 	
 	private int time;
 	
@@ -43,6 +44,13 @@ public class World2 extends BasicGameState {
     	
     	tetrisList = new ArrayList<Tetris>();
     	cloudList = new ArrayList<Cloud>();
+    	sharkList = new ArrayList<Shark>();
+    	sharkList.add(new Shark(110, 1));
+    	sharkList.add(new Shark(400, 1));
+    	sharkList.add(new Shark(700, 1));
+    	sharkList.add(new Shark(300, 0));
+    	sharkList.add(new Shark(500, 0));
+    	sharkList.add(new Shark(970, 0));
     	
     	time = 0;
     	fond = new Image(urlFond);
@@ -63,6 +71,10 @@ public class World2 extends BasicGameState {
     	//les trucs
     	//cloud.render(container, game, g);
     	for(Cloud u:cloudList){
+    		u.render(container, game, g);
+    	}
+    	
+    	for(Shark u:sharkList){
     		u.render(container, game, g);
     	}
     	
@@ -99,6 +111,10 @@ public class World2 extends BasicGameState {
     	if(Math.random() * 1.001 > 0.997 ){
 			cloudList.add(new Cloud());
 		}
+    	
+    	for(Shark u:sharkList){
+    		u.update(container, game, delta);
+    	}
     	
     	
     	
