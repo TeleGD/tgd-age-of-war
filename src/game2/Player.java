@@ -19,22 +19,39 @@ public class Player {
 	
 	private double x ;
 	private double y ;
-	private boolean rightPress;
-	private boolean leftPress;
-	private boolean isInJump;
 	private double jumpSpeed;
-	private boolean jumpReleased;
 	private double speedX;
 	private double speedY;
 	private double gravity;
+	private boolean rightPress;
+	private boolean leftPress;
+	private boolean isInJump;
+	private boolean canMoveRight;
+	private boolean canMoveLeft;
+	private boolean jumpReleased;
+	private boolean collapseOn;
 	private ArrayList<Tetris> tetrisList;
-	private Shape hitBoxChar ;
+	private Shape hitBoxCharFoot ;
+	private Shape hitBoxCharBody ;
 	private Image image;
 	
-	public Player (int x,  int y, Shape hitBoxChar ){
+	
+	public Player (int x,  int y, Shape hitBoxCharFoot, Shape hitBoxCharBody ){
 		this.x=x;
 		this.y=y;
-		this.hitBoxChar=hitBoxChar;
+		rightPress = false;
+		collapseOn = false;
+		leftPress = false;
+		isInJump = false;
+		canMoveRight = true;
+		canMoveLeft = true;
+		jumpReleased = true;
+		gravity=0.005;
+		speedX=0.1;
+		speedY=0.1;
+		jumpSpeed=1;
+		this.hitBoxCharFoot=hitBoxCharFoot;
+		this.hitBoxCharBody=hitBoxCharBody;
 		try {
 			image=new Image("images/TetrisPolyBridge/player.png");
 		} catch (SlickException e) {
@@ -51,20 +68,51 @@ public class Player {
 	
 	
 	public void update(GameContainer arg0, StateBasedGame arg1, int delta) throws SlickException {
-		move(delta);
 		speedY = speedY - gravity*delta;
+		move(delta);
 		collapse();
+		
+		
 	
 	}
 	
 	public void collapse() {
-		if (this.x-1 >= 500) {
-			speedY = 0;
+		collapseOn = false;
+		if (this.x<=100 && this.y<=420 && this.y>=385){
+			this.y = 385;
+			collapseOn=true;
+			isInJump = false;
 		}
+		if (this.y>=556 && this.x<=100){ 
+			this.x = 116;
+			collapseOn=true;
+			canMoveLeft = false;
+		}
+		if (this.y>=572){ 
+			this.y = 556;
+			collapseOn=true;
+			isInJump = false;
+		}
+		if (this.y>=556 && this.x >=980){ 
+			this.x = 964;
+			collapseOn=true;
+			canMoveRight = false;
+		}
+		if (this.x>=980 && this.y<=420 && this.y>=385){
+			this.y = 385;
+			collapseOn=true;
+			isInJump = false;
+		}	
 		tetrisList = World2.getTetrisList();
-		for (int i=0; i <= World2.getTetrisList().size(); i++){
+	
+		for (int i=0; i <= tetrisList.size(); i++){
 			
 			
+		}
+		if (collapseOn == false){
+			isInJump = true;
+			canMoveLeft = true;
+			canMoveRight = true;
 		}
 	}
 	
@@ -76,11 +124,11 @@ public class Player {
 			}
 			
 			if (key == Input.KEY_LEFT && rightPress == false ) {
-				rightPress = true;
+				leftPress = true;
 			}
 			
 			if (key == Input.KEY_SPACE && isInJump == false && jumpReleased == true ) {
-				jumpSpeed = 10;
+				speedY = jumpSpeed;
 				isInJump = true;
 			}
 			
@@ -100,30 +148,17 @@ public class Player {
 		}
 	
 	public void move(double delta) {
-			if (rightPress = true && x<1280) {
+			if (rightPress == true && x<1064 && canMoveRight == true) {
 				this.x = this.x + speedX*delta;
 			}
-			if (leftPress = true && x>0 ) {
-				this.x = this.x + speedX*delta;
+			if (leftPress == true && x>0 && canMoveLeft == true) {
+				this.x = this.x - speedX*delta;
 			}
-			if (isInJump = true && y<0 && y>720  ){
-				this.y = this.y + speedY*delta;
+			if (isInJump == true && y>=0 && y<720  ){
+				this.y = this.y - speedY*delta;
 		}
-			this.hitBoxChar = new Rectangle((int)x+6,(int)y,20,32);
+			this.hitBoxCharFoot = new Rectangle((int)x+6,(int)y+20,20,12);
+			this.hitBoxCharBody = new Rectangle((int)x+6,(int)y,20,32);
+			
 	}
-		
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-	
-	
-	
-
+}	
