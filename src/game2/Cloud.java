@@ -19,7 +19,7 @@ public class Cloud {
     	
     	posx = 0;
     	posy = (int) (50 + Math.random() * 250);
-    	speed=0.1+Math.random()*0.5;
+    	speed=0.075+Math.random()*0.275;
 	}
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
