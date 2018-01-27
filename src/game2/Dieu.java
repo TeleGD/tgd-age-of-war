@@ -1,17 +1,19 @@
 package game2;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
+/**		CLASSE DIEU :
+ * Classe qui sert à déposer les pièces et à gérer leur rotation
+ * ainsi que les collisions entre les pièces lachées et le reste
+ */
+
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Dieu {
-//	private static final double TETRIS_NUM = 35454110; //cf serie n°A000988 on the OEIS website 
 	//Classe qui dépose les tetris.
 	private Image sprite;
 	private boolean left,right,rightLeft,down,up,upDown,rotLeft,rotRight,rotrot,drop;
@@ -19,12 +21,11 @@ public class Dieu {
 	private Tetris controlledBlock,nextBlock;
 	
 	public Dieu() throws SlickException {
+		
 		sprite = new Image("images/TetrisPolyBridge/dieu.png");
 		x = 360;
 		y = 0;
 		speed = 1;
-		controlledBlockX = 360;
-		controlledBlockY = 32;
 		left = false;
 		right = false;
 		rightLeft = false;
@@ -38,6 +39,7 @@ public class Dieu {
 		boolean[][] mat = new boolean[4][4];
 		
 		try {
+			//Génération de la pièce de départ et de la suivante
 			for(int i = 0; i < 4; i++){
 				for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
 			}
@@ -52,10 +54,16 @@ public class Dieu {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		
+		//Téléportation de la première pièce générée sous dieu.
+		controlledBlock.setXcentre((int) (x+16));
+		controlledBlock.rotate(0);
 
 	}
 	
 	public boolean checkCollision(Tetris t) {
+	//Vérifie les collisions entre la pièce courante et t
+	//On vérifie les intersections bloc par bloc, mais on s'arrête dès qu'on en trouve une
 		for(Block[] rowT : t.getMatrice()){
 			if (rowT == null) continue;
 			for(Block bT : rowT){
@@ -75,10 +83,12 @@ public class Dieu {
 	}
 	
 	public void dropBlock() {
+		//Déclenche la chute de la pièce courante
 		controlledBlock.setVy(0.5);
 	}
 	
 	public String randomCat(){
+		//Renvoie une catégorie aléatoire pour la pièce en cours de construction
 		String cat = "";
 		switch((int)Math.floor(Math.random()*10)){
 		case 0:
@@ -116,6 +126,7 @@ public class Dieu {
 	}
 	
 	public void nextBlock() {
+		//Gère le passage à la pièce suivante : génération de la nouvelle pièce, téléportation sous dieu, et changement de la pièce.
 		boolean[][] mat = new boolean[4][4];
 		
 		for(int i = 0; i < 4; i++){
@@ -124,10 +135,11 @@ public class Dieu {
 		
 		try {
 			World2.addTetrisList(controlledBlock);
-			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
 			controlledBlock = nextBlock;
 			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
 			controlledBlock.setVy(0);
+			controlledBlock.setXcentre((int) (x+16));
+			controlledBlock.rotate(0);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -136,17 +148,40 @@ public class Dieu {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		move(delta);
 		
-		if(!drop){
-			controlledBlock.setXcentre((int) (x+16));
-			controlledBlock.rotate(0);
-		}
-		else{
-			if(controlledBlock.getYcentre()>=720){
-				controlledBlock.setVy(0);
-				drop = false;
-				nextBlock();
+		if(drop){
+			System.out.println("Block : "+controlledBlock.getYcentre());
+		
+			for(Block[] row : controlledBlock.getMatrice()){
+				if(row == null) continue;
+				System.out.println("Row");
+				for(Block b : row){
+					if(b == null) continue;
+					System.out.println("b");
+					if(b.getHitbox().intersects(World2.getShape1())){
+						System.out.println("INTERSECT 1");
+						controlledBlock.setVy(0);
+						drop = false;
+						nextBlock();
+						break;
+					}
+					else if(b.getHitbox().intersects(World2.getShape2())){
+						System.out.println("INTERSECT 2");
+						controlledBlock.setVy(0);
+						drop = false;
+						nextBlock();
+						break;
+					}
+					else if(b.getHitbox().intersects(World2.getShape3())){
+						System.out.println("INTERSECT 3");
+						controlledBlock.setVy(0);
+						drop = false;
+						nextBlock();
+						break;
+					}
+				}
 			}
-			else if(World2.getTetrisList().size() >= 1){
+			
+			if(World2.getTetrisList().size() >= 1){
 				for(Tetris t : World2.getTetrisList()){
 					if(checkCollision(t)){
 						controlledBlock.setVy(0);
@@ -157,6 +192,7 @@ public class Dieu {
 				}
 			}
 		}
+		
 		controlledBlock.update(container, game, delta);
 		
 		
@@ -193,9 +229,8 @@ public class Dieu {
 			rotRight = true;
 			rotrot = true;
 			break;
-		case Input.KEY_SPACE:
+		case Input.KEY_LSHIFT:
 			drop = true;
-			//nextBlock();
 			dropBlock();
 			break;
 		}
@@ -227,23 +262,25 @@ public class Dieu {
 	}
 	
 	public void move(int dt){
+		//Déplace dieu en accord avec les commandes du joueur
 		int moveX = 0;
+		float tmpX = x;
 		if((left && !right) || rightLeft){
 			x -= dt*speed;
 			moveX = (int) (-dt*speed);
-			if(x < 0){
-				moveX = (int) -(x + dt*speed);
-				x = 0;
+			if(x < 50){
+				moveX = (int) (50-tmpX);
+				x = 50;
 			}
 		}else if(right){
 			x += dt*speed;
 			moveX = (int) (dt*speed);
-			if(x > 1280-32){
-				moveX = (int) (1280 - 32 - x);
-				x = 1280 - 32;
+			if(x > 1030-32){
+				moveX = (int) (1030 - 32 - tmpX);
+				x = 1030 - 32;
 			}
 		}
-		controlledBlock.moveCentre(moveX,0);
+		if(!drop)controlledBlock.moveCentre(moveX,0);
 		if((rotRight && !rotLeft)|| rotrot ){
 			controlledBlock.rotate(0.1);
 		}else if(rotLeft){
@@ -320,6 +357,10 @@ public class Dieu {
 	public float getControlledBlockSpeed() {
 		return controlledBlockSpeed;
 	}
+
+	public Tetris getNextBlock() {
+		return nextBlock;
+	}
 	
 	//Setters
 
@@ -389,10 +430,6 @@ public class Dieu {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
-	}
-
-	public Tetris getNextBlock() {
-		return nextBlock;
 	}
 
 	public void setNextBlock(Tetris nextBlock) {

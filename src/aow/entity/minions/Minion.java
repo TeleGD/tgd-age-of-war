@@ -37,11 +37,12 @@ public class Minion {
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
 			
+			damage = (int) (World1.damageDefault * age * 1.2);
 			HP = (int) (World1.HPminion * age * 1.25);
 			price = (int) (World1.priceMinion * age * 1.25);
 			this.idOwner = idOwner;
 			this.x = World1.board.getX(posX);
-			this.y= y;
+			this.y= World1.yMinion;
 			this.currentPosX = posX;
 			this.nextPosX = posX;
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
@@ -73,6 +74,10 @@ public class Minion {
     	// Inflige les dégats d'une attaque à ce minion
     	HP -= inflictedDamage;
 		if (this.HP<=0) {
+			if (idOwner == 1) {
+				World1.p2.addGold((int) price );
+			}
+			else World1.p1.addGold((int) price );
 			World1.minions[posX] = World1.fantom ;
 		}
     }

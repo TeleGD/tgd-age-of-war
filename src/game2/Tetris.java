@@ -69,6 +69,7 @@ public class Tetris {
 				}
 			}
 		}
+		rotate(0);
     }
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
