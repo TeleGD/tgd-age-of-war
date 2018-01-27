@@ -33,7 +33,7 @@ public class Minion {
 		this.y= y;
 		this.currentPosX = posX;
 		this.nextPosX = posX;
-		this.direction = -2 * idOwner + 3 ;
+		this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
 		World1.minions.add(this);
 	}
 	
@@ -53,7 +53,10 @@ public class Minion {
 		if (this.HP<=0) {
 			World1.minions.remove(this);
 		}
-    	
+    }
+    
+    public void move() {
+    	x += direction;
     }
 
 }
