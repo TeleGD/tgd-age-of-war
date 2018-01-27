@@ -230,13 +230,13 @@ public class World2 extends BasicGameState {
 	    	g.drawString("Time : ", 1160, 65);
 	    	g.drawString(((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1130, 90);
 	    	
-	    	/*
+	    	//*
 	    	next = dieu.getNextBlock();
 	    	next.setXcentre(1150);
 	    	next.setYcentre(600);
 	    	next.rotate(0);
 	    	next.render(container, game, g);
-	    	*/
+	    	//*/
     	}
     }
 
