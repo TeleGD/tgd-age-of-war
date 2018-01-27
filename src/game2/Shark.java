@@ -10,6 +10,7 @@ public class Shark {
 	private int posx;
 	private int posy;
 	private int sens;
+	private double speed;
 	
 	private Image shark;
 	private Image shark1;
@@ -21,6 +22,7 @@ public class Shark {
 		posx = x;
 		posy = 652-32;
 		sens = dir;
+		speed = 0.05+Math.random()*0.2;
 		
 		shark1 = new Image(urlShark1);	
 		shark2 = new Image(urlShark2);
@@ -34,13 +36,13 @@ public class Shark {
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		if(sens == 1){
-			posx += 1;
+			posx += delta*speed;
 			if(posx>980-32){
 				sens = 1 - sens;
 				shark = shark2;
 			}
 		}else{
-			posx -= 1;
+			posx -= delta*speed;
 			if(posx < 100){
 				sens = 1 - sens;
 				shark = shark1;
