@@ -55,6 +55,13 @@ public class Block {
 		hitbox.setY(hitbox.getY()+y);
 	}
 	
+	public void teleport(int x, int y) {
+		posx=x;
+		posy=y;
+		hitbox.setX(x);
+		hitbox.setY(y);
+	}
+	
 	public int getPosx(){
 		return posx;
 	}

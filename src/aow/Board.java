@@ -90,19 +90,24 @@ public class Board {
 	
 	/****** fonctions de rafraichissement du damier ******/
 	public void refreshLeads(){
+		
+		/*
+		 * Permet de repérer la position des leaders de chaque player
+		 */
 		int n = this.damier.length;
 		
 		this.lead_1=0;
 		this.lead_2=n-1;
 		int i = 0;
-		while(this.damier[i]!=2){
+		while(this.damier[i]!=2 && i < n-1){
 			if(this.damier[i] == 1){
 				this.lead_1 = i;
 			}
 			i++;
 		}
 		this.lead_2 = i;
-	
+		System.out.println(this.lead_1);
+		System.out.println(this.lead_2);
 	}
 	
 	public void refreshPositions(){
@@ -155,10 +160,11 @@ public class Board {
 		 */
 		
 		/* on commence en mettant à jour les World1.minions du joueur 1 */
-		for(int j = this.lead_1;j>0;j--){
+		for(int j = this.lead_1;j>=0;j--){
 			if(this.damier[j] == 1 && j != n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
 				this.damier[j+1] = 1;
+				System.out.println(World1.minions[j].getIdOwner());
 				World1.minions[j].move();
 			}
 		}
@@ -208,6 +214,8 @@ public class Board {
 		
 		
 	}
+	
+/******* Méthodes d'attaque*****/
 	
 	
 	public void attackBase(Minion m){
