@@ -28,6 +28,7 @@ public class World2 extends BasicGameState {
 	private static ArrayList<Tetris> tetrisList;
 	private ArrayList<Cloud> cloudList;
 	private ArrayList<Shark> sharkList;
+	private ArrayList<Bulle> bulleList;
 	
 	private int time;
 	
@@ -50,7 +51,21 @@ public class World2 extends BasicGameState {
     	sharkList.add(new Shark(700, 1));
     	sharkList.add(new Shark(300, 0));
     	sharkList.add(new Shark(500, 0));
-    	sharkList.add(new Shark(970, 0));
+    	sharkList.add(new Shark(948, 0));
+    	bulleList = new ArrayList<Bulle>();
+    	bulleList.add(new Bulle(120));
+    	bulleList.add(new Bulle(180));
+    	bulleList.add(new Bulle(250));
+    	bulleList.add(new Bulle(300));
+    	bulleList.add(new Bulle(360));
+    	bulleList.add(new Bulle(470));
+    	bulleList.add(new Bulle(590));
+    	bulleList.add(new Bulle(640));
+    	bulleList.add(new Bulle(690));
+    	bulleList.add(new Bulle(730));
+    	bulleList.add(new Bulle(810));
+    	bulleList.add(new Bulle(890));
+    	bulleList.add(new Bulle(940));
     	
     	time = 0;
     	fond = new Image(urlFond);
@@ -75,6 +90,10 @@ public class World2 extends BasicGameState {
     	}
     	
     	for(Shark u:sharkList){
+    		u.render(container, game, g);
+    	}
+    	
+    	for(Bulle u:bulleList){
     		u.render(container, game, g);
     	}
     	
@@ -116,7 +135,9 @@ public class World2 extends BasicGameState {
     		u.update(container, game, delta);
     	}
     	
-    	
+    	for(Bulle u:bulleList){
+    		u.update(container, game, delta);
+    	}
     	
     	dieu.update(container, game, delta);
     	player.update(container, game, delta);
