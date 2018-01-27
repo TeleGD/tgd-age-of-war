@@ -134,7 +134,7 @@ public class Dieu {
 		}
 		
 		try {
-			World2.addTetrisList(controlledBlock);
+			if(controlledBlock.getYcentre()>100)World2.addTetrisList(controlledBlock);
 			controlledBlock = nextBlock;
 			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
 			controlledBlock.setVy(0);
@@ -149,7 +149,6 @@ public class Dieu {
 		move(delta);
 		
 		if(drop){
-			System.out.println("Block : "+controlledBlock.getYcentre());
 		
 			for(Block[] row : controlledBlock.getMatrice()){
 				if(row == null) continue;
@@ -263,16 +262,16 @@ public class Dieu {
 		if((left && !right) || rightLeft){
 			x -= dt*speed;
 			moveX = (int) (-dt*speed);
-			if(x < 50){
-				moveX = (int) (50-tmpX);
-				x = 50;
+			if(x < 148){
+				moveX = (int) (148-tmpX);
+				x = 148;
 			}
 		}else if(right){
 			x += dt*speed;
 			moveX = (int) (dt*speed);
-			if(x > 1030-32){
-				moveX = (int) (1030 - 32 - tmpX);
-				x = 1030 - 32;
+			if(x > 868){
+				moveX = (int) (868 - tmpX);
+				x = 868;
 			}
 		}
 		if(!drop)controlledBlock.moveCentre(moveX,0);
