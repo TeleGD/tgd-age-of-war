@@ -229,10 +229,11 @@ public class World2 extends BasicGameState {
 	    	g.setColor(Color.white);
 	    	g.drawString("Time : ", 1160, 65);
 	    	g.drawString(((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1130, 90);
+	    	
 	    	/*
 	    	next = dieu.getNextBlock();
-	    	next.setXcentre(1100);
-	    	next.setYcentre(500);
+	    	next.setXcentre(1150);
+	    	next.setYcentre(600);
 	    	next.rotate(0);
 	    	next.render(container, game, g);
 	    	*/
@@ -302,13 +303,17 @@ public class World2 extends BasicGameState {
 	}
 	
 	public void keyPressed(int key, char c){
-		dieu.keyPressed(key, c);
-		player.keyPressed(key, c);
+		if (gameOn){
+			dieu.keyPressed(key, c);
+			player.keyPressed(key, c);
+		}
 	}
 	
 	public void keyReleased(int key, char c){
-		dieu.keyReleased(key, c);
-		player.keyReleased(key, c);
+		if (gameOn){
+			dieu.keyReleased(key, c);
+			player.keyReleased(key, c);
+		}
 	}
 	
 	public static ArrayList<Tetris> getTetrisList(){
