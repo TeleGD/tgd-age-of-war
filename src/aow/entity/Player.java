@@ -96,15 +96,15 @@ public class Player {
 			}
 		} else if (ID==2) {
 			switch(type) {
-			case 1 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(50*age)) {
+			case 1 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(15*age)) {
 						// Ajout d'un Minion1 en case n-1
 						Minion m = new Minion(2, age, type);
 					};
-			case 2 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(100*age)) {
+			case 2 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(40*age)) {
 						// Ajout d'un Minion2 en case n-1
 						Minion m = new Minion(2, age, type);
 					};
-			case 3 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(150*age)) {
+			case 3 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(100*age)) {
 						// Ajout d'un Minion3 en case n-1
 						Minion m = new Minion(2, age, type);
 					};
