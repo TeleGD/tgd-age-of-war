@@ -31,12 +31,11 @@ public class Player {
 	private boolean jumpReleased;
 	private boolean collapseOn;
 	private ArrayList<Tetris> tetrisList;
-	private Shape hitBoxCharFoot ;
-	private Shape hitBoxCharBody ;
+	private Shape hitBoxChar ;
 	private Image image;
 	
 	
-	public Player (int x,  int y, Shape hitBoxCharFoot, Shape hitBoxCharBody ){
+	public Player (int x,  int y, Shape hitBoxChar){
 		this.x=x;
 		this.y=y;
 		rightPress = false;
@@ -50,8 +49,7 @@ public class Player {
 		speedX=0.1;
 		speedY=0.1;
 		jumpSpeed=1;
-		this.hitBoxCharFoot=hitBoxCharFoot;
-		this.hitBoxCharBody=hitBoxCharBody;
+		this.hitBoxChar=hitBoxChar;
 		try {
 			image=new Image("images/TetrisPolyBridge/player.png");
 		} catch (SlickException e) {
@@ -107,15 +105,30 @@ public class Player {
 		}	
 		tetrisList = World2.getTetrisList();
 	
-		for (int k=0; k <= tetrisList.size(); k++){
-			/*if (Math.abs(tetrisList.get(k).getXcentre()-this.x)<112){
-				for (int i=0; i <= tetrisList.get(k).getMatrice().length ; i++){
-					for (int j=0; j <= tetrisList.get(k).getMatrice()[j].length ; j++){
-						
+		for (int k=0; k < tetrisList.size(); k++){
+			if (Math.abs(tetrisList.get(k).getXcentre()-this.x)<112){
+				for (int i=0; i < tetrisList.get(k).getMatrice().length ; i++){
+					for (int j=0; j < tetrisList.get(k).getMatrice()[i].length ; j++){
+						if(this.hitBoxChar.intersects(tetrisList.get(k).getMatrice()[i][j].getHitbox())==true);{
+							collapseOn = false;
+							if (rightPress == true ){
+								this.x = this.x - 1 ;
+								canMoveRight = false;
+								rightPress = false;
+								speedX=0;
+							}
+							if (rightPress == false ){
+								this.x = this.x - 1 ;
+								canMoveRight = false;
+								leftPress = false;
+								speedX=0;
+							}
+						}
+					
 					}
 				}
-			}
-			*/
+				}
+			
 		}
 		if (collapseOn == false){
 			isInJump = true;
@@ -165,8 +178,7 @@ public class Player {
 			if (isInJump == true && y>=0 && y<720  ){
 				this.y = this.y - speedY*delta;
 		}
-			this.hitBoxCharFoot = new Rectangle((int)x+6,(int)y+20,20,12);
-			this.hitBoxCharBody = new Rectangle((int)x+6,(int)y,20,32);
+			this.hitBoxChar = new Rectangle((int)x+6,(int)y,20,32);
 			
 	}
 }	
