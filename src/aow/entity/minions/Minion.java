@@ -37,6 +37,7 @@ public class Minion {
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
 			
+			damage = (int) (World1.damageDefault * age * 1.2);
 			HP = (int) (World1.HPminion * age * 1.25);
 			price = (int) (World1.priceMinion * age * 1.25);
 			this.idOwner = idOwner;
@@ -74,9 +75,9 @@ public class Minion {
     	HP -= inflictedDamage;
 		if (this.HP<=0) {
 			if (idOwner == 1) {
-				World1.p2.addGold((int) (price * 1.25) );
+				World1.p2.addGold((int) price );
 			}
-			else World1.p1.addGold((int) (price * 1.25) );
+			else World1.p1.addGold((int) price );
 			World1.minions[posX] = World1.fantom ;
 		}
     }
