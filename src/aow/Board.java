@@ -114,7 +114,7 @@ public class Board {
 		/* calcule le nouveau damier à partir de l'ancien */
 		for(int j=0;j<damier.length;j++){
 			damier[j]=World1.minions[j].getIdOwner();
-			System.out.println(damier[j]);
+			
 		}
 		
 		int n = this.damier.length;
