@@ -19,7 +19,6 @@ public class World2 extends BasicGameState {
 	public static int ID=77;
 	public static String name = "Tetris PolyBridge";
 	private Player player;
-	private Tetris tetris;
 	private Dieu dieu;
 	
 	private static Shape shape1;
@@ -32,6 +31,9 @@ public class World2 extends BasicGameState {
 	
 	private Image fond;
 	private String urlFond = "images/TetrisPolyBridge/background.png";
+	
+	private Cloud cloud;
+	
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
@@ -43,9 +45,12 @@ public class World2 extends BasicGameState {
     	time = 0;
     	fond = new Image(urlFond);
     	
+    	
     	shape1 = new Rectangle(0,400, 100, 720);
     	shape2 = new Rectangle(980, 400, 1080, 720);
     	shape3 = new Rectangle(100, 572, 980, 720);
+    	
+    	cloud = new Cloud();
     }
 
     @Override
@@ -54,6 +59,7 @@ public class World2 extends BasicGameState {
     	g.drawImage(fond, 0, 0);
     	
     	//les trucs
+    	cloud.render(container, game, g);
     	dieu.render(container, game, g);
     	player.render(container, game, g);
 
