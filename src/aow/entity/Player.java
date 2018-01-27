@@ -115,7 +115,7 @@ public class Player {
 	public void update(GameContainer container,StateBasedGame game, int delta) throws SlickException
 	{
 		// update de age, xpMax, pv, pvmax ;
-		if(xp>=xpMax && age < 3)
+		if(xp>=xpMax && age < 2)
 		{
 			age++;
 			xpMax=(int)(xpMax*1.75);
