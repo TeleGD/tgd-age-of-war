@@ -48,7 +48,14 @@ public class Minion {
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
 			
 			try {
-				image=new Image("images/game1/stick_"+type+"_a"+age+".png");
+				if (type <= 3) {
+					image=new Image("images/game1/stick_"+type+"_a"+age+".png");
+				}
+				if (type >= 4 ) {
+					image=new Image("images/game1/stick_"+ (type - 3) +"_a"+age+".png");
+					image=image.getScaledCopy((float) 2);
+					this.y -= 90;
+				}
 				if (idOwner==2) {
 					image=image.getFlippedCopy(true, false);
 				}
