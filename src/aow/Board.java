@@ -7,16 +7,16 @@ import aow.entity.Player;
 
 public class Board {
 /*
- * classe définissant le damier de positions des unités.
- * Elle permet de gérer les collisions, la position de chaque unité par son type
- * et les déplacements.
- * Chaque case du damier vaut 0 si inoccupée, 1 si occupée par unité du joueur 1,
- * 2 si occupée par unité du joueur 2.
+ * classe dï¿½finissant le damier de positions des unitï¿½s.
+ * Elle permet de gï¿½rer les collisions, la position de chaque unitï¿½ par son type
+ * et les dï¿½placements.
+ * Chaque case du damier vaut 0 si inoccupï¿½e, 1 si occupï¿½e par unitï¿½ du joueur 1,
+ * 2 si occupï¿½e par unitï¿½ du joueur 2.
  */
 	private int[] damier;
 	private int case_width;  //largeur d'une case  
-	private int left_border; //pixel de démarrage à gauche du tableau
-	private int right_border;  //pixel de fin du tableau à droite
+	private int left_border; //pixel de dï¿½marrage ï¿½ gauche du tableau
+	private int right_border;  //pixel de fin du tableau ï¿½ droite
 	private int damier_width;   //taille en pixels du tableau
 	private int lead_1; //position du minion leader du joueur 1
 	private int lead_2; //position du minion leader du joueur 2
@@ -34,7 +34,7 @@ public class Board {
 	
 	public Board(int size, int left_border, int right_border){
 		/*
-		 * le nombre de cases (size) du damier est défini dans le Main.
+		 * le nombre de cases (size) du damier est dï¿½fini dans le Main.
 		 * left_border : position du bord gauche.
 		 * right_border : position du bord droit.
 		 * 
@@ -71,8 +71,8 @@ public class Board {
 	
 	public void setMinionToCase(int player, int index){
 		/* 
-		 * méthode pour attribuer à une case l'ID d'un joueur 
-		 * en fonction du minion présent sur la case
+		 * mï¿½thode pour attribuer ï¿½ une case l'ID d'un joueur 
+		 * en fonction du minion prï¿½sent sur la case
 		 */
 		this.damier[index] = player;
 	}
@@ -80,7 +80,7 @@ public class Board {
 	public void setVoidToCase(int index){
 		/* 
 		 * 
-		 * méthode pour rendre une case vide
+		 * mï¿½thode pour rendre une case vide
 		 * 
 		 */
 		this.damier[index] = 0;
@@ -91,7 +91,7 @@ public class Board {
 	public void refreshLeads(){
 		
 		/*
-		 * Permet de repérer la position des leaders de chaque player
+		 * Permet de repï¿½rer la position des leaders de chaque player
 		 */
 		int n = this.damier.length;
 		
@@ -111,7 +111,7 @@ public class Board {
 	
 	public void refreshPositions(){
 		
-		/* calcule le nouveau damier à partir de l'ancien */
+		/* calcule le nouveau damier ï¿½ partir de l'ancien */
 		for(int j=0;j<damier.length;j++){
 			damier[j]=World1.minions[j].getIdOwner();
 			
@@ -119,26 +119,26 @@ public class Board {
 
 		int n = this.damier.length;
 				
-		/* On recalcule au préalable les positions des deux leaders,
-		 * au cas où des World1.minions ont disparus ou sont apparus.
+		/* On recalcule au prï¿½alable les positions des deux leaders,
+		 * au cas oï¿½ des World1.minions ont disparus ou sont apparus.
 		 */
 		
 		this.refreshLeads();
 		
 		/*
-		 *  on traite d'abord le cas particulier où les leaders
-		 *  se départagent une même case. 
-		 *  Cas sur les bords : priorité aux World1.minions déjà dans leurs bases
-		 *  Cas général : aléatoire
+		 *  on traite d'abord le cas particulier oï¿½ les leaders
+		 *  se dï¿½partagent une mï¿½me case. 
+		 *  Cas sur les bords : prioritï¿½ aux World1.minions dï¿½jï¿½ dans leurs bases
+		 *  Cas gï¿½nï¿½ral : alï¿½atoire
 		 */
 		
 		if(this.lead_2 == this.lead_1 + 2){
-			if(this.lead_1 == 0){ //Cas où le lead 1 est juste à côté de sa base
+			if(this.lead_1 == 0){ //Cas oï¿½ le lead 1 est juste ï¿½ cï¿½tï¿½ de sa base
 				this.damier[0] = 0;
 				this.damier[1] = 1;
 				World1.minions[0].move();
 				
-			}else if (this.lead_2 == n-1){ //Cas où le lead 2 est juste à côté de sa base
+			}else if (this.lead_2 == n-1){ //Cas oï¿½ le lead 2 est juste ï¿½ cï¿½tï¿½ de sa base
 				this.damier[n-1] = 0;
 				this.damier[n-2] = 2;
 				World1.minions[n-1].move();
@@ -157,11 +157,11 @@ public class Board {
 		}
 		
 		
-		/* On part ensuite de chaque leader et on remonte jusqu'à la base, 
-		 * afin d'éviter que les unités leaders bloquent leur prédécesseurs 
+		/* On part ensuite de chaque leader et on remonte jusqu'ï¿½ la base, 
+		 * afin d'ï¿½viter que les unitï¿½s leaders bloquent leur prï¿½dï¿½cesseurs 
 		 */
 		
-		/* on commence en mettant à jour les World1.minions du joueur 1 */
+		/* on commence en mettant ï¿½ jour les World1.minions du joueur 1 */
 		for(int j = this.lead_1;j>=0;j--){
 			if(this.damier[j] == 1 && j < n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
@@ -170,7 +170,7 @@ public class Board {
 			}
 		}
 		
-		/* on met ensuite à jour les World1.minions du joueur 2 */
+		/* on met ensuite ï¿½ jour les World1.minions du joueur 2 */
 		for(int j = this.lead_2;j<=n-1;j++){
 			if(this.damier[j] == 2 && j > 2 && this.damier[j-1] == 0){
 				this.damier[j] = 0;
@@ -179,17 +179,19 @@ public class Board {
 			}
 		}
 		
-		/*place aux attaques : seuls le leader et la base peuvent être attaqués*/
+		/*place aux attaques : seuls le leader et la base peuvent ï¿½tre attaquï¿½s*/
 		
 		this.refreshLeads();
 		
 		/*on commence par les bases ennemies*/
 		
-		if(this.damier[0] == 0 && this.damier[1] == 0 && this.damier[1] == 2){
+		if(this.damier[0] == 0 && this.damier[1] == 0 && this.damier[2] == 2){
+			
 			this.attackBase(World1.minions[2]);
 			if(this.damier[3] == 2){
 				this.attackBase(World1.minions[3]);
 			}
+			
 		}else if(this.damier[n-1] == 0 && this.damier[n-2] == 0 && this.damier[n-3] == 1){
 			
 			this.attackBase(World1.minions[n-3]);
@@ -198,8 +200,8 @@ public class Board {
 			}
 			
 			
-		/* Cas général : les leaders s'attaquent entre eux ; 
-		 * en renfort peut intervenir un allié derrière chacun.
+		/* Cas gï¿½nï¿½ral : les leaders s'attaquent entre eux ; 
+		 * en renfort peut intervenir un alliï¿½ derriï¿½re chacun.
 		 */
 		}else if(this.lead_2==this.lead_1+1){
 			this.attack(World1.minions[this.lead_1],World1.minions[this.lead_2]);
@@ -217,17 +219,15 @@ public class Board {
 		
 	}
 	
-/******* Méthodes d'attaque ******/
+/******* Mï¿½thodes d'attaque ******/
 	
 	
 	public void attackBase(Minion m){
-		Player p;
 		if(m.getIdOwner()==1){
-			p = World1.p2;
+			World1.p2.takeDamage(m.getDamage());
 		}else{
-			p = World1.p1;
+			World1.p1.takeDamage(m.getDamage());
 		}
-		p.takeDamage(m.getDamage());
 	}
 	
 	
