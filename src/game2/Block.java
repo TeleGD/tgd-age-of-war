@@ -42,9 +42,16 @@ public class Block {
 		sprite.rotate((float) -angle);
 	}
 	
+	public void rotate(double angle, double vangle) {
+		this.angle=angle;
+		hitbox.transform(Transform.createRotateTransform((float) vangle));
+	}
+	
 	public void move(int x,int y) {
 		posx+=x;
 		posy+=y;
+		hitbox.setX(hitbox.getX()+x);
+		hitbox.setY(hitbox.getY()+y);
 	}
 	
 	public int getPosx(){
