@@ -32,7 +32,13 @@ public class Player {
 		PVMax=HP;
 	}
 	
-	
+	public void takeDamage(int degat) {
+		PV=PV-degat;
+		if (PV<=0) {
+			System.out.println("Défaite du joueur "+ID);
+			System.exit(0);
+		}
+	}
 	
 	public int getHp()
 	{
