@@ -35,8 +35,24 @@ public class Dieu {
 		rotRight = false;
 		rotrot = false;
 		drop = false;
-		nextBlock();
-		controlledBlock.setVy(0);
+		boolean[][] mat = new boolean[4][4];
+		
+		try {
+			for(int i = 0; i < 4; i++){
+				for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
+			}
+			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
+			controlledBlock.setVy(0);
+			
+			for(int i = 0; i < 4; i++){
+				for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
+			}
+			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
+			
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	public boolean checkCollision(Tetris t) {
@@ -62,13 +78,9 @@ public class Dieu {
 		controlledBlock.setVy(0.5);
 	}
 	
-	public void nextBlock() {
-		boolean[][] mat = new boolean[4][4];
+	public String randomCat(){
 		String cat = "";
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
-		}
-		switch((int)Math.floor(Math.random()*9)){
+		switch((int)Math.floor(Math.random()*10)){
 		case 0:
 			cat = "White";
 			break;
@@ -100,9 +112,21 @@ public class Dieu {
 			cat = "QRCode";
 			break;
 		}
+		return cat;
+	}
+	
+	public void nextBlock() {
+		boolean[][] mat = new boolean[4][4];
+		
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
+		}
+		
 		try {
-			if(controlledBlock != null) World2.addTetrisList(controlledBlock);
-			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+6*Math.random())+cat+".png");
+			World2.addTetrisList(controlledBlock);
+			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
+			controlledBlock = nextBlock;
+			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
 			controlledBlock.setVy(0);
 		} catch (SlickException e) {
 			e.printStackTrace();
