@@ -112,7 +112,10 @@ public class Board {
 	public void refreshPositions(){
 		
 		/* calcule le nouveau damier à partir de l'ancien */
-		
+		for(int j=0;j<damier.length;j++){
+			damier[j]=World1.minions[j].getIdOwner();
+			
+		}
 		
 		int n = this.damier.length;
 		
@@ -168,7 +171,7 @@ public class Board {
 		}
 		
 		/* on met ensuite à jour les World1.minions du joueur 2 */
-		for(int j = this.lead_2;j< n-1;j++){
+		for(int j = this.lead_2;j<=n-1;j++){
 			if(this.damier[j] == 2 && j != 2 && this.damier[j-1] == 0){
 				this.damier[j] = 0;
 				this.damier[j-1] = 2;

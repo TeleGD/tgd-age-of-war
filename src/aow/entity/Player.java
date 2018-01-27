@@ -55,7 +55,9 @@ public class Player {
 		return age;
 	}
 	
-	
+	public void addGold(int toAdd) {
+		gold += toAdd;
+	}
 	
 	public boolean removeGold(int toRemove) // enleve toRemove a l or du joueur, retourne true si le joueur peut payer
 	{
