@@ -26,6 +26,7 @@ public class World2 extends BasicGameState {
 	private static Shape shape3;
 	
 	private static ArrayList<Tetris> tetrisList;
+	private ArrayList<Cloud> cloudList;
 	
 	private int time;
 	
@@ -41,6 +42,7 @@ public class World2 extends BasicGameState {
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
+    	cloudList = new ArrayList<Cloud>();
     	
     	time = 0;
     	fond = new Image(urlFond);
@@ -62,6 +64,10 @@ public class World2 extends BasicGameState {
     	cloud.render(container, game, g);
     	dieu.render(container, game, g);
     	player.render(container, game, g);
+    	
+    	for(Tetris u:tetrisList){
+    		u.render(container, game, g);
+    	}
 
     	g.setColor(Color.black);
     	g.fillRect(1080, 0, 1280, 720);
@@ -72,6 +78,12 @@ public class World2 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    	if(cloud.getPosX()<1080){
+    		cloud.update(container, game, delta);
+    	}
+    	
+    	
+    	
     	dieu.update(container, game, delta);
     	player.update(container, game, delta);
     	time += delta;

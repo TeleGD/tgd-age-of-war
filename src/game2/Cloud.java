@@ -27,4 +27,12 @@ public class Cloud {
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(cloud,(float) posx,(float) posy);
 	}
+	
+	public int getPosX(){
+		return posx;
+	}
+	
+	public int getPosy(){
+		return posy;
+	}
 }
