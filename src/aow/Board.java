@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import aow.World1;
 import aow.entity.minions.Minion;
+import aow.entity.Player;
 
 public class Board {
 /*
@@ -175,11 +176,53 @@ public class Board {
 		
 		this.refreshLeads();
 		
+		/*on commence par les bases ennemies*/
+		
 		if(this.damier[0] == 0 && this.damier[1] == 0 && this.damier[1] == 2){
-			//World1.minions[2].
+			this.attackBase(World1.minions[2]);
+			if(this.damier[3] == 2){
+				this.attackBase(World1.minions[3]);
+			}
+		}else if(this.damier[n-1] == 0 && this.damier[n-2] == 0 && this.damier[n-3] == 1){
+			this.attackBase(World1.minions[n-3]);
+			if(this.damier[n-4] == 1){
+				this.attackBase(World1.minions[n-4]);
+			}
+			
+			
+		/* Cas général : les leaders s'attaquent entre eux ; 
+		 * en renfort peut intervenir un allié derrière chacun.
+		 */
+		}else if(this.lead_2==this.lead_1+1){
+			this.attack(World1.minions[this.lead_1],World1.minions[this.lead_2]);
+			this.attack(World1.minions[this.lead_2],World1.minions[this.lead_1]);
+			if(this.damier[this.lead_1-1] == 1){
+				this.attack(World1.minions[this.lead_1-1],World1.minions[this.lead_2]);
+			}
+			if(this.damier[this.lead_2+1] == 2){
+				this.attack(World1.minions[this.lead_2+1],World1.minions[this.lead_1]);
+			}
+			
 		}
+		
+		
 		
 	}
 	
+	
+	public void attackBase(Minion m){
+		Player p;
+		if(m.getIdOwner()==1){
+			p = World1.p2;
+		}else{
+			p = World1.p1;
+		}
+		p.takeDamage(m.getDamage());
+	}
+	
+	
+	public void attack(Minion m1, Minion m2){
+		m2.takeDamage(m1.getDamage());
+	}
 	
 }
