@@ -203,19 +203,19 @@ public class Dieu {
 	}
 	
 	public void move(int dt){
-		float moveX;
+		int moveX = 0;
 		if((left && !right) || rightLeft){
 			x -= dt*speed;
-			moveX = -dt*speed;
+			moveX = (int) (-dt*speed);
 			if(x < 0){
-				moveX = -(x + dt*speed);
+				moveX = (int) -(x + dt*speed);
 				x = 0;
 			}
 		}else if(right){
 			x += dt*speed;
-			moveX = dt*speed;
+			moveX = (int) (dt*speed);
 			if(x > 1280-32){
-				moveX = 1280 - 32 - x;
+				moveX = (int) (1280 - 32 - x);
 				x = 1280 - 32;
 			}
 		}
