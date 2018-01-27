@@ -53,6 +53,7 @@ public class World2 extends BasicGameState {
     	sharkList.add(new Shark(500, 0));
     	sharkList.add(new Shark(948, 0));
     	bulleList = new ArrayList<Bulle>();
+    	/*
     	bulleList.add(new Bulle(120, (int) (0 + Math.random() * (720 - 652) + 652)));
     	bulleList.add(new Bulle(180, (int) (0 + Math.random() * (720 - 652) + 652)));
     	bulleList.add(new Bulle(250, (int) (0 + Math.random() * (720 - 652) + 652)));
@@ -65,7 +66,7 @@ public class World2 extends BasicGameState {
     	bulleList.add(new Bulle(730, (int) (0 + Math.random() * (720 - 652) + 652)));
     	bulleList.add(new Bulle(810, (int) (0 + Math.random() * (720 - 652) + 652)));
     	bulleList.add(new Bulle(890, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(940, (int) (0 + Math.random() * (720 - 652) + 652)));
+    	bulleList.add(new Bulle(940, (int) (0 + Math.random() * (720 - 652) + 652)));*/
     	
     	time = 0;
     	fond = new Image(urlFond);
@@ -146,9 +147,15 @@ public class World2 extends BasicGameState {
     		u.update(container, game, delta);
     	}
     	
-    	for(Bulle u:bulleList){
-    		u.update(container, game, delta);
+    	if(bulleList.size()>0){
+	    	for(Bulle u:bulleList){
+	    		u.update(container, game, delta);
+	    	}
     	}
+    	
+    	if(Math.random() * 1.001 > 0.997 ){
+			bulleList.add(new Bulle((int) (0 + Math.random() * (960 - 120) + 120), (int) (0 + Math.random() * (720 - 652) + 652)));
+		}
     	
     	dieu.update(container, game, delta);
     	player.update(container, game, delta);
