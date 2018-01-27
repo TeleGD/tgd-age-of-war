@@ -68,7 +68,6 @@ public class Minion {
 	}
 	
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-
     }
     
     
@@ -91,10 +90,19 @@ public class Minion {
     
     public void move() {
     	World1.minions[posX] = World1.fantom ;
-    	posX += direction;
+    	nextPosX = posX + direction;
     	x = World1.board.getX(posX);
-    	World1.minions[posX] = this; 	
-    	
+    	World1.minions[nextPosX] = this; 
+    }
+    
+    public void fluidMove() {
+    	if (posX != nextPosX) {
+    		x=x+direction;
+    	}
+    }
+    
+    public void setPosX() {
+    	this.posX=nextPosX;
     }
     
     public int getDamage() {

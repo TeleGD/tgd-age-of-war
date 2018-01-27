@@ -75,7 +75,7 @@ public class Player {
 	
 	public void augmenteXp(int inc)
 	{
-		if (age < 3) {
+		if (age < 2) {
 			xp+=inc;
 		}
 	}

@@ -206,16 +206,16 @@ public class Board {
 		 */
 			
 		}else if(this.lead_2==this.lead_1+1){
-			// Copie des minions leaders pour conserver les dégats qu'ils doivent se donner en même temps
-			// Evite de favoriser le premier à attaquer
+			// Copie des minions leaders pour conserver les dï¿½gats qu'ils doivent se donner en mï¿½me temps
+			// Evite de favoriser le premier ï¿½ attaquer
 			Minion m1 = World1.minions[this.lead_1];
 			Minion m2 = World1.minions[this.lead_2];
 			this.attack(m1,World1.minions[this.lead_2]);
 			this.attack(m2,World1.minions[this.lead_1]);
-			if(this.damier[this.lead_1-1] == 1){
+			if(this.damier[this.lead_1-1] == 1 && World1.minions[this.lead_1-1].getType()==2){
 				this.attack(World1.minions[this.lead_1-1],World1.minions[this.lead_2]);
 			}
-			if(this.damier[this.lead_2+1] == 2){
+			if(this.damier[this.lead_2+1] == 2 && World1.minions[this.lead_2+1].getType()==2){
 				this.attack(World1.minions[this.lead_2+1],World1.minions[this.lead_1]);
 			}
 			
