@@ -30,10 +30,10 @@ public class Block {
 		vitx = 0;
 		vity=0;
 	}
-	//hitbox = hitbox.transform(Transform.createRotateTransform((float) angle));
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+		posy+=delta*vity;
+		posx+=delta*vitx;
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
@@ -41,6 +41,7 @@ public class Block {
 		spriteTemporaire.rotate((float) angle);
 		g.drawImage(spriteTemporaire,(float) posx,(float) posy);
 	}
+	
 	
 	public int getPosx(){
 		return posx;

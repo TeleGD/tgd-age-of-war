@@ -55,7 +55,16 @@ public class Tetris {
 	}
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+		ycentre+=delta*vy;
+		xcentre+=delta*vx;
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (matBool[i][j]) {
+					matrice[i][j].setVity(vy);
+					matrice[i][j].update(container,game,delta);
+				}
+			}
+		}
     }
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
@@ -66,7 +75,6 @@ public class Tetris {
 				}
 			}
 		}
-		
 	}
 	
 	public void rotate(double vangle) {
