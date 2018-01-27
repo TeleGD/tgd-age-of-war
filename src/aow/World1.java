@@ -46,7 +46,7 @@ public class World1 extends BasicGameState {
     	Arrays.fill(minions, fantom);
     	
     	Minion m1 = new Minion(1, 1, 1, "images/game1/stick_1_a1.png" );
-//    	Minion m2 = new Minion(1, 1, 1, "images/game1/stick_1_a1.png" );
+    	Minion m2 = new Minion(2, 1, 1, "images/game1/stick_1_a1.png" );
     	fond = new Image("images/game1/fond.png");
     }
 
@@ -65,8 +65,9 @@ public class World1 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-    	while(incr<60){
-    		incr++;
+    	incr++;
+    	if(incr>60){
+    		incr = 0;
     		board.refreshPositions();
     	}
     }
