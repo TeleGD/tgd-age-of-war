@@ -12,12 +12,16 @@ public class Tetris {
 	private int x,y,xcentre,ycentre;
 	private double angle,vx,vy;
 	private String sprite;
-	private boolean[][] matBool;
+	private boolean[][] matBool=new boolean[4][4];
 	
 	
 	public Tetris(boolean[][] matBool,String adresse) throws SlickException {
 		this.x=500;
-		this.matBool=matBool;
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				this.matBool[i][j]=matBool[i][j];
+			}
+		}
 		this.y=-100;
 		sprite=adresse;
 		this.angle=0;
