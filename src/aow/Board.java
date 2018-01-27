@@ -106,8 +106,7 @@ public class Board {
 			i++;
 		}
 		this.lead_2 = i;
-		System.out.println(this.lead_1);
-		System.out.println(this.lead_2);
+		
 	}
 	
 	public void refreshPositions(){
@@ -164,7 +163,6 @@ public class Board {
 			if(this.damier[j] == 1 && j != n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
 				this.damier[j+1] = 1;
-				System.out.println(World1.minions[j].getIdOwner());
 				World1.minions[j].move();
 			}
 		}

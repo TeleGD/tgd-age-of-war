@@ -38,6 +38,8 @@ public class World1 extends BasicGameState {
 
 	public static Minion fantom = new Minion(0, 1, 1, "");
 	
+	private int incr=0;
+	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	minions = new Minion[tailleBoard];
@@ -63,7 +65,10 @@ public class World1 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-    	
+    	while(incr<60){
+    		incr++;
+    		board.refreshPositions();
+    	}
     }
     
     public static void reset() {
