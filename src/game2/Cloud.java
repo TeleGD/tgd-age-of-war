@@ -9,6 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Cloud {
 	private int posx;
 	private int posy;
+	private double speed;
 
 	private Image cloud;
 	private String urlCloud = "images/TetrisPolyBridge/cloud.png";
@@ -18,10 +19,11 @@ public class Cloud {
     	
     	posx = 0;
     	posy = (int) (50 + Math.random() * 250);
+    	speed=0.075+Math.random()*0.275;
 	}
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		posx += 1;
+		posx += delta*speed;
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {

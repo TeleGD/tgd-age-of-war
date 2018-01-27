@@ -28,7 +28,7 @@ public class World1 extends BasicGameState {
 	public static int goldInit = 50;
 	public static int HPInit = 100;
 	public static int tailleBoard = 20;
-	public static int yMinion = 500;
+	public static int yMinion = 430;
 	
 	public Image fond;
 	
@@ -57,6 +57,7 @@ public class World1 extends BasicGameState {
     	g.setColor(Color.green);
 //    	g.fillRect(50, 50, 50, 50);
     	p1.render(container,game,g);
+    	
     	p2.render(container,game,g);
     	for(Minion m : minions){
 			m.render(container,game,g);
@@ -71,12 +72,23 @@ public class World1 extends BasicGameState {
     		incr = 0;
     		board.refreshPositions();
     	}
+    	p1.update(container, game, delta);
+    	p2.update(container, game, delta);
+
     }
     
     public static void reset() {
        
     }
-
+    
+    public void keyPressed(int key, char c){
+		p1.keyPressed(key, c);
+	}
+	
+	public void keyReleased(int key, char c){
+		p1.keyReleased(key, c);
+	}
+    
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
