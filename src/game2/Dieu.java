@@ -7,13 +7,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Dieu {
-	private static final double TETRIS_NUM = 35454110; //cf serie n°A000988 on the OEIS website 
+//	private static final double TETRIS_NUM = 35454110; //cf serie n°A000988 on the OEIS website 
 	//Classe qui dépose les tetris.
 	private Image sprite;
-	private boolean left,right,rightLeft,down,up,upDown,rotLeft,rotRight,rotrot,space;
+	private boolean left,right,rightLeft,down,up,upDown,rotLeft,rotRight,rotrot,drop;
 	private float x,y,controlledBlockX,controlledBlockY,speed,controlledBlockSpeed;
 	private Tetris controlledBlock;
 	
@@ -33,25 +34,102 @@ public class Dieu {
 		rotLeft = false;
 		rotRight = false;
 		rotrot = false;
-		space = false;
-	}
-	
-	public void throwBlock() {
+		drop = false;
 		nextBlock();
 	}
 	
+	public boolean checkCollision(Tetris t) {
+		for(Block[] rowT : t.getMatrice()){
+			if (rowT == null) continue;
+			for(Block bT : rowT){
+				if (bT == null) continue;
+				for(Block[] row : controlledBlock.getMatrice()){
+					if (row == null) continue;
+					for(Block b : row){
+						if (b == null) continue;
+						if(bT.getHitbox().intersects(b.getHitbox())) return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public void dropBlock() {
+		//controlledBlock.setSpeedY(0.5)
+		
+	}
+	
 	public void nextBlock() {
-		double r = Math.random() * TETRIS_NUM;
+		boolean[][] mat = new boolean[4][4];
+		String cat = "";
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++) mat[i][j] = Math.random() > 0.5;
+		}
+		switch((int)Math.floor(Math.random()*9)){
+		case 0:
+			cat = "White";
+			break;
+		case 1:
+			cat = "Yellow";
+			break;
+		case 2:
+			cat = "Red";
+			break;
+		case 3:
+			cat = "Blue";
+			break;
+		case 4:
+			cat = "Gray";
+			break;
+		case 5:
+			cat = "Green";
+			break;
+		case 6:
+			cat = "Orange";
+			break;
+		case 7:
+			cat = "Purple";
+			break;
+		case 8:
+			cat = "Flash";
+			break;
+		/*case 9:
+			cat = "QRCode";
+			break;*/
+			
+		}
+		try {
+			if(controlledBlock != null) World2.addTetrisList(controlledBlock);
+			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc1QRCode.png");
+			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+6*Math.random())+cat+".png");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		//controlledBlock.update();
 		move(delta);
+		if(!drop)controlledBlock.setXcentre((int) (x+16));
+		else{
+			for(Tetris t : World2.getTetrisList()){
+				if(World2.getTetrisList().size() < 1) break;
+				/*if(checkCollision(t)){
+					//controlledBlock.setSpeedY(0);
+					nextBlock();
+				}*/
+			}
+			
+		}
+		controlledBlock.update(container, game, delta);
+		
+		
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(sprite,(float) x,(float) y);
-		//controlledBlock.render(container,game,g);
+		controlledBlock.render(container,game,g);
 	}
 	
 	public void keyPressed(int key, char c) {
@@ -81,10 +159,11 @@ public class Dieu {
 			rotrot = true;
 			break;
 		case Input.KEY_SPACE:
-			space = true;
+			drop = true;
+			nextBlock();
+			//dropBlock();
 			break;
 		}
-
 	}
 	
 	public void keyReleased(int key, char c) {
@@ -107,9 +186,6 @@ public class Dieu {
 			break;
 		case Input.KEY_E:
 			rotRight = false;
-			break;
-		case Input.KEY_SPACE:
-			space = false;
 			break;
 		}
 	}
@@ -171,7 +247,7 @@ public class Dieu {
 	}
 	
 	public boolean space() {
-		return space;
+		return drop;
 	}
 
 	public float getX() {
@@ -237,7 +313,7 @@ public class Dieu {
 	}
 	
 	public void setSpace(boolean space) {
-		this.space = space;
+		this.drop = space;
 	}
 
 	public void setX(float x) {
