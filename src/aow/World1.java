@@ -57,6 +57,7 @@ public class World1 extends BasicGameState {
     	g.setColor(Color.green);
 //    	g.fillRect(50, 50, 50, 50);
     	p1.render(container,game,g);
+    	
     	p2.render(container,game,g);
     	for(Minion m : minions){
 			m.render(container,game,g);
@@ -71,6 +72,9 @@ public class World1 extends BasicGameState {
     		incr = 0;
     		board.refreshPositions();
     	}
+    	p1.update(container, game, delta);
+    	p2.update(container, game, delta);
+
     }
     
     public static void reset() {

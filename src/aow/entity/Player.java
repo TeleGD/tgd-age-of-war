@@ -23,6 +23,7 @@ public class Player {
 	private int xpMax = 1000;
 	private int age = 1;
 	private int boardLength = World1.tailleBoard;
+	private int temps = 0;
 	
 	//constructeur
 	public Player(int num, int gold, int HP ) // init num joueur, or et pv 
@@ -115,6 +116,11 @@ public class Player {
 			PV=(int)(PV*1.25);
 		}
 		
+		temps ++;
+		if (temps >= 90) {
+			gold += 10;
+			temps = 0;
+		}
 	}
 	
 	public void render(GameContainer container,StateBasedGame game, Graphics g) throws SlickException
