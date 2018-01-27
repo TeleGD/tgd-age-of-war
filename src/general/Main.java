@@ -40,7 +40,9 @@ public class Main extends StateBasedGame{
 		addState(new MainMenu());
 		addState(new World());
 		addState(new aow.World1());
+		addState(new aow.BadEndAow());
 		addState(new game2.World2());
+		
 		this.enterState(WelcomeMenu.ID);
 	}
 }

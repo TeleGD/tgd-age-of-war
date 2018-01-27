@@ -9,6 +9,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import aow.World1;
 import aow.entity.minions.Minion;
@@ -39,7 +41,8 @@ public class Player {
 		PV=PV-degat;
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
-			System.exit(0);
+			World1.death();
+//			System.exit(0);
 		}
 	}
 	

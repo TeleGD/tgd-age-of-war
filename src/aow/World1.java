@@ -18,6 +18,8 @@ import java.util.*;
 
 public class World1 extends BasicGameState {
 	
+	protected static StateBasedGame game;
+	
 	public static int ID=7;
 	public static String name = "Age of War";
 	public static Minion[] minions;
@@ -99,6 +101,10 @@ public class World1 extends BasicGameState {
 	public int getID() {
 		// TODO Auto-generated method stub
 		return ID;
+	}
+	
+	public static void death() { // Si un joueur meurt on part sur l'écran de fin
+		game.enterState(BadEndAow.ID, new FadeOutTransition(),new FadeInTransition());
 	}
 
 
