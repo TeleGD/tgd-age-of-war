@@ -47,7 +47,10 @@ public class Dieu {
 					if (row == null) continue;
 					for(Block b : row){
 						if (b == null) continue;
-						if(bT.getHitbox().intersects(b.getHitbox())) return true;
+						if(bT.getHitbox().intersects(b.getHitbox())) {
+							//System.out.println("Collision at x: "+bT.getPosx()+"/"+b.getPosx()+"; y: "+bT.getPosy()+"/"+b.getPosy());
+							return true;
+						}
 					}
 				}
 			}
@@ -57,8 +60,7 @@ public class Dieu {
 	}
 	
 	public void dropBlock() {
-		//controlledBlock.setSpeedY(0.5)
-		
+		controlledBlock.setVy(0.5);
 	}
 	
 	public void nextBlock() {
@@ -103,6 +105,14 @@ public class Dieu {
 		try {
 			if(controlledBlock != null) World2.addTetrisList(controlledBlock);
 			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc1QRCode.png");
+			/*System.out.println("--------");
+			for(int i = 0; i < 4; i ++){
+				for(int j = 0; j < 4; j  ++){
+					System.out.print(mat[i][j]+";");
+				}
+				System.out.println();
+			}
+			System.out.println("-------- ");*/
 			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+6*Math.random())+cat+".png");
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -111,14 +121,17 @@ public class Dieu {
 
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		move(delta);
+		
 		if(!drop)controlledBlock.setXcentre((int) (x+16));
 		else{
 			for(Tetris t : World2.getTetrisList()){
 				if(World2.getTetrisList().size() < 1) break;
-				/*if(checkCollision(t)){
-					//controlledBlock.setSpeedY(0);
+				if(checkCollision(t)){
+					controlledBlock.setVy(0);
+					drop = false;
 					nextBlock();
-				}*/
+					break;
+				}
 			}
 			
 		}
