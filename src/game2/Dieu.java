@@ -16,7 +16,7 @@ public class Dieu {
 	private Image sprite;
 	private boolean left,right,rightLeft,down,up,upDown,rotLeft,rotRight,rotrot,drop;
 	private float x,y,controlledBlockX,controlledBlockY,speed,controlledBlockSpeed;
-	private Tetris controlledBlock;
+	private Tetris controlledBlock,nextBlock;
 	
 	public Dieu() throws SlickException {
 		sprite = new Image("images/TetrisPolyBridge/dieu.png");
@@ -96,15 +96,14 @@ public class Dieu {
 		case 8:
 			cat = "Flash";
 			break;
-		/*case 9:
+		case 9:
 			cat = "QRCode";
-			break;*/
-			
+			break;
 		}
 		try {
 			if(controlledBlock != null) World2.addTetrisList(controlledBlock);
-			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc1QRCode.png");
 			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+6*Math.random())+cat+".png");
+			controlledBlock.setVy(0);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -114,7 +113,6 @@ public class Dieu {
 		move(delta);
 		
 		if(!drop){
-			//System.out.println("Moving center to : "+(x+16));
 			controlledBlock.setXcentre((int) (x+16));
 			controlledBlock.rotate(0);
 		}
@@ -205,13 +203,23 @@ public class Dieu {
 	}
 	
 	public void move(int dt){
+		float moveX;
 		if((left && !right) || rightLeft){
 			x -= dt*speed;
-			if(x < 0) x = 0;
+			moveX = -dt*speed;
+			if(x < 0){
+				moveX = -(x + dt*speed);
+				x = 0;
+			}
 		}else if(right){
 			x += dt*speed;
-			if(x > 1280-32) x = 1280 - 32;
+			moveX = dt*speed;
+			if(x > 1280-32){
+				moveX = 1280 - 32 - x;
+				x = 1280 - 32;
+			}
 		}
+		controlledBlock.moveCentre(moveX,0);
 		if((rotRight && !rotLeft)|| rotrot ){
 			controlledBlock.rotate(0.1);
 		}else if(rotLeft){
@@ -357,6 +365,14 @@ public class Dieu {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
+	}
+
+	public Tetris getNextBlock() {
+		return nextBlock;
+	}
+
+	public void setNextBlock(Tetris nextBlock) {
+		this.nextBlock = nextBlock;
 	}
 	
 }
