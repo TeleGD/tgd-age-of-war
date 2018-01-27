@@ -41,8 +41,8 @@ public class World1 extends BasicGameState {
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
     	
-    	Minion m1 = new Minion(1 );
-    	Minion m2 = new Minion(1 );
+    	Minion m1 = new Minion(1, 1, 1 );
+    	Minion m2 = new Minion(1, 1, 1 );
     	fond = new Image("images/game1/fond.png");
     }
 

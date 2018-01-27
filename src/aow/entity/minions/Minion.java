@@ -25,7 +25,7 @@ public class Minion {
 	private int range;
 	private int type;
 
-	public Minion(int idOwner, int age; int type) {
+	public Minion(int idOwner, int age, int type) {
 		/*
 		 * posX : numéro de case du minion dans le board en partant de la gauche
 		 * y :  position en y dans la fênetre, est constant au cours du temps
@@ -73,6 +73,10 @@ public class Minion {
     
     public int getDamage() {
     	return damage;
+    }
+    
+    public int getIdOwner() {
+    	return idOwner;
     }
 
 }
