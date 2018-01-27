@@ -52,7 +52,7 @@ public class World2 extends BasicGameState {
     	shape2 = new Rectangle(980, 400, 1080, 720);
     	shape3 = new Rectangle(100, 572, 980, 720);
     	
-    	cloud = new Cloud();
+    	//cloud = new Cloud();
     }
 
     @Override
@@ -61,7 +61,11 @@ public class World2 extends BasicGameState {
     	g.drawImage(fond, 0, 0);
     	
     	//les trucs
-    	cloud.render(container, game, g);
+    	//cloud.render(container, game, g);
+    	for(Cloud u:cloudList){
+    		u.render(container, game, g);
+    	}
+    	
     	dieu.render(container, game, g);
     	player.render(container, game, g);
     	
@@ -79,7 +83,14 @@ public class World2 extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     	if(cloud.getPosX()<1080){
-    		cloud.update(container, game, delta);
+    		//cloud.update(container, game, delta);
+    	}
+    	
+    	for(Cloud u:cloudList){
+    		if(u.getPosX()>1080){
+    			cloudList.remove(u);
+    		}
+    		u.update(container, game, delta);
     	}
     	
     	
