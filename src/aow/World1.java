@@ -37,7 +37,7 @@ public class World1 extends BasicGameState {
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
 
-	public static Minion fantom = new Minion(0, 1, 1, "");
+	public static Minion fantom = new Minion(0, 1, 1);
 	
 	private int incr=0;
 	
@@ -46,8 +46,8 @@ public class World1 extends BasicGameState {
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
     	
-    	Minion m1 = new Minion(1, 1, 1, "images/game1/stick_1_a1.png" );
-    	Minion m2 = new Minion(2, 1, 1, "images/game1/stick_1_a1.png" );
+    	Minion m1 = new Minion(1, 1, 1);
+    	Minion m2 = new Minion(2, 1, 1);
     	fond = new Image("images/game1/fond.png");
     }
 

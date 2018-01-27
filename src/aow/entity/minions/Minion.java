@@ -21,17 +21,15 @@ public class Minion {
 	private int direction; // haut=1 -> sens horaire +1
 	private double speed;
 	private int idOwner;
-	private Image sprite;
 	private int range;
 	private int type;
 	private int price;
-	private String nameSprite;
 	private Image image;
 
-	public Minion(int idOwner, int age, int type, String nameSprite ) {
+	public Minion(int idOwner, int age, int type) {
 		/*
-		 * posX : numéro de case du minion dans le board en partant de la gauche
-		 * y :  position en y dans la fênetre, est constant au cours du temps
+		 * posX : numï¿½ro de case du minion dans le board en partant de la gauche
+		 * y :  position en y dans la fï¿½netre, est constant au cours du temps
 		 */
 		
 		if (idOwner != 0) {
@@ -48,8 +46,10 @@ public class Minion {
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
 			
 			try {
-				image=new Image(nameSprite);
-				image=image.getScaledCopy((float) 1);
+				image=new Image("images/game1/stick_"+type+"_a"+age+".png");
+				if (idOwner==2) {
+					image=image.getFlippedCopy(true, false);
+				}
 			} catch (SlickException e) {
 				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 				e.printStackTrace();
@@ -71,7 +71,7 @@ public class Minion {
     
     
     public void takeDamage(int inflictedDamage) {
-    	// Inflige les dégats d'une attaque à ce minion
+    	// Inflige les dï¿½gats d'une attaque ï¿½ ce minion
     	HP -= inflictedDamage;
 		if (this.HP<=0) {
 			if (idOwner == 1) {
