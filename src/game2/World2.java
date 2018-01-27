@@ -25,6 +25,8 @@ public class World2 extends BasicGameState {
 	private static Shape shape2;
 	private static Shape shape3;
 	
+	private Tetris next;
+	
 	private static ArrayList<Tetris> tetrisList;
 	private ArrayList<Cloud> cloudList;
 	private ArrayList<Shark> sharkList;
@@ -92,7 +94,10 @@ public class World2 extends BasicGameState {
     	g.fillRect(1080, 0, 1280, 720);
     	g.setColor(Color.white);
     	g.drawString("Time : " + ((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1085, 100);
-    	
+    	next = dieu.getNextBlock();
+    	//next.setX(1100);
+    	//next.setY(500);
+    	next.render(container, game, g);
     }
 
     @Override
