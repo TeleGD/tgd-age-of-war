@@ -81,8 +81,8 @@ public class Player {
 	}
 	
 	public void achatMinion(int type) {
-		if (ID==1 && World1.board.getCase(0)==0 ) {
-			if (World1.p1.removeGold(15*age*type)) {
+		if (ID==1 && World1.board.getCase(0)==0 ) { //Teste si case de spawn vide
+			if (World1.p1.removeGold(15*age*type)) { // teste si le joueur peut payer et l'encaisse si oui
 				Minion m = new Minion(1, age, type);
 				World1.board.setMinionToCase(1,0);
 			}
