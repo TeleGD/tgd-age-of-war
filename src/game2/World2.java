@@ -37,9 +37,12 @@ public class World2 extends BasicGameState {
 	
 	private Cloud cloud;
 	
+	private static Music mainMusic;
+	
 
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
+    	mainMusic=new Music("musics/game2/tetris.ogg");
     	player = new Player(45,400 - 16, new Rectangle(6, 0, 20, 12), new Rectangle(6,20,20,32));
     	dieu = new Dieu();
     	
@@ -61,6 +64,11 @@ public class World2 extends BasicGameState {
     	shape1 = new Rectangle(0,400, 100, 320);
     	shape2 = new Rectangle(980, 400, 100, 320);
     	shape3 = new Rectangle(100, 572, 880, 148);
+    }
+    
+    @Override
+    public void enter(final GameContainer container, final StateBasedGame game) throws SlickException {
+    	mainMusic.play();
     }
 
     @Override
