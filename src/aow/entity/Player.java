@@ -131,10 +131,10 @@ public class Player {
 			g.fillRect(6, 229, 120, 18);
 		
 			g.setColor(new Color(255,0,0));
-			g.fillRect(6, 229, 120*(int)(PV/PVMax), 18);
+			g.fillRect(6, 229, (int)(120*(double)(PV)/PVMax), 18);
 			
 			g.setColor(Color.white);
-			g.drawString(""+((double)(PV)/PVMax)*100+" %", 8, 229);
+			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 8, 229);
 			
 			g.setColor(Color.yellow);
 			g.drawString((double)(gold) + " gold", 8, 255);
@@ -146,10 +146,10 @@ public class Player {
 			g.fillRect(6, 200, 120, 18);
 		
 			g.setColor(new Color(0,255,0));
-			g.fillRect(6, 200, 120*(int)(xp/xpMax), 18);
+			g.fillRect(6, 200, (int)(120*(double)(xp)/xpMax), 18);
 			
 			g.setColor(Color.white);
-			g.drawString(""+((double)(xp)/xpMax)*100+" %", 8, 200);
+			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 8, 200);
 			
 		}		
 		else // joueur 2
@@ -158,10 +158,10 @@ public class Player {
 			g.fillRect(1151, 229, 120, 18); //
 			
 			g.setColor(new Color(255,0,0));
-			g.fillRect(1151, 229, 120*(int)(PV/PVMax), 18);
+			g.fillRect(1151, 229, (int)(120*(double)(PV)/PVMax), 18);
 			
 			g.setColor(Color.white);
-			g.drawString(""+((double)(PV)/PVMax)*100+" %", 1153, 229);
+			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 1153, 229);
 			
 			g.setColor(Color.yellow);
 			g.drawString((double)(gold) + " gold", 1153, 255);
@@ -173,10 +173,10 @@ public class Player {
 			g.fillRect(1151, 200, 120, 18);
 		
 			g.setColor(new Color(0,255,0));
-			g.fillRect(1151, 200, 120*(int)(xp/xpMax), 18);
+			g.fillRect(1151, 200, (int)(120*(double)(xp)/xpMax), 18);
 			
 			g.setColor(Color.white);
-			g.drawString(""+((double)(xp)/xpMax)*100+" %", 1153, 200);
+			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 1153, 200);
 		}
 	}
 	
