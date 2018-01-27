@@ -28,7 +28,7 @@ public class World1 extends BasicGameState {
 	public static int goldInit = 50;
 	public static int HPInit = 100;
 	public static int tailleBoard = 20;
-	public static int yMinion = 430;
+	public static int yMinion = 410;
 	
 	public Image fond;
 	
