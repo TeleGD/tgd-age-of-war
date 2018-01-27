@@ -90,7 +90,7 @@ public class Tetris {
 		}
 	}
 	
-	public void moveCenter(int x, int y) {
+	public void moveCentre(int x, int y) {
 		xcentre+=x;
 		ycentre+=y;
 		for (int i=0;i<4;i++) {
