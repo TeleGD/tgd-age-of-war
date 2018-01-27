@@ -1,7 +1,9 @@
 package aow;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import aow.World1;
+import aow.entity.minions.Minion;
 
 public class Board {
 /*
@@ -18,6 +20,7 @@ public class Board {
 	private int damier_width;   //taille en pixels du tableau
 	private int lead_1; //position du minion leader du joueur 1
 	private int lead_2; //position du minion leader du joueur 2
+	private ArrayList<Minion> minions;
 	private Random r;
 	
 	
@@ -47,6 +50,7 @@ public class Board {
 		this.case_width = (int) this.damier_width/size;
 		this.lead_1 = 0;
 		this.lead_2 = size-1;
+		this.minions = aow.World1.minions;
 		this.r = new Random();
 	}
 	
@@ -121,16 +125,21 @@ public class Board {
 			if(this.lead_1 == 0){ //Cas où le lead 1 est juste à côté de sa base
 				this.damier[0] = 0;
 				this.damier[1] = 1;
+				minions.get(0).move();
+				
 			}else if (this.lead_2 == n-1){ //Cas où le lead 2 est juste à côté de sa base
 				this.damier[n-1] = 0;
 				this.damier[n-2] = 2;
+				minions.get(n-1).move();
 			}else{ //Si on est quelque part au milieu, un des leaders au hasard avance
 				int c = r.nextInt(2)+1;
 				this.damier[this.lead_1+1]=c;
 				if(c==1){
 					this.damier[this.lead_1] = 0;
+					minions.get(this.lead_1).move();
 				}else{
 					this.damier[this.lead_2] = 0;
+					minions.get(this.lead_2).move();
 				}
 			}
 			
@@ -146,6 +155,7 @@ public class Board {
 			if(this.damier[j] == 1 && j != n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
 				this.damier[j+1] = 1;
+				minions.get(j).move();
 			}
 		}
 		
@@ -154,6 +164,7 @@ public class Board {
 			if(this.damier[j] == 2 && j != 2 && this.damier[j-1] == 0){
 				this.damier[j] = 0;
 				this.damier[j-1] = 2;
+				minions.get(j).move();
 			}
 		}
 		
