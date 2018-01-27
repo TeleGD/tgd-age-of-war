@@ -82,7 +82,6 @@ public class Tetris {
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
 				if (matBool[i][j]) {
-					System.out.println();
 					matrice[i][j].setAngle(angle*180/Math.PI);
 					matrice[i][j].setPosx((int) (xcentre+matDonnees[i][j][0]*Math.cos(angle+matDonnees[i][j][1])));
 					matrice[i][j].setPosy((int) (ycentre+matDonnees[i][j][0]*Math.sin(angle+matDonnees[i][j][1])));
