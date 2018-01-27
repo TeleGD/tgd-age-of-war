@@ -24,8 +24,11 @@ public class Minion {
 	private Image sprite;
 	private int range;
 	private int type;
+	private int price;
+	private String nameSprite;
+	private Image image;
 
-	public Minion(int idOwner, int age, int type) {
+	public Minion(int idOwner, int age, int type, String nameSprite ) {
 		/*
 		 * posX : numéro de case du minion dans le board en partant de la gauche
 		 * y :  position en y dans la fênetre, est constant au cours du temps
@@ -34,20 +37,31 @@ public class Minion {
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
 			
-			
+			HP = (int) (World1.HPminion * age * 1.25);
+			price = (int) (World1.priceMinion * age * 1.25);
 			this.idOwner = idOwner;
 			this.x = World1.board.getX(posX);
 			this.y= y;
 			this.currentPosX = posX;
 			this.nextPosX = posX;
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
+			
+			try {
+				image=new Image(nameSprite);
+				image=image.getScaledCopy((float) 1);
+			} catch (SlickException e) {
+				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
+				e.printStackTrace();
+			}
+			
 			World1.minions[posX] = this;
 		}
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
-		g.setColor(Color.green);
-    	g.fillRect(x, y, 40, 40);
+		if (idOwner != 0) {
+			g.drawImage(image, (float)(x), (float)(y));
+		}
 	}
 	
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
@@ -78,5 +92,19 @@ public class Minion {
     public int getIdOwner() {
     	return idOwner;
     }
+
+	public int getHP() {
+		return HP;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public int getType() {
+		return type;
+	}
+    
+    
 
 }

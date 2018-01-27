@@ -86,9 +86,8 @@ public class Tetris {
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
 				if (matBool[i][j]) {
-					matrice[i][j].setAngle(angle*180/Math.PI);
-					matrice[i][j].setPosx((int) (xcentre+matDonnees[i][j][0]*Math.cos(angle+matDonnees[i][j][1])));
-					matrice[i][j].setPosy((int) (ycentre+matDonnees[i][j][0]*Math.sin(angle+matDonnees[i][j][1])));
+					matrice[i][j].rotate(angle*180/Math.PI,vangle);
+					matrice[i][j].teleport( (int) (xcentre+matDonnees[i][j][0]*Math.cos(angle+matDonnees[i][j][1])) , (int) (ycentre+matDonnees[i][j][0]*Math.sin(angle+matDonnees[i][j][1])) );
 				}
 			}
 		}
@@ -104,6 +103,10 @@ public class Tetris {
 				}
 			}
 		}
+	}
+	
+	public void teleport(int x, int y) {
+		moveCentre(x-xcentre,y-ycentre);
 	}
 
 	public Block[][] getMatrice() {
