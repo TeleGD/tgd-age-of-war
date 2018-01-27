@@ -22,7 +22,7 @@ public class Tetris {
 		sprite=adresse;
 		this.angle=0;
 		this.vx=0;
-		this.vy=1;
+		this.vy=0;
 		this.xcentre=0;
 		this.ycentre=0;
 		int n=0;
@@ -90,6 +90,17 @@ public class Tetris {
 		}
 	}
 	
+	public void moveCenter(int x, int y) {
+		xcentre+=x;
+		ycentre+=y;
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				if (matBool[i][j]) {
+					matrice[i][j].move(x,y);
+				}
+			}
+		}
+	}
 
 	public Block[][] getMatrice() {
 		return matrice;

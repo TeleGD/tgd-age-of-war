@@ -42,6 +42,10 @@ public class Block {
 		sprite.rotate((float) -angle);
 	}
 	
+	public void move(int x,int y) {
+		posx+=x;
+		posy+=y;
+	}
 	
 	public int getPosx(){
 		return posx;
