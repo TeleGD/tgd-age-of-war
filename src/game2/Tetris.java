@@ -42,7 +42,13 @@ public class Tetris {
 			for (int j=0;j<4;j++) {
 				if (matBool[i][j]) {
 					matDonnees[i][j][0]=Math.sqrt( Math.pow(32*j+16-xcentre,2) + Math.pow(32*i+16-ycentre,2) );
-					matDonnees[i][j][1]=Math.atan((32*i+16-ycentre)/(32*j+16-xcentre));
+					if (matDonnees[i][j][0]!=0) {
+						if (32*i+16<ycentre) {
+							matDonnees[i][j][1]=Math.acos((32*j+16-xcentre)/matDonnees[i][j][0]);
+						} else {
+							matDonnees[i][j][1]=-Math.acos((32*j+16-xcentre)/matDonnees[i][j][0]);
+						}
+					}
 				}
 			}
 		}
