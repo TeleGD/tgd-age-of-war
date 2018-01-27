@@ -82,7 +82,7 @@ public class Player {
 		if (ID==1) {
 			switch(type) {
 			case 1 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(15*age)) {
-						System.out.println("Ca marche !");
+						// Ajout d'un Minion1 en case 0
 						Minion m = new Minion(1, age, type);
 					};
 			case 2 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(40*age)) {

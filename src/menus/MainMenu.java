@@ -11,7 +11,7 @@ public class MainMenu extends Menu{
 	public static int ID = -3;	
 	
 	public MainMenu(){
-		super.setTitrePrincipal("TGD-LEBUREAUCTMIEUXAVANT-GAME");
+		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
 		
 		super.setItems(aow.World1.name,game2.World2.name,"Scores", "Quitter");
@@ -31,15 +31,13 @@ public class MainMenu extends Menu{
 		switch (position) {
 		case 0:
 			aow.World1.reset();
-			game.enterState(aow.World1.ID, new FadeOutTransition(),
-					new FadeInTransition());
+			game.enterState(aow.World1.ID, new FadeOutTransition(),new FadeInTransition());
 			break;
 		case 1:
 			game2.World2.reset();
-			game.enterState(game2.World2.ID, new FadeOutTransition(),
-					new FadeInTransition());
+			game.enterState(game2.World2.ID, new FadeOutTransition(),new FadeInTransition());
 			break;
-		case 2:
+		case 3:
 			System.out.println("exit");
 			System.exit(0);
 			break;
