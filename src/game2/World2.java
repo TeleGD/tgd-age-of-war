@@ -97,15 +97,22 @@ public class World2 extends BasicGameState {
     	for(Tetris u:tetrisList){
     		u.render(container, game, g);
     	}
+    	
+    	g.draw(shape1);
+    	g.draw(shape2);
+    	g.draw(shape3);
 
     	g.setColor(Color.black);
     	g.fillRect(1080, 0, 1280, 720);
     	g.setColor(Color.white);
     	g.drawString("Time : " + ((time/1000)/60)/60 + " h " + (time/1000)/60 + " min " + ((time/1000)%60)%60  + " s", 1085, 100);
+    	/*
     	next = dieu.getNextBlock();
-    	//next.setX(1100);
-    	//next.setY(500);
+    	next.setXcentre(1100);
+    	next.setYcentre(500);
+    	next.rotate(0);
     	next.render(container, game, g);
+    	*/
     }
 
     @Override
