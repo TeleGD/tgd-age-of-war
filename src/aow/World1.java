@@ -34,15 +34,15 @@ public class World1 extends BasicGameState {
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
 
-	public static Minion fantom = new Minion(0);
+	public static Minion fantom = new Minion(0, 1, 1);
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
     	
-    	Minion m1 = new Minion(1 );
-    	Minion m2 = new Minion(1 );
+    	Minion m1 = new Minion(1, 1, 1 );
+    	Minion m2 = new Minion(1, 1, 1 );
     	fond = new Image("images/game1/fond.png");
     }
 

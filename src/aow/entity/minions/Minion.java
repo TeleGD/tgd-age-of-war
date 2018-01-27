@@ -22,8 +22,10 @@ public class Minion {
 	private double speed;
 	private int idOwner;
 	private Image sprite;
+	private int range;
+	private int type;
 
-	public Minion(int idOwner) {
+	public Minion(int idOwner, int age, int type) {
 		/*
 		 * posX : numéro de case du minion dans le board en partant de la gauche
 		 * y :  position en y dans la fênetre, est constant au cours du temps
@@ -31,6 +33,8 @@ public class Minion {
 		
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
+			
+			
 			this.idOwner = idOwner;
 			this.x = World1.board.getX(posX);
 			this.y= y;
@@ -60,13 +64,19 @@ public class Minion {
     }
     
     public void move() {
+    	World1.minions[posX] = World1.fantom ;
     	posX += direction;
     	x = World1.board.getX(posX);
+    	World1.minions[posX] = this; 	
     	
     }
     
     public int getDamage() {
     	return damage;
+    }
+    
+    public int getIdOwner() {
+    	return idOwner;
     }
 
 }
