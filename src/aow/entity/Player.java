@@ -108,7 +108,7 @@ public class Player {
 	public void update(GameContainer container,StateBasedGame game, int delta) throws SlickException
 	{
 		// update de age, xpMax, pv, pvmax ;
-		if(xp>=xpMax)
+		if(xp>=xpMax && age < 3)
 		{
 			age++;
 			xpMax=(int)(xpMax*1.75);
@@ -139,6 +139,8 @@ public class Player {
 			g.setColor(Color.yellow);
 			g.drawString((double)(gold) + " gold", 8, 255);
 			
+			g.setColor(Color.magenta);
+			g.drawString("Age : " + (int)(age), 8, 280);
 			
 			g.setColor(new Color(0,153,0));
 			g.fillRect(6, 200, 120, 18);
@@ -163,6 +165,9 @@ public class Player {
 			
 			g.setColor(Color.yellow);
 			g.drawString((double)(gold) + " gold", 1153, 255);
+			
+			g.setColor(Color.magenta);
+			g.drawString("Age : " + (int)(age), 1153, 280);
 			
 			g.setColor(new Color(0,153,0));
 			g.fillRect(1151, 200, 120, 18);
