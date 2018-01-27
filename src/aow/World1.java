@@ -24,10 +24,11 @@ public class World1 extends BasicGameState {
 
 	public static int goldInit = 50;
 	public static int HPInit = 100;
+	public static int tailleBoard = 20;
 	
 	public Image fond;
 	
-	public static Board board = new Board(20,130,1150);
+	public static Board board = new Board(tailleBoard,130,1150);
 
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
