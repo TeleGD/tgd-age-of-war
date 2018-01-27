@@ -56,6 +56,7 @@ public class Dieu {
 		}
 		
 		//Téléportation de la première pièce générée sous dieu.
+		//Pour une raison qui m'échappe, le rotate téléporte la hitbox au bon endroit (aka autour du centre qu'on vient de définir)
 		controlledBlock.setXcentre((int) (x+16));
 		controlledBlock.rotate(0);
 
@@ -135,6 +136,9 @@ public class Dieu {
 		
 		try {
 			if(controlledBlock.getYcentre()>100)World2.addTetrisList(controlledBlock);
+			nextBlock.setVy(0);
+			nextBlock.setXcentre((int) (x+16));
+			nextBlock.rotate(0);
 			controlledBlock = nextBlock;
 			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
 			controlledBlock.setVy(0);
