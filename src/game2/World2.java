@@ -17,7 +17,7 @@ import java.util.*;
 public class World2 extends BasicGameState {
 	
 	public static int ID=77;
-	public static String name = "Tetris PolyBridge";
+	public static String name = "La Sainte Ventouse";
 	private Player player;
 	private Dieu dieu;
 	
