@@ -1,5 +1,4 @@
 package aow;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import aow.World1;
@@ -97,7 +96,7 @@ public class Board {
 		int n = this.damier.length;
 		
 		this.lead_1=0;
-		this.lead_2=n-1;
+		this.lead_2=n;
 		int i = 0;
 		while(this.damier[i]!=2 && i < n-1){
 			if(this.damier[i] == 1){
@@ -105,8 +104,9 @@ public class Board {
 			}
 			i++;
 		}
-		this.lead_2 = i;
-		
+		if(this.damier[i]==2){
+			this.lead_2 = i;
+		}
 	}
 	
 	public void refreshPositions(){
@@ -116,9 +116,9 @@ public class Board {
 			damier[j]=World1.minions[j].getIdOwner();
 			
 		}
-		
+
 		int n = this.damier.length;
-		
+				
 		/* On recalcule au préalable les positions des deux leaders,
 		 * au cas où des World1.minions ont disparus ou sont apparus.
 		 */
@@ -163,7 +163,7 @@ public class Board {
 		
 		/* on commence en mettant à jour les World1.minions du joueur 1 */
 		for(int j = this.lead_1;j>=0;j--){
-			if(this.damier[j] == 1 && j != n-3 && this.damier[j+1] == 0){
+			if(this.damier[j] == 1 && j < n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
 				this.damier[j+1] = 1;
 				World1.minions[j].move();
@@ -172,7 +172,7 @@ public class Board {
 		
 		/* on met ensuite à jour les World1.minions du joueur 2 */
 		for(int j = this.lead_2;j<=n-1;j++){
-			if(this.damier[j] == 2 && j != 2 && this.damier[j-1] == 0){
+			if(this.damier[j] == 2 && j > 2 && this.damier[j-1] == 0){
 				this.damier[j] = 0;
 				this.damier[j-1] = 2;
 				World1.minions[j].move();
@@ -191,6 +191,7 @@ public class Board {
 				this.attackBase(World1.minions[3]);
 			}
 		}else if(this.damier[n-1] == 0 && this.damier[n-2] == 0 && this.damier[n-3] == 1){
+			
 			this.attackBase(World1.minions[n-3]);
 			if(this.damier[n-4] == 1){
 				this.attackBase(World1.minions[n-4]);
@@ -216,7 +217,7 @@ public class Board {
 		
 	}
 	
-/******* Méthodes d'attaque*****/
+/******* Méthodes d'attaque ******/
 	
 	
 	public void attackBase(Minion m){
