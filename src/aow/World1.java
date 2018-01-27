@@ -18,8 +18,6 @@ import java.util.*;
 
 public class World1 extends BasicGameState {
 	
-	protected static StateBasedGame game;
-	
 	public static int ID=7;
 	public static String name = "Age of War";
 	public static Minion[] minions;
@@ -33,6 +31,7 @@ public class World1 extends BasicGameState {
 	public static int yMinion = 410;
 	
 	public Image fond;
+	public Image fondBadEnd;
 	
 	public static Board board = new Board(tailleBoard,130,1150);
 
@@ -51,19 +50,27 @@ public class World1 extends BasicGameState {
     	// Minion m1 = new Minion(1, 1, 1);
     	Minion m2 = new Minion(2, 1, 1);
     	fond = new Image("images/game1/fond.png");
+    	fondBadEnd = new Image("images/game1/yoda.png");
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-    	g.drawImage(fond,0,0);
-    	g.setColor(Color.green);
-//    	g.fillRect(50, 50, 50, 50);
-    	p1.render(container,game,g);
-    	
-    	p2.render(container,game,g);
-    	for(Minion m : minions){
-			m.render(container,game,g);
-		}
+    	if (p1.getHp() > 0 && p2.getHp() > 0) {
+	    	g.drawImage(fond,0,0);
+	    	g.setColor(Color.green);
+	//    	g.fillRect(50, 50, 50, 50);
+	    	p1.render(container,game,g);
+	    	p2.render(container,game,g);
+	    	
+	    	for(Minion m : minions){
+				m.render(container,game,g);
+			}
+    	} else {
+    		g.drawImage(fondBadEnd,0,0);
+        	g.setColor(Color.white);
+        	g.drawString("IL N'Y A PAS DE GAGNANTS DANS UNE GUERRE...", 550, 350);
+    		g.drawRect(525, 330, 205, 50);
+    	}
     }
 
 
@@ -103,9 +110,4 @@ public class World1 extends BasicGameState {
 		return ID;
 	}
 	
-	public static void death() { // Si un joueur meurt on part sur l'écran de fin
-		game.enterState(BadEndAow.ID, new FadeOutTransition(),new FadeInTransition());
-	}
-
-
 }

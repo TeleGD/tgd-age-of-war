@@ -41,7 +41,6 @@ public class Player {
 		PV=PV-degat;
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
-			World1.death();
 //			System.exit(0);
 		}
 	}
