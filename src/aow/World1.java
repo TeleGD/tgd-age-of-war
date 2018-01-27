@@ -20,11 +20,12 @@ public class World1 extends BasicGameState {
 	
 	public static int ID=7;
 	public static String name = "Age of War";
-	public static ArrayList<Minion> minions;
+	public static Minion[] minions;
 
 	public static int goldInit = 50;
 	public static int HPInit = 100;
 	public static int tailleBoard = 20;
+	public static int yMinion = 500;
 	
 	public Image fond;
 	
@@ -33,13 +34,15 @@ public class World1 extends BasicGameState {
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
 
-
+	public static Minion fantom = new Minion(0);
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	minions = new ArrayList<Minion>();
-    	Minion m1 = new Minion(3,100, 1 );
-    	Minion m2 = new Minion(5,100, 1 );
+    	minions = new Minion[tailleBoard];
+    	Arrays.fill(minions, fantom);
+    	
+    	Minion m1 = new Minion(1 );
+    	Minion m2 = new Minion(1 );
     	fond = new Image("images/game1/fond.png");
     }
 
