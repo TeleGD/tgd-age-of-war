@@ -82,16 +82,23 @@ public class World2 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-    	if(cloud.getPosX()<1080){
-    		//cloud.update(container, game, delta);
-    	}
-    	
     	for(Cloud u:cloudList){
     		if(u.getPosX()>1080){
     			cloudList.remove(u);
+    			break;
     		}
-    		u.update(container, game, delta);
+    		
     	}
+    	
+    	if(cloudList.size()>0){
+    	 	for(Cloud u:cloudList){
+	    		u.update(container, game, delta);
+	    	}
+    	}
+    	
+    	if(Math.random() * 1.001 > 0.997 ){
+			cloudList.add(new Cloud());
+		}
     	
     	
     	

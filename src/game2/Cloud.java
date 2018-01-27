@@ -17,7 +17,7 @@ public class Cloud {
     	cloud = new Image(urlCloud);
     	
     	posx = 0;
-    	posy = 100;
+    	posy = (int) (50 + Math.random() * 250);
 	}
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
