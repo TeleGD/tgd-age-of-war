@@ -45,7 +45,6 @@ public class Block {
 	
 	public void rotate(double angle, double vangle) {
 		this.angle=angle;
-		System.out.println("blaaa");
 		hitbox.transform(Transform.createRotateTransform((float) vangle));
 	}
 	

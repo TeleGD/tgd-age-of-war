@@ -104,6 +104,10 @@ public class Tetris {
 			}
 		}
 	}
+	
+	public void teleport(int x, int y) {
+		moveCentre(x-xcentre,y-ycentre);
+	}
 
 	public Block[][] getMatrice() {
 		return matrice;
