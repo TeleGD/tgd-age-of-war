@@ -7,11 +7,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import aow.Board;
 import aow.World1;
-import aow.entity.Player;
 
-public class Minion1 {
+public class Minion {
 	
 	private int x;
 	private int y;
@@ -21,25 +19,21 @@ public class Minion1 {
 	private int damage;
 	private int direction; // haut=1 -> sens horaire +1
 	private double speed;
+	private int idOwner;
 	private Image sprite;
-	private int id;
-//	private Player player; //Joueur ennemi de cette unité
-//	private Board board;
-	
-	public Minion1(int posX, int y, int id) {
+
+	public Minion(int posX, int y, int idOwner) {
 		/*
 		 * posX : numéro de case du minion dans le board en partant de la gauche
 		 * y :  position en y dans la fênetre, est constant au cours du temps
 		 */
-		
-//		this.board = board;
-//		this.player = player;
-		this.id = id;
+
+		this.idOwner = idOwner;
 		this.x = World1.board.getX(posX);
 		this.y= y;
 		this.currentPosX = posX;
 		this.nextPosX = posX;
-		this.direction = 0;
+		this.direction = -2 * idOwner + 3 ;
 		World1.minions.add(this);
 	}
 	
@@ -61,5 +55,5 @@ public class Minion1 {
 		}
     	
     }
-	
+
 }
