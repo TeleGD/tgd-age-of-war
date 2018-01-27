@@ -81,35 +81,15 @@ public class Player {
 	}
 	
 	public void achatMinion(int type) {
-		if (ID==1) {
-			switch(type) {
-			case 1 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(15*age)) {
-						// Ajout d'un Minion1 en case 0
-						Minion m = new Minion(1, age, type);
-					};
-			case 2 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(40*age)) {
-						// Ajout d'un Minion2 en case 0
-						Minion m = new Minion(1, age, type);
-					};
-			case 3 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(100*age)) {
-						// Ajout d'un Minion3 en case 0
-						Minion m = new Minion(1, age, type);
-					};
+		if (ID==1 && World1.board.getCase(0)==0 ) {
+			if (World1.p1.removeGold(15*age*type)) {
+				Minion m = new Minion(1, age, type);
+				World1.board.setMinionToCase(1,0);
 			}
-		} else if (ID==2) {
-			switch(type) {
-			case 1 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(15*age)) {
-						// Ajout d'un Minion1 en case n-1
-						Minion m = new Minion(2, age, type);
-					};
-			case 2 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(40*age)) {
-						// Ajout d'un Minion2 en case n-1
-						Minion m = new Minion(2, age, type);
-					};
-			case 3 : if (World1.board.getCase(boardLength-1)==0 && World1.p2.removeGold(100*age)) {
-						// Ajout d'un Minion3 en case n-1
-						Minion m = new Minion(2, age, type);
-					};
+		} else if (ID==2 && World1.board.getCase(boardLength-1) == 0) {
+			if (World1.p2.removeGold(15*age*type)) {
+				Minion m = new Minion(2, age, type);
+				World1.board.setMinionToCase(2, boardLength -1);	
 			}
 		}
 	}
