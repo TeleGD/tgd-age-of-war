@@ -25,7 +25,7 @@ public class Dieu {
 		sprite = new Image("images/TetrisPolyBridge/dieu.png");
 		x = 360;
 		y = 0;
-		speed = 1;
+		speed = (float) 0.5;
 		left = false;
 		right = false;
 		rightLeft = false;
@@ -223,7 +223,7 @@ public class Dieu {
 			rotRight = true;
 			rotrot = true;
 			break;
-		case Input.KEY_LSHIFT:
+		case Input.KEY_ENTER:
 			drop = true;
 			dropBlock();
 			break;
