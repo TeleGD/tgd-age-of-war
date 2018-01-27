@@ -129,6 +129,9 @@ public class Player {
 			g.setColor(Color.white);
 			g.drawString(""+((double)(PV)/PVMax)*100+" %", 8, 229);
 			
+			g.setColor(Color.yellow);
+			g.drawString((double)(gold) + " gold", 8, 255);
+			
 			
 			g.setColor(new Color(0,153,0));
 			g.fillRect(6, 200, 120, 18);
@@ -140,7 +143,7 @@ public class Player {
 			g.drawString(""+((double)(xp)/xpMax)*100+" %", 8, 200);
 			
 		}		
-		else //deux joueur
+		else // joueur 2
 		{
 			g.setColor(new Color(153,0,0));
 			g.fillRect(1151, 229, 120, 18); //
@@ -150,6 +153,9 @@ public class Player {
 			
 			g.setColor(Color.white);
 			g.drawString(""+((double)(PV)/PVMax)*100+" %", 1153, 229);
+			
+			g.setColor(Color.yellow);
+			g.drawString((double)(gold) + " gold", 1153, 255);
 			
 			g.setColor(new Color(0,153,0));
 			g.fillRect(1151, 200, 120, 18);
