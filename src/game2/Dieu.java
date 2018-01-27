@@ -48,14 +48,12 @@ public class Dieu {
 					if (row == null) continue;
 					for(Block b : row){
 						if (b == null) continue;
-						if(bT.getHitbox().intersects(b.getHitbox())) {
-							//System.out.println("Collision at x: "+bT.getPosx()+"/"+b.getPosx()+"; y: "+bT.getPosy()+"/"+b.getPosy());
-							return true;
-						}
+						if(bT.getHitbox().intersects(b.getHitbox())) return true;
 					}
 				}
 			}
 		}
+		
 		
 		return false;
 	}
@@ -106,14 +104,6 @@ public class Dieu {
 		try {
 			if(controlledBlock != null) World2.addTetrisList(controlledBlock);
 			//controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc1QRCode.png");
-			/*System.out.println("--------");
-			for(int i = 0; i < 4; i ++){
-				for(int j = 0; j < 4; j  ++){
-					System.out.print(mat[i][j]+";");
-				}
-				System.out.println();
-			}
-			System.out.println("-------- ");*/
 			controlledBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+6*Math.random())+cat+".png");
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -124,19 +114,26 @@ public class Dieu {
 		move(delta);
 		
 		if(!drop){
+			//System.out.println("Moving center to : "+(x+16));
 			controlledBlock.setXcentre((int) (x+16));
+			controlledBlock.rotate(0);
 		}
 		else{
-			for(Tetris t : World2.getTetrisList()){
-				if(World2.getTetrisList().size() < 1) break;
-				if(checkCollision(t)){
-					controlledBlock.setVy(0);
-					drop = false;
-					nextBlock();
-					break;
+			if(controlledBlock.getYcentre()>=720){
+				controlledBlock.setVy(0);
+				drop = false;
+				nextBlock();
+			}
+			else if(World2.getTetrisList().size() >= 1){
+				for(Tetris t : World2.getTetrisList()){
+					if(checkCollision(t)){
+						controlledBlock.setVy(0);
+						drop = false;
+						nextBlock();
+						break;
+					}
 				}
 			}
-			
 		}
 		controlledBlock.update(container, game, delta);
 		
@@ -176,8 +173,8 @@ public class Dieu {
 			break;
 		case Input.KEY_SPACE:
 			drop = true;
-			nextBlock();
-			//dropBlock();
+			//nextBlock();
+			dropBlock();
 			break;
 		}
 	}
@@ -216,9 +213,9 @@ public class Dieu {
 			if(x > 1280-32) x = 1280 - 32;
 		}
 		if((rotRight && !rotLeft)|| rotrot ){
-			controlledBlock.rotate(-15);
-		}else if(rotrot){
-			controlledBlock.rotate(15);
+			controlledBlock.rotate(0.1);
+		}else if(rotLeft){
+			controlledBlock.rotate(-0.1);
 		}
 	}
 	

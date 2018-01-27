@@ -37,9 +37,9 @@ public class Block {
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		Image spriteTemporaire = sprite;
-		spriteTemporaire.rotate((float) angle);
-		g.drawImage(spriteTemporaire,(float) posx,(float) posy);
+		sprite.rotate((float) angle);
+		g.drawImage(sprite,(float) posx,(float) posy);
+		sprite.rotate((float) -angle);
 	}
 	
 	
