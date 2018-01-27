@@ -5,6 +5,7 @@ import java.awt.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,7 +21,7 @@ public class Player {
 	private int ID; //num joueur
 	private int xp;
 	private int xpMax = 1000;
-	private int age;
+	private int age = 1;
 	private int boardLength = World1.tailleBoard;
 	
 	//constructeur
@@ -79,7 +80,7 @@ public class Player {
 		if (ID==1) {
 			switch(type) {
 			case 1 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(15*age)) {
-						// Ajout d'un Minion1 en case 0
+						System.out.println("Ca marche !");
 					};
 			case 2 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(40*age)) {
 						// Ajout d'un Minion2 en case 0
@@ -168,5 +169,58 @@ public class Player {
 		}
 	}
 	
+	private boolean aPress,zPress,ePress,iPress,oPress,pPress = false;
+	
+	public void keyPressed(int key, char c) {
+		switch (key){
+		case Input.KEY_A:
+			aPress = true;
+			World1.p1.achatMinion(1);
+			break;
+		case Input.KEY_Z:
+			zPress = true;
+			World1.p1.achatMinion(2);
+			break;
+		case Input.KEY_E:
+			ePress = true;
+			World1.p1.achatMinion(3);
+			break;
+		case Input.KEY_I:
+			iPress = true;
+			World1.p2.achatMinion(1);
+			break;
+		case Input.KEY_O:
+			oPress = true;
+			World1.p2.achatMinion(2);
+			break;
+		case Input.KEY_P:
+			pPress = true;
+			World1.p2.achatMinion(3);
+			break;
+		}
+	}
+	
+	public void keyReleased(int key, char c) {
+		switch (key){
+		case Input.KEY_A:
+			aPress = false;
+			break;
+		case Input.KEY_Z:
+			zPress = false;
+			break;
+		case Input.KEY_E:
+			ePress = false;
+			break;
+		case Input.KEY_I:
+			iPress = false;
+			break;
+		case Input.KEY_O:
+			oPress = false;
+			break;
+		case Input.KEY_P:
+			pPress = false;
+			break;
+		}
+	}
 	
 }

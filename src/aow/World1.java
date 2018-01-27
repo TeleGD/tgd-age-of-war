@@ -76,7 +76,15 @@ public class World1 extends BasicGameState {
     public static void reset() {
        
     }
-
+    
+    public void keyPressed(int key, char c){
+		p1.keyPressed(key, c);
+	}
+	
+	public void keyReleased(int key, char c){
+		p1.keyReleased(key, c);
+	}
+    
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
