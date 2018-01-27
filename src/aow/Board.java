@@ -95,7 +95,7 @@ public class Board {
 		 */
 		int n = this.damier.length;
 		
-		this.lead_1=0;
+		this.lead_1=-1;
 		this.lead_2=n;
 		int i = 0;
 		while(this.damier[i]!=2 && i < n-1){
@@ -188,14 +188,15 @@ public class Board {
 		if(this.damier[0] == 0 && this.damier[1] == 0 && this.damier[2] == 2){
 			
 			this.attackBase(World1.minions[2]);
-			if(this.damier[3] == 2){
+			if(this.damier[3] == 2 && World1.minions[3].getType()==2){
 				this.attackBase(World1.minions[3]);
+				
 			}
 			
 		}else if(this.damier[n-1] == 0 && this.damier[n-2] == 0 && this.damier[n-3] == 1){
 			
 			this.attackBase(World1.minions[n-3]);
-			if(this.damier[n-4] == 1){
+			if(this.damier[n-4] == 1 && World1.minions[n-4].getType()==2){
 				this.attackBase(World1.minions[n-4]);
 			}
 			
@@ -203,6 +204,7 @@ public class Board {
 		/* Cas g�n�ral : les leaders s'attaquent entre eux ; 
 		 * en renfort peut intervenir un alli� derri�re chacun.
 		 */
+			
 		}else if(this.lead_2==this.lead_1+1){
 			this.attack(World1.minions[this.lead_1],World1.minions[this.lead_2]);
 			this.attack(World1.minions[this.lead_2],World1.minions[this.lead_1]);
