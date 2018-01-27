@@ -45,7 +45,7 @@ public class World2 extends BasicGameState {
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	mainMusic=new Music("musics/game2/tetris.ogg");
-    	player = new Player(45,400 - 16, new Rectangle(6, 0, 20, 12), new Rectangle(6,20,20,32));
+    	player = new Player(45,400 - 16, new Rectangle(6, 0, 20, 32));
     	dieu = new Dieu();
     	
     	tetrisList = new ArrayList<Tetris>();
