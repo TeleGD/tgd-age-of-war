@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 import game2.World2;
-
+import game2.Tetris;
 
 public class Player {
 
@@ -87,6 +87,7 @@ public class Player {
 			this.x = 116;
 			collapseOn=true;
 			canMoveLeft = false;
+			leftPress=false;
 		}
 		if (this.y>=572){ 
 			this.y = 556;
@@ -97,6 +98,7 @@ public class Player {
 			this.x = 964;
 			collapseOn=true;
 			canMoveRight = false;
+			rightPress = false;
 		}
 		if (this.x>=980 && this.y<=420 && this.y>=385){
 			this.y = 385;
@@ -105,9 +107,15 @@ public class Player {
 		}	
 		tetrisList = World2.getTetrisList();
 	
-		for (int i=0; i <= tetrisList.size(); i++){
-			
-			
+		for (int k=0; k <= tetrisList.size(); k++){
+			/*if (Math.abs(tetrisList.get(k).getXcentre()-this.x)<112){
+				for (int i=0; i <= tetrisList.get(k).getMatrice().length ; i++){
+					for (int j=0; j <= tetrisList.get(k).getMatrice()[j].length ; j++){
+						
+					}
+				}
+			}
+			*/
 		}
 		if (collapseOn == false){
 			isInJump = true;
