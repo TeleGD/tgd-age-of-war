@@ -19,7 +19,7 @@ public class Player {
 	private int gold;
 	private int ID; //num joueur
 	private int xp;
-	private int xpMax;
+	private int xpMax = 1000;
 	private int age;
 	private int boardLength = World1.tailleBoard;
 	
@@ -122,10 +122,10 @@ public class Player {
 			g.drawString(""+((double)(PV)/PVMax)*100+" %", 8, 229);
 			
 			
-			g.setColor(new Color(153,0,0));
+			g.setColor(new Color(0,153,0));
 			g.fillRect(6, 200, 120, 18);
 		
-			g.setColor(new Color(255,0,0));
+			g.setColor(new Color(0,255,0));
 			g.fillRect(6, 200, 120*(int)(xp/xpMax), 18);
 			
 			g.setColor(Color.white);
@@ -142,6 +142,15 @@ public class Player {
 			
 			g.setColor(Color.white);
 			g.drawString(""+((double)(PV)/PVMax)*100+" %", 1153, 229);
+			
+			g.setColor(new Color(0,153,0));
+			g.fillRect(1151, 200, 120, 18);
+		
+			g.setColor(new Color(0,255,0));
+			g.fillRect(1151, 200, 120*(int)(xp/xpMax), 18);
+			
+			g.setColor(Color.white);
+			g.drawString(""+((double)(xp)/xpMax)*100+" %", 1153, 200);
 		}
 	}
 	
