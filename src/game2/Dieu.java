@@ -153,26 +153,21 @@ public class Dieu {
 		
 			for(Block[] row : controlledBlock.getMatrice()){
 				if(row == null) continue;
-				System.out.println("Row");
 				for(Block b : row){
 					if(b == null) continue;
-					System.out.println("b");
 					if(b.getHitbox().intersects(World2.getShape1())){
-						System.out.println("INTERSECT 1");
 						controlledBlock.setVy(0);
 						drop = false;
 						nextBlock();
 						break;
 					}
 					else if(b.getHitbox().intersects(World2.getShape2())){
-						System.out.println("INTERSECT 2");
 						controlledBlock.setVy(0);
 						drop = false;
 						nextBlock();
 						break;
 					}
 					else if(b.getHitbox().intersects(World2.getShape3())){
-						System.out.println("INTERSECT 3");
 						controlledBlock.setVy(0);
 						drop = false;
 						nextBlock();
