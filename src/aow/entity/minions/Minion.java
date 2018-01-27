@@ -25,6 +25,7 @@ public class Minion {
 	private int type;
 	private int price;
 	private Image image;
+	private int xp;
 
 	public Minion(int idOwner, int age, int type) {
 		/*
@@ -35,9 +36,10 @@ public class Minion {
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
 			
-			damage = (int) (World1.damageDefault * age * 1.2);
-			HP = (int) (World1.HPminion * age * 1.25);
-			price = (int) (World1.priceMinion * age * 1.25);
+			xp = 50 * age * type;
+			damage = (int) (World1.damageDefault * age * type);
+			HP = (int) (World1.HPminion * age * type);
+			price = (int) (World1.priceMinion * age * type);
 			this.idOwner = idOwner;
 			this.x = World1.board.getX(posX);
 			this.y= World1.yMinion;
@@ -76,8 +78,13 @@ public class Minion {
 		if (this.HP<=0) {
 			if (idOwner == 1) {
 				World1.p2.addGold((int) price );
+				World1.p2.augmenteXp((int) xp );
 			}
-			else World1.p1.addGold((int) price );
+			else {
+				World1.p1.addGold((int) price );
+				World1.p1.augmenteXp((int) xp );
+			}
+			
 			World1.minions[posX] = World1.fantom ;
 		}
     }
