@@ -9,6 +9,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
+import aow.World1;
+
 public class Player {
 	
 	
@@ -63,7 +65,15 @@ public class Player {
 	{
 		xp+=inc;
 	}
-	 
+	
+	public void achatMinion1() {
+		if (ID==1) {
+			if (World1.board.getCase(0)==0 && World1.p1.removeGold(50*age)) {
+				// Ajout d'un Minion1 en case 0
+			}
+		}
+	}
+	
 	public void update(GameContainer container,StateBasedGame game, int delta) throws SlickException
 	{
 		// update de age, xpMax, pv, pvmax ;

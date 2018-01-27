@@ -22,15 +22,15 @@ public class World1 extends BasicGameState {
 	public static String name = "Age of War";
 	public static ArrayList<Minion1> minions;
 
-	public int goldInit = 50;
-	public int HPInit = 100;
+	public static int goldInit = 50;
+	public static int HPInit = 100;
 	
 	public Image fond;
 	
 	public static Board board = new Board(20,130,1150);
 
-	public Player p1 = new Player(1,goldInit,HPInit);
-	public Player p2 = new Player(2,goldInit,HPInit);
+	public static Player p1 = new Player(1,goldInit,HPInit);
+	public static Player p2 = new Player(2,goldInit,HPInit);
 
 
 	
