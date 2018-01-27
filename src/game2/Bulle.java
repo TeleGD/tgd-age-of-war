@@ -13,11 +13,11 @@ public class Bulle {
 	private Image bulle;
 	private String urlBulle = "images/TetrisPolyBridge/bulle.png";
 	
-	public Bulle(int x) throws SlickException{
+	public Bulle(int x, int y) throws SlickException{
     	bulle = new Image(urlBulle);
     	
     	posx = x;
-    	posy = 720;
+    	posy = 720 - y;
 	}
 	
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {

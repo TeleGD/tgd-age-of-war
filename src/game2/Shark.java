@@ -19,11 +19,11 @@ public class Shark {
 	
 	public Shark(int x, int dir) throws SlickException{
 		posx = x;
-		posy = 652;
+		posy = 652-32;
 		sens = dir;
 		
 		shark1 = new Image(urlShark1);	
-		shark2 = new Image(urlShark1);
+		shark2 = new Image(urlShark2);
 		
 		if(dir == 1){
 			shark = shark1;
@@ -35,7 +35,7 @@ public class Shark {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		if(sens == 1){
 			posx += 1;
-			if(posx>980){
+			if(posx>980-32){
 				sens = 1 - sens;
 				shark = shark2;
 			}
