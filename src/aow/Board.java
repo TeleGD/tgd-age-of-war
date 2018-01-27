@@ -20,7 +20,6 @@ public class Board {
 	private int damier_width;   //taille en pixels du tableau
 	private int lead_1; //position du minion leader du joueur 1
 	private int lead_2; //position du minion leader du joueur 2
-	private ArrayList<Minion> minions;
 	private Random r;
 	
 	
@@ -50,7 +49,6 @@ public class Board {
 		this.case_width = (int) this.damier_width/size;
 		this.lead_1 = 0;
 		this.lead_2 = size-1;
-		this.minions = aow.World1.minions;
 		this.r = new Random();
 	}
 	
@@ -90,18 +88,8 @@ public class Board {
 	
 	
 	/****** fonctions de rafraichissement du damier ******/
-	
-	
-	public void refreshPositions(){
-		
-		/* calcule le nouveau damier à partir de l'ancien */
-		
-		
+	public void refreshLeads(){
 		int n = this.damier.length;
-		
-		/* On recalcule au préalable les positions des deux leaders,
-		 * au cas où des minions ont disparus ou sont apparus.
-		 */
 		
 		this.lead_1=0;
 		this.lead_2=n-1;
@@ -113,11 +101,26 @@ public class Board {
 			i++;
 		}
 		this.lead_2 = i;
+	
+	}
+	
+	public void refreshPositions(){
+		
+		/* calcule le nouveau damier à partir de l'ancien */
+		
+		
+		int n = this.damier.length;
+		
+		/* On recalcule au préalable les positions des deux leaders,
+		 * au cas où des World1.minions ont disparus ou sont apparus.
+		 */
+		
+		this.refreshLeads();
 		
 		/*
 		 *  on traite d'abord le cas particulier où les leaders
 		 *  se départagent une même case. 
-		 *  Cas sur les bords : priorité aux minions déjà dans leurs bases
+		 *  Cas sur les bords : priorité aux World1.minions déjà dans leurs bases
 		 *  Cas général : aléatoire
 		 */
 		
@@ -125,21 +128,21 @@ public class Board {
 			if(this.lead_1 == 0){ //Cas où le lead 1 est juste à côté de sa base
 				this.damier[0] = 0;
 				this.damier[1] = 1;
-				minions.get(0).move();
+				World1.minions[0].move();
 				
 			}else if (this.lead_2 == n-1){ //Cas où le lead 2 est juste à côté de sa base
 				this.damier[n-1] = 0;
 				this.damier[n-2] = 2;
-				minions.get(n-1).move();
+				World1.minions[n-1].move();
 			}else{ //Si on est quelque part au milieu, un des leaders au hasard avance
 				int c = r.nextInt(2)+1;
 				this.damier[this.lead_1+1]=c;
 				if(c==1){
 					this.damier[this.lead_1] = 0;
-					minions.get(this.lead_1).move();
+					World1.minions[this.lead_1].move();
 				}else{
 					this.damier[this.lead_2] = 0;
-					minions.get(this.lead_2).move();
+					World1.minions[this.lead_2].move();
 				}
 			}
 			
@@ -150,24 +153,31 @@ public class Board {
 		 * afin d'éviter que les unités leaders bloquent leur prédécesseurs 
 		 */
 		
-		/* on commence en mettant à jour les minions du joueur 1 */
+		/* on commence en mettant à jour les World1.minions du joueur 1 */
 		for(int j = this.lead_1;j>0;j--){
 			if(this.damier[j] == 1 && j != n-3 && this.damier[j+1] == 0){
 				this.damier[j] = 0;
 				this.damier[j+1] = 1;
-				minions.get(j).move();
+				World1.minions[j].move();
 			}
 		}
 		
-		/* on met ensuite à jour les minions du joueur 2 */
-		for(int j = this.lead_2;j< 0;j++){
+		/* on met ensuite à jour les World1.minions du joueur 2 */
+		for(int j = this.lead_2;j< n-1;j++){
 			if(this.damier[j] == 2 && j != 2 && this.damier[j-1] == 0){
 				this.damier[j] = 0;
 				this.damier[j-1] = 2;
-				minions.get(j).move();
+				World1.minions[j].move();
 			}
 		}
 		
+		/*place aux attaques : seuls le leader et la base peuvent être attaqués*/
+		
+		this.refreshLeads();
+		
+		if(this.damier[0] == 0 && this.damier[1] == 0 && this.damier[1] == 2){
+			//World1.minions[2].
+		}
 		
 	}
 	
