@@ -36,6 +36,7 @@ public class Dieu {
 		rotrot = false;
 		drop = false;
 		nextBlock();
+		controlledBlock.setVy(0);
 	}
 	
 	public boolean checkCollision(Tetris t) {
@@ -122,7 +123,9 @@ public class Dieu {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		move(delta);
 		
-		if(!drop)controlledBlock.setXcentre((int) (x+16));
+		if(!drop){
+			controlledBlock.setXcentre((int) (x+16));
+		}
 		else{
 			for(Tetris t : World2.getTetrisList()){
 				if(World2.getTetrisList().size() < 1) break;
@@ -199,6 +202,7 @@ public class Dieu {
 			break;
 		case Input.KEY_E:
 			rotRight = false;
+			rotrot = false;
 			break;
 		}
 	}
@@ -210,6 +214,11 @@ public class Dieu {
 		}else if(right){
 			x += dt*speed;
 			if(x > 1280-32) x = 1280 - 32;
+		}
+		if((rotRight && !rotLeft)|| rotrot ){
+			controlledBlock.rotate(-15);
+		}else if(rotrot){
+			controlledBlock.rotate(15);
 		}
 	}
 	
