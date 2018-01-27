@@ -192,14 +192,19 @@ public class World2 extends BasicGameState {
     	
     	if (gameOn) {
     	
-    		rejouer.render(container, game, g);
-    		retourMenu.render(container, game, g);
-    		quitter.render(container, game, g);
+    		
     		
 	    	//les trucs
 	    	for(Cloud u:cloudList){
 	    		u.render(container, game, g);
 	    	}
+	    	
+	    	g.setColor(Color.black);
+	    	g.fillRect(1080, 0, 1280, 720);
+	    	
+	    	rejouer.render(container, game, g);
+    		retourMenu.render(container, game, g);
+    		quitter.render(container, game, g);
 	    	
 	    	for(Shark u:sharkList){
 	    		u.render(container, game, g);
