@@ -39,6 +39,8 @@ public class World1 extends BasicGameState {
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	minions = new Minion[tailleBoard];
+    	Arrays.fill(minions, fantom);
+    	
     	Minion m1 = new Minion(1 );
     	Minion m2 = new Minion(1 );
     	fond = new Image("images/game1/fond.png");
