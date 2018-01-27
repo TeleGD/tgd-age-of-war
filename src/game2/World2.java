@@ -53,20 +53,6 @@ public class World2 extends BasicGameState {
     	sharkList.add(new Shark(500, 0));
     	sharkList.add(new Shark(948, 0));
     	bulleList = new ArrayList<Bulle>();
-    	/*
-    	bulleList.add(new Bulle(120, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(180, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(250, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(300, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(360, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(470, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(590, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(640, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(690, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(730, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(810, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(890, (int) (0 + Math.random() * (720 - 652) + 652)));
-    	bulleList.add(new Bulle(940, (int) (0 + Math.random() * (720 - 652) + 652)));*/
     	
     	time = 0;
     	fond = new Image(urlFond);
@@ -75,8 +61,6 @@ public class World2 extends BasicGameState {
     	shape1 = new Rectangle(0,400, 100, 320);
     	shape2 = new Rectangle(980, 400, 100, 320);
     	shape3 = new Rectangle(100, 572, 880, 148);
-    	
-    	//cloud = new Cloud();
     }
 
     @Override
@@ -85,7 +69,6 @@ public class World2 extends BasicGameState {
     	g.drawImage(fond, 0, 0);
     	
     	//les trucs
-    	//cloud.render(container, game, g);
     	for(Cloud u:cloudList){
     		u.render(container, game, g);
     	}
@@ -153,8 +136,8 @@ public class World2 extends BasicGameState {
 	    	}
     	}
     	
-    	if(Math.random() * 1.001 > 0.997 ){
-			bulleList.add(new Bulle((int) (0 + Math.random() * (960 - 120) + 120), (int) (0 + Math.random() * (720 - 652) + 652)));
+    	if(Math.random() * 1.001 > 0.9 ){
+			bulleList.add(new Bulle((int) (Math.random() * (960 - 120) + 120), 0));
 		}
     	
     	dieu.update(container, game, delta);
