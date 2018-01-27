@@ -12,7 +12,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import aow.entity.Player;
-import aow.entity.minions.Minion1;
+import aow.entity.minions.Minion;
 
 import java.util.*;
 
@@ -20,7 +20,7 @@ public class World1 extends BasicGameState {
 	
 	public static int ID=7;
 	public static String name = "Age of War";
-	public static ArrayList<Minion1> minions;
+	public static ArrayList<Minion> minions;
 
 	public static int goldInit = 50;
 	public static int HPInit = 100;
@@ -36,9 +36,9 @@ public class World1 extends BasicGameState {
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
-    	minions = new ArrayList<Minion1>();
-    	Minion1 m1 = new Minion1(3,100, 1 );
-    	Minion1 m2 = new Minion1(5,100, 1 );
+    	minions = new ArrayList<Minion>();
+    	Minion m1 = new Minion(3,100, 1 );
+    	Minion m2 = new Minion(5,100, 1 );
     	fond = new Image("images/game1/fond.png");
     }
 
@@ -49,7 +49,7 @@ public class World1 extends BasicGameState {
     	g.fillRect(50, 50, 50, 50);
     	p1.render(container,game,g);
     	p2.render(container,game,g);
-    	for(Minion1 m : minions){
+    	for(Minion m : minions){
 			m.render(container,game,g);
 		}
     }
