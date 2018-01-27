@@ -78,13 +78,13 @@ public class Player {
 	public void achatMinion(int type) {
 		if (ID==1) {
 			switch(type) {
-			case 1 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(50*age)) {
+			case 1 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(15*age)) {
 						// Ajout d'un Minion1 en case 0
 					};
-			case 2 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(100*age)) {
+			case 2 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(40*age)) {
 						// Ajout d'un Minion2 en case 0
 					};
-			case 3 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(150*age)) {
+			case 3 : if (World1.board.getCase(0)==0 && World1.p1.removeGold(100*age)) {
 						// Ajout d'un Minion3 en case 0
 					};
 			}

@@ -22,6 +22,7 @@ public class World1 extends BasicGameState {
 	public static String name = "Age of War";
 	public static Minion[] minions;
 
+	public static int damageDefault = 5;
 	public static int HPminion = 15;
 	public static int priceMinion = 10 ;
 	public static int goldInit = 50;
