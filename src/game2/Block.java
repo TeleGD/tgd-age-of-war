@@ -40,6 +40,7 @@ public class Block {
 		sprite.rotate((float) angle);
 		g.drawImage(sprite,(float) posx,(float) posy);
 		sprite.rotate((float) -angle);
+		g.draw(hitbox);
 	}
 	
 	public void rotate(double angle, double vangle) {
