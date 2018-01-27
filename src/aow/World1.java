@@ -22,6 +22,8 @@ public class World1 extends BasicGameState {
 	public static String name = "Age of War";
 	public static Minion[] minions;
 
+	public static int HPminion = 15;
+	public static int priceMinion = 10 ;
 	public static int goldInit = 50;
 	public static int HPInit = 100;
 	public static int tailleBoard = 20;
@@ -34,15 +36,15 @@ public class World1 extends BasicGameState {
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
 
-	public static Minion fantom = new Minion(0, 1, 1);
+	public static Minion fantom = new Minion(0, 1, 1, "");
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
     	
-    	Minion m1 = new Minion(1, 1, 1 );
-    	Minion m2 = new Minion(1, 1, 1 );
+    	Minion m1 = new Minion(1, 1, 1, "images/game1/stick_1_a1.png" );
+//    	Minion m2 = new Minion(1, 1, 1, "images/game1/stick_1_a1.png" );
     	fond = new Image("images/game1/fond.png");
     }
 
@@ -50,7 +52,7 @@ public class World1 extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
     	g.drawImage(fond,0,0);
     	g.setColor(Color.green);
-    	g.fillRect(50, 50, 50, 50);
+//    	g.fillRect(50, 50, 50, 50);
     	p1.render(container,game,g);
     	p2.render(container,game,g);
     	for(Minion m : minions){
@@ -61,7 +63,7 @@ public class World1 extends BasicGameState {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-
+    	
     }
     
     public static void reset() {
