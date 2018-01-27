@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 
 import aow.World1;
@@ -26,6 +27,7 @@ public class Minion {
 	private int price;
 	private Image image;
 	private int xp;
+	private Sound bruit;
 
 	public Minion(int idOwner, int age, int type) {
 		/*
@@ -50,11 +52,13 @@ public class Minion {
 			try {
 				if (type <= 3) {
 					image=new Image("images/game1/stick_"+type+"_a"+age+".png");
+					this.bruit=new Sound("musics/game1/headshot.ogg");
 				}
 				if (type >= 4 ) {
 					image=new Image("images/game1/stick_"+ (type - 3) +"_a"+age+".png");
 					image=image.getScaledCopy((float) 2);
 					this.y -= 90;
+					this.bruit=new Sound("musics/game1/headshot.ogg");
 				}
 				if (idOwner==2) {
 					image=image.getFlippedCopy(true, false);
@@ -85,6 +89,7 @@ public class Minion {
 			if (idOwner == 1) {
 				World1.p2.addGold((int) price );
 				World1.p2.augmenteXp((int) xp );
+				
 			}
 			else {
 				World1.p1.addGold((int) price );
@@ -92,6 +97,7 @@ public class Minion {
 			}
 			
 			World1.minions[posX] = World1.fantom ;
+			bruit.play();
 		}
     }
     
