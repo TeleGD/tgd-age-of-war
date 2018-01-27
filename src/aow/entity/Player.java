@@ -75,7 +75,9 @@ public class Player {
 	
 	public void augmenteXp(int inc)
 	{
-		xp+=inc;
+		if (age < 3) {
+			xp+=inc;
+		}
 	}
 	
 	public void achatMinion(int type) {
@@ -144,7 +146,7 @@ public class Player {
 			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 8, 229);
 			
 			g.setColor(Color.yellow);
-			g.drawString((double)(gold) + " gold", 8, 255);
+			g.drawString((int)(gold) + " gold", 8, 255);
 			
 			g.setColor(Color.magenta);
 			g.drawString("Age : " + (int)(age), 8, 280);
@@ -171,7 +173,7 @@ public class Player {
 			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 1153, 229);
 			
 			g.setColor(Color.yellow);
-			g.drawString((double)(gold) + " gold", 1153, 255);
+			g.drawString((int)(gold) + " gold", 1153, 255);
 			
 			g.setColor(Color.magenta);
 			g.drawString("Age : " + (int)(age), 1153, 280);
