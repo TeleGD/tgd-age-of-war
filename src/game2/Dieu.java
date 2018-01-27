@@ -138,6 +138,7 @@ public class Dieu {
 			if(controlledBlock.getYcentre()>100)World2.addTetrisList(controlledBlock);
 			nextBlock.setVy(0);
 			nextBlock.setXcentre((int) (x+16));
+			nextBlock.setYcentre(64);
 			nextBlock.rotate(0);
 			controlledBlock = nextBlock;
 			nextBlock = new Tetris(mat, "images/TetrisPolyBridge/Bloc"+(int)Math.floor(1+7*Math.random())+randomCat()+".png");
