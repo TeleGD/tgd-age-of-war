@@ -45,6 +45,7 @@ public class Block {
 	
 	public void rotate(double angle, double vangle) {
 		this.angle=angle;
+		System.out.println("blaaa");
 		hitbox.transform(Transform.createRotateTransform((float) vangle));
 	}
 	
@@ -53,6 +54,13 @@ public class Block {
 		posy+=y;
 		hitbox.setX(hitbox.getX()+x);
 		hitbox.setY(hitbox.getY()+y);
+	}
+	
+	public void teleport(int x, int y) {
+		posx=x;
+		posy=y;
+		hitbox.setX(x);
+		hitbox.setY(y);
 	}
 	
 	public int getPosx(){
