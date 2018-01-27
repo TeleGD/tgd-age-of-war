@@ -124,6 +124,7 @@ public class Dieu {
 		move(delta);
 		
 		if(!drop){
+			//System.out.println("Moving center to : "+(x+16));
 			controlledBlock.setXcentre((int) (x+16));
 		}
 		else{
@@ -216,9 +217,9 @@ public class Dieu {
 			if(x > 1280-32) x = 1280 - 32;
 		}
 		if((rotRight && !rotLeft)|| rotrot ){
-			controlledBlock.rotate(-15);
-		}else if(rotrot){
-			controlledBlock.rotate(15);
+			controlledBlock.rotate(0.1);
+		}else if(rotLeft){
+			controlledBlock.rotate(-0.1);
 		}
 	}
 	
