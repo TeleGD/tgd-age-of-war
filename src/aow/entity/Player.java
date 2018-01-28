@@ -137,6 +137,17 @@ public class Player {
 			PV=(int)(PV*1.25);
 			base1=new Image("images/game1/base_1_a"+age+".png");
 			base2=new Image("images/game1/base_2_a"+age+".png");
+			
+			// Gestion musique du fond sonore : vérifie qu'il est le premier à lancer cette musique, sinon ne fait rien
+			if (ID ==1) {
+				if (age < World1.p2.getAge() ) {
+					
+				}
+			} else {
+				if (age < World1.p2.getAge() ) {
+					
+				}
+			}
 		}
 		
 		temps ++;
