@@ -5,6 +5,7 @@ import java.awt.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
@@ -27,6 +28,8 @@ public class Player {
 	private int age = 1;
 	private int boardLength = World1.tailleBoard;
 	private int temps = 0;
+	private Image base1;
+	private Image base2;
 	
 	//constructeur
 	public Player(int num, int gold, int HP ) // init num joueur, or et pv 
@@ -35,12 +38,20 @@ public class Player {
 		this.gold=gold;
 		PV=HP;
 		PVMax=HP;
+		try {
+			base1=new Image("images/game1/base_1_a1.png");
+			base2=new Image("images/game1/base_2_a1.png");
+		} catch (SlickException e) {
+			// nous donne la trace de l'erreur si on ne peut charger l'image correctement
+			e.printStackTrace();
+		}
 	}
 	
 	public void takeDamage(int degat) {
 		PV=PV-degat;
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
+			World1.etat = 1;
 //			System.exit(0);
 		}
 	}
@@ -111,6 +122,8 @@ public class Player {
 			xpMax=(int)(xpMax*1.75);
 			PVMax=(int)(PVMax*1.25);
 			PV=(int)(PV*1.25);
+			base1=new Image("images/game1/base_1_a"+age+".png");
+			base2=new Image("images/game1/base_2_a"+age+".png");
 		}
 		
 		temps ++;
@@ -124,6 +137,8 @@ public class Player {
 	{
 		if(ID==1)
 		{
+			g.drawImage(base1, 6, 250);
+			
 			g.setColor(new Color(153,0,0));
 			g.fillRect(6, 229, 120, 18);
 		
@@ -151,6 +166,8 @@ public class Player {
 		}		
 		else // joueur 2
 		{
+			g.drawImage(base2, 1151, 250);
+			
 			g.setColor(new Color(153,0,0));
 			g.fillRect(1151, 229, 120, 18); //
 			

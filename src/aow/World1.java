@@ -1,5 +1,8 @@
 package aow;
 
+import org.newdawn.slick.TrueTypeFont;
+import general.utils.FontUtils;
+
 import general.ui.Button;
 import general.ui.TGDComponent;
 import general.utils.FontUtils;
@@ -14,6 +17,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import aow.entity.Player;
 import aow.entity.minions.Minion;
 
+import java.awt.Font;
 import java.util.*;
 
 public class World1 extends BasicGameState {
@@ -33,6 +37,9 @@ public class World1 extends BasicGameState {
 	public Image fond;
 	public Image fondBadEnd;
 	
+	protected TrueTypeFont fontEnd;
+
+	
 	public static Board board = new Board(tailleBoard,130,1150);
 
 	public static Player p1 = new Player(1,goldInit,HPInit);
@@ -41,9 +48,12 @@ public class World1 extends BasicGameState {
 	public static Minion fantom = new Minion(0, 1, 1);
 	
 	private int incr=0;
+	public static int etat = 0;
 	
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
+		fontEnd = FontUtils.loadFont("Kalinga",Font.BOLD,18,true);
+    	
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
     	
@@ -55,7 +65,7 @@ public class World1 extends BasicGameState {
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-    	if (p1.getHp() > 0 && p2.getHp() > 0) {
+    	if (etat == 0) { // Si tout le monde est vivant
 	    	g.drawImage(fond,0,0);
 	    	g.setColor(Color.green);
 	//    	g.fillRect(50, 50, 50, 50);
@@ -65,30 +75,42 @@ public class World1 extends BasicGameState {
 	    	for(Minion m : minions){
 				m.render(container,game,g);
 			}
+    	} else if (etat == 1) { // Si un joueur est mort
+    		g.drawImage(fondBadEnd,0,0);
+    		
+        	g.setColor(Color.white);
+			g.setFont(fontEnd);
+        	g.drawString("IL N'Y A PAS DE GAGNANTS DANS UNE GUERRE...", 550, 350);
     	} else {
     		g.drawImage(fondBadEnd,0,0);
+    		
         	g.setColor(Color.white);
-        	g.drawString("IL N'Y A PAS DE GAGNANTS DANS UNE GUERRE...", 550, 350);
-    		g.drawRect(525, 330, 205, 50);
+			g.setFont(fontEnd);
+        	g.drawString("PEACE", 550, 350);
     	}
     }
 
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-    	incr++;
-    	if(incr>50){
-    		incr = 0;
-    		for(Minion m : minions){
-    			m.setPosX();
-    		}
-    		board.refreshPositions();
+    	
+    	if (p1.getHp() > 0 && p2.getHp() > 0) {
+	    	incr++;
+	    	if(incr>50){
+	    		incr = 0;
+	    		for(Minion m : minions){
+	    			m.setPosX();
+	    		}
+	    		board.refreshPositions();
+	    	}
+	    	p1.update(container, game, delta);
+	    	p2.update(container, game, delta);
+	    	for(Minion m : minions){
+				m.fluidMove();
+			}
+    	} else {
+    		
     	}
-    	p1.update(container, game, delta);
-    	p2.update(container, game, delta);
-    	for(Minion m : minions){
-			m.fluidMove();
-		}
 
     }
     

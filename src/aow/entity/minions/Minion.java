@@ -28,6 +28,7 @@ public class Minion {
 	private Image image;
 	private int xp;
 	private Sound bruit;
+	private Sound surprise;
 
 	public Minion(int idOwner, int age, int type) {
 		/*
@@ -42,6 +43,12 @@ public class Minion {
 			damage = (int) (World1.damageDefault * age * type);
 			HP = (int) (World1.HPminion * age * type);
 			price = (int) (World1.priceMinion * age * type);
+			try {
+				surprise=new Sound("musics/game1/surprise.ogg");
+			} catch (SlickException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			this.idOwner = idOwner;
 			this.x = World1.board.getX(posX);
 			this.y= World1.yMinion;
@@ -52,13 +59,14 @@ public class Minion {
 			try {
 				if (type <= 3) {
 					image=new Image("images/game1/stick_"+type+"_a"+age+".png");
-					this.bruit=new Sound("musics/game1/headshot.ogg");
+					this.bruit=new Sound("musics/game1/criWilhelm.ogg");
 				}
 				if (type >= 4 ) {
 					image=new Image("images/game1/stick_"+ (type - 3) +"_a"+age+".png");
 					image=image.getScaledCopy((float) 2);
 					this.y -= 90;
 					this.bruit=new Sound("musics/game1/headshot.ogg");
+					surprise.play();
 				}
 				if (idOwner==2) {
 					image=image.getFlippedCopy(true, false);
@@ -97,7 +105,7 @@ public class Minion {
 			}
 			
 			World1.minions[posX] = World1.fantom ;
-			bruit.play();
+			bruit.play(1,(float) 0.4);
 		}
     }
     
