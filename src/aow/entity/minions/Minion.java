@@ -92,21 +92,24 @@ public class Minion {
     
     public void takeDamage(int inflictedDamage) {
     	// Inflige les d�gats d'une attaque � ce minion
-    	HP -= inflictedDamage;
-		if (this.HP<=0) {
-			if (idOwner == 1) {
-				World1.p2.addGold((int) price );
-				World1.p2.augmenteXp((int) xp );
-				
-			}
-			else {
-				World1.p1.addGold((int) price );
-				World1.p1.augmenteXp((int) xp );
-			}
-			
-			World1.minions[posX] = World1.fantom ;
-			bruit.play(1,(float) 0.4);
-		}
+    	if (idOwner != 0) {
+        	HP -= inflictedDamage;
+    		if (this.HP<=0) {
+    			if (idOwner == 1) {
+    				World1.p2.addGold((int) price );
+    				World1.p2.augmenteXp((int) xp );
+    				
+    			}
+    			else {
+    				World1.p1.addGold((int) price );
+    				World1.p1.augmenteXp((int) xp );
+    			}
+    			
+    			World1.minions[posX] = World1.fantom ;
+    			bruit.play(1,(float) 0.4);
+    		}
+    	}
+
     }
     
     public void move() {
