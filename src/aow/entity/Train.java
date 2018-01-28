@@ -25,8 +25,7 @@ public class Train {
 		private boolean proche; // vaut true si proches de base
 		private Image picture;
 		private Music goodMusic;
-
-		
+		private boolean toMove; // dit s'il faut faire avancer le rail (un update sur deux	
 		
 		
 		/* constructeur, il faut faire commencer en décalant de longueur une ligne de train*/
@@ -88,9 +87,13 @@ public class Train {
 		    		goodMusic.loop(1, (float)0.2);
 		    		
 				}
+			} else {
+				proche = false;
 			}
 			
-			if(!end)this.move(); // on bouge si on n'a pas tout fait
+			toMove = !toMove;	
+			
+			if(toMove)this.move();
 		}
 		
 		public void removeRail(int nbrem)
