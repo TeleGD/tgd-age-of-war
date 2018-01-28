@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
@@ -30,11 +31,18 @@ public class Player {
 	private int temps = 0;
 	private Image base1;
 	private Image base2;
+	private Music sadMusic;
 	
 	//constructeur
 	public Player(int num, int gold, int HP ) // init num joueur, or et pv 
 	{
 		ID=num;
+		try {
+			sadMusic=new Music("musics/game1/sadMusic.ogg");
+		} catch (SlickException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		this.gold=gold;
 		PV=HP;
 		PVMax=HP;
@@ -52,6 +60,7 @@ public class Player {
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
 			World1.etat = 1;
+			sadMusic.loop();
 //			System.exit(0);
 		}
 	}
