@@ -1,6 +1,8 @@
 package menus;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
@@ -9,6 +11,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MainMenu extends Menu{
 
 	public static int ID = -3;	
+	public Sound pegi;
 	
 	public MainMenu(){
 		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
@@ -32,6 +35,13 @@ public class MainMenu extends Menu{
 		case 0:
 			aow.World1.reset();
 			game.enterState(aow.World1.ID, new FadeOutTransition(),new FadeInTransition());
+			try {
+				pegi=new Sound("musics/game1/pegi18.ogg");
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	pegi.play();
 			break;
 		case 1:
 			game2.World2.reset();
