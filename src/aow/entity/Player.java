@@ -34,6 +34,7 @@ public class Player {
 	private Image base2;
 	private Music sadMusic;
 	private Music goodMusic;
+	private Music musicAge;
 	
 	//constructeur
 	public Player(int num, int gold, int HP ) // init num joueur, or et pv 
@@ -42,6 +43,7 @@ public class Player {
 		try {
 			sadMusic=new Music("musics/game1/sadMusic.ogg");
 			goodMusic = new Music("musics/game1/I_LIKE_TRAINS.ogg");
+
 		} catch (SlickException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -139,20 +141,21 @@ public class Player {
 			base2=new Image("images/game1/base_2_a"+age+".png");
 			
 			// Gestion musique du fond sonore : vérifie qu'il est le premier à lancer cette musique, sinon ne fait rien
-			if (ID ==1) {
-				if (age < World1.p2.getAge() ) {
-					
+			if (needMusic()) {
+				try {
+					musicAge =new Music("musics/game1/age" + age + ".ogg");
+
+				} catch (SlickException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-			} else {
-				if (age < World1.p2.getAge() ) {
-					
-				}
-			}
+				musicAge.loop();
+			}	
 		}
 		
 		temps ++;
 		paix ++;
-    	if (paix/60 > 10) {
+    	if (paix/60 > 15) {
     		World1.etat = 2 + ID;
     		goodMusic.loop(1, (float)0.2);
     		
@@ -222,6 +225,19 @@ public class Player {
 			g.setColor(Color.white);
 			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 1153, 200);
 		}
+	}
+	
+	private boolean needMusic() {
+		if (ID ==1) {
+			if (age > World1.p2.getAge() ) {
+				return true;
+			}
+		} else {
+			if (age > World1.p1.getAge() ) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private boolean aPress,zPress,ePress,iPress,oPress,pPress = false;
