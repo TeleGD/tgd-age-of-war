@@ -36,6 +36,7 @@ public class World1 extends BasicGameState {
 	
 	public Image fond;
 	public Image fondBadEnd;
+	public Image fondGoodEnd;
 	
 	protected TrueTypeFont fontEnd;
 
@@ -61,6 +62,7 @@ public class World1 extends BasicGameState {
     	Minion m2 = new Minion(2, 1, 1);
     	fond = new Image("images/game1/fond.png");
     	fondBadEnd = new Image("images/game1/yoda.png");
+    	fondGoodEnd = new Image("images/game1/goodEnd.png");
     }
 
     @Override
@@ -82,7 +84,8 @@ public class World1 extends BasicGameState {
 			g.setFont(fontEnd);
         	g.drawString("IL N'Y A PAS DE GAGNANTS DANS UNE GUERRE...", 550, 350);
     	} else {
-    		g.drawImage(fondBadEnd,0,0);
+    		
+    		g.drawImage(fondGoodEnd,0,0);
     		
         	g.setColor(Color.white);
 			g.setFont(fontEnd);
@@ -94,8 +97,9 @@ public class World1 extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     	
-    	if (p1.getHp() > 0 && p2.getHp() > 0) {
+    	if (etat == 0) {
 	    	incr++;
+	    	
 	    	if(incr>50){
 	    		incr = 0;
 	    		for(Minion m : minions){

@@ -28,6 +28,7 @@ public class Player {
 	private int age = 1;
 	private int boardLength = World1.tailleBoard;
 	private int temps = 0;
+	private int paix = 0;
 	private Image base1;
 	private Image base2;
 	
@@ -94,6 +95,7 @@ public class Player {
 	}
 	
 	public void achatMinion(int type) {
+		paix = 0; // Il y a eu un recrutement : la paix est finie
 		if (ID==1 && World1.board.getCase(0)==0 ) { //Teste si case de spawn vide
 			if (World1.p1.removeGold(15*age*type)) { // teste si le joueur peut payer et l'encaisse si oui
 				if (Math.random() > 0.7) {
@@ -127,6 +129,10 @@ public class Player {
 		}
 		
 		temps ++;
+		paix ++;
+    	if (paix/60 > 10) {
+    		World1.etat = 3;
+    	}
 		if (temps >= 90) {
 			gold += 10;
 			temps = 0;
