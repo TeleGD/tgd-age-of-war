@@ -33,6 +33,7 @@ public class Player {
 	private Image base1;
 	private Image base2;
 	private Music sadMusic;
+	private Music goodMusic;
 	
 	//constructeur
 	public Player(int num, int gold, int HP ) // init num joueur, or et pv 
@@ -40,6 +41,7 @@ public class Player {
 		ID=num;
 		try {
 			sadMusic=new Music("musics/game1/sadMusic.ogg");
+			goodMusic = new Music("musics/game1/I_LIKE_TRAINS.ogg");
 		} catch (SlickException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -141,6 +143,8 @@ public class Player {
 		paix ++;
     	if (paix/60 > 10) {
     		World1.etat = 3;
+    		goodMusic.loop();
+    		
     	}
 		if (temps >= 90) {
 			gold += 10;
