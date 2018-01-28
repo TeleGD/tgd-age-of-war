@@ -15,6 +15,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import aow.entity.Player;
+import aow.entity.Train;
 import aow.entity.minions.Minion;
 
 import java.awt.Font;
@@ -48,6 +49,8 @@ public class World1 extends BasicGameState {
 
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
+	public Train t1 = new Train(1);
+	public Train t2 = new Train(2);
 
 	public static Minion fantom = new Minion(0, 1, 1);
 	
@@ -79,6 +82,8 @@ public class World1 extends BasicGameState {
 	//    	g.fillRect(50, 50, 50, 50);
 	    	p1.render(container,game,g);
 	    	p2.render(container,game,g);
+	    	t1.render(container, game, g);
+	    	t2.render(container, game, g);
 	    	
 	    	for(Minion m : minions){
 				m.render(container,game,g);
@@ -112,6 +117,8 @@ public class World1 extends BasicGameState {
 	    			m.setPosX();
 	    		}
 	    		board.refreshPositions();
+	    		t1.update();
+	    		t2.update();
 	    	}
 	    	p1.update(container, game, delta);
 	    	p2.update(container, game, delta);
