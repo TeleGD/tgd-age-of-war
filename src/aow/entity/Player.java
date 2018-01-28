@@ -126,7 +126,7 @@ public class Player {
 				}
 				Minion m = new Minion(1, age, type);
 				World1.board.setMinionToCase(1,0);
-				World1.t1.removeRail(1); // Le joueur recrute, il perd des rails
+				World1.t1.removeRail(3); // Le joueur recrute, il perd des rails
 			}
 		} else if (ID==2 && World1.board.getCase(boardLength-1) == 0) {
 			if (World1.p2.removeGold(15*age*type)) {
@@ -135,7 +135,7 @@ public class Player {
 				}
 				Minion m = new Minion(2, age, type);
 				World1.board.setMinionToCase(2, boardLength -1);	
-				World1.t2.removeRail(1); // Le joueur recrute, il perd des rails
+				World1.t2.removeRail(3); // Le joueur recrute, il perd des rails
 			}
 		}
 	}
@@ -181,7 +181,7 @@ public class Player {
 		
 		temps ++;
 		if (temps >= 90) {
-			gold += 10;
+			gold += 5;
 			temps = 0;
 		}
 	}

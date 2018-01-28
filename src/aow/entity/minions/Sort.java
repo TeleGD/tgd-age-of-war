@@ -24,6 +24,7 @@ public class Sort {
 	private double x,y; // ira jusqu'au point culminant centre
 	private double pente=(30.0-350.0)/((World1.board.getX(World1.tailleBoard-1)-World1.board.getX(0))/2); //difference de hauteur / longueur axe des x  ; 15 sera la hauteur max
 	private int i=0; //compteur d explosion
+	private double speed = 5;
 	
 	
 	/* constructeur : -initialise power en fonction de l'age */
@@ -107,13 +108,13 @@ public class Sort {
 	{
 		if(numJoueur==1)
 		{
-			x++;
-			y+=pente;
+			x+=speed;
+			y+=pente*speed;
 		}
 		else
 		{
-			x--;
-			y+=pente;
+			x-=speed ;
+			y+=pente*speed;
 		}
 		
 	} /* ou sont faits les tests pour que a la hauteur 15 boum, hit ennemis puis fin ???? */
