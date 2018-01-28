@@ -37,6 +37,9 @@ public class World1 extends BasicGameState {
 	public Image fond;
 	public Image fondBadEnd;
 	public Image fondGoodEnd;
+	public Music music1;
+	public Sound pegi;
+	public boolean debut;
 	
 	protected TrueTypeFont fontEnd;
 
@@ -54,6 +57,7 @@ public class World1 extends BasicGameState {
     @Override
     public void init(final GameContainer container, final StateBasedGame game) throws SlickException {
 		fontEnd = FontUtils.loadFont("Kalinga",Font.BOLD,18,true);
+		debut=true;
     	
     	minions = new Minion[tailleBoard];
     	Arrays.fill(minions, fantom);
@@ -63,6 +67,8 @@ public class World1 extends BasicGameState {
     	fond = new Image("images/game1/fond.png");
     	fondBadEnd = new Image("images/game1/yoda.png");
     	fondGoodEnd = new Image("images/game1/goodEnd.png");
+    	music1=new Music("musics/game1/age1.ogg");
+    	pegi = new Sound("musics/game1/pegi18.ogg");
     }
 
     @Override
@@ -114,6 +120,17 @@ public class World1 extends BasicGameState {
 			}
     	} else {
     		
+    	}
+    	if (debut) {
+    		debut=false;
+    		pegi.play();
+    		try {
+				Thread.sleep(2500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		music1.loop(1,(float) 0.4);
     	}
 
     }

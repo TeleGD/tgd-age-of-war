@@ -12,8 +12,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MainMenu extends Menu{
 
 	public static int ID = -3;	
-	public Sound pegi;
-	public Music musique;
 	
 	public MainMenu(){
 		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
@@ -37,26 +35,6 @@ public class MainMenu extends Menu{
 		case 0:
 			aow.World1.reset();
 			game.enterState(aow.World1.ID, new FadeOutTransition(),new FadeInTransition());
-			try {
-				pegi=new Sound("musics/game1/pegi18.ogg");
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	pegi.play(1,1);
-	    	try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	try {
-				musique = new Music("musics/game1/stress.ogg");
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	musique.loop(1,(float) 0.3);
 			break;
 		case 1:
 			game2.World2.reset();
