@@ -89,7 +89,7 @@ public class World1 extends BasicGameState {
     		
         	g.setColor(Color.white);
 			g.setFont(fontEnd);
-        	g.drawString("La liaison féroviaire à l'initiative du joueur " + (etat - 2) + " à instauré la paix", 550, 350);
+        	g.drawString("La liaison ferroviaire Ã  l'initiative du joueur " + (etat - 2) + " a instaurÃ© la paix", 550, 350);
     	}
     }
 
