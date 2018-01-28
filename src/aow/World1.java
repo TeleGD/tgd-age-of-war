@@ -59,7 +59,7 @@ public class World1 extends BasicGameState {
     	Arrays.fill(minions, fantom);
     	
     	// Minion m1 = new Minion(1, 1, 1);
-    	Minion m2 = new Minion(2, 1, 1);
+    	// Minion m2 = new Minion(2, 1, 1);
     	fond = new Image("images/game1/fond.png");
     	fondBadEnd = new Image("images/game1/yoda.png");
     	fondGoodEnd = new Image("images/game1/goodEnd.png");
