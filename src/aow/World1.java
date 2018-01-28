@@ -49,8 +49,8 @@ public class World1 extends BasicGameState {
 
 	public static Player p1 = new Player(1,goldInit,HPInit);
 	public static Player p2 = new Player(2,goldInit,HPInit);
-	public Train t1 = new Train(1);
-	public Train t2 = new Train(2);
+	public static Train t1 = new Train(1);
+	public static Train t2 = new Train(2);
 
 	public static Minion fantom = new Minion(0, 1, 1);
 	
@@ -100,7 +100,7 @@ public class World1 extends BasicGameState {
     		
         	g.setColor(Color.white);
 			g.setFont(fontEnd);
-        	g.drawString("La liaison ferroviaire à l'initiative du joueur " + (etat - 2) + " a instauré la paix", 550, 350);
+        	g.drawString("La liaison ferroviaire à l'initiative du joueur " + (etat - 2) + " a instauré la paix", 400, 280);
     	}
     }
 

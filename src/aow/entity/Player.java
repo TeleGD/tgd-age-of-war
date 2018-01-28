@@ -25,11 +25,10 @@ public class Player {
 	private int gold;
 	private int ID; //num joueur
 	private int xp;
-	private int xpMax = 1000;
+	private int xpMax = 3000;
 	private int age = 1;
 	private int boardLength = World1.tailleBoard;
 	private int temps = 0;
-	private int paix = 0;
 	private Image base1;
 	private Image base2;
 	private Music sadMusic;
@@ -108,22 +107,24 @@ public class Player {
 	}
 	
 	public void achatMinion(int type) {
-		paix = 0; // Il y a eu un recrutement : la paix est finie
+		
 		if (ID==1 && World1.board.getCase(0)==0 ) { //Teste si case de spawn vide
 			if (World1.p1.removeGold(15*age*type)) { // teste si le joueur peut payer et l'encaisse si oui
-				if (Math.random() > 0.7) {
+				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(1, age, type);
 				World1.board.setMinionToCase(1,0);
+				World1.t1.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		} else if (ID==2 && World1.board.getCase(boardLength-1) == 0) {
 			if (World1.p2.removeGold(15*age*type)) {
-				if (Math.random() > 0.7) {
+				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(2, age, type);
 				World1.board.setMinionToCase(2, boardLength -1);	
+				World1.t2.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		}
 	}
@@ -134,7 +135,7 @@ public class Player {
 		if(xp>=xpMax && age < 2)
 		{
 			age++;
-			xpMax=(int)(xpMax*1.75);
+			xpMax=(int)(xpMax*3);
 			PVMax=(int)(PVMax*1.25);
 			PV=(int)(PV*1.25);
 			base1=new Image("images/game1/base_1_a"+age+".png");
@@ -154,12 +155,6 @@ public class Player {
 		}
 		
 		temps ++;
-		paix ++;
-    	if (paix/60 > 15) {
-    		World1.etat = 2 + ID;
-    		goodMusic.loop(1, (float)0.2);
-    		
-    	}
 		if (temps >= 90) {
 			gold += 10;
 			temps = 0;

@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 import aow.World1;
@@ -23,6 +24,8 @@ public class Train {
 		private boolean end; // vaut true quand on a atteint l'autre base
 		private boolean proche; // vaut true si proches de base
 		private Image picture;
+		private Music goodMusic;
+
 		
 		
 		
@@ -33,6 +36,13 @@ public class Train {
 			proche=false;
 			numJoueur=idOwner;
 			numRail=0;
+			try {
+				goodMusic = new Music("musics/game1/I_LIKE_TRAINS.ogg");
+
+			} catch (SlickException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				picture=new Image("images/game1/track.png"); // a faire le nom
 			} catch (SlickException e) {
@@ -74,7 +84,9 @@ public class Train {
 				
 				if(numRail==nbrail) // arrives
 				{
-					end=true;
+		    		World1.etat = 2 + numJoueur;
+		    		goodMusic.loop(1, (float)0.2);
+		    		
 				}
 			}
 			
