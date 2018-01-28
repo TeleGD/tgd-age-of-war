@@ -66,7 +66,7 @@ public class Minion {
 					image=image.getScaledCopy((float) 2);
 					this.y -= 90;
 					this.bruit=new Sound("musics/game1/headshot.ogg");
-					surprise.play();
+					surprise.play(1,(float) 0.5);
 				}
 				if (idOwner==2) {
 					image=image.getFlippedCopy(true, false);

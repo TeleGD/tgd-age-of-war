@@ -1,6 +1,7 @@
 package menus;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -12,6 +13,7 @@ public class MainMenu extends Menu{
 
 	public static int ID = -3;	
 	public Sound pegi;
+	public Music musique;
 	
 	public MainMenu(){
 		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
@@ -41,7 +43,14 @@ public class MainMenu extends Menu{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	pegi.play();
+	    	pegi.play(1,1);
+	    	try {
+				musique = new Music("musics/game1/stress.ogg");
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	musique.loop(1,(float) 0.3);
 			break;
 		case 1:
 			game2.World2.reset();
