@@ -82,14 +82,14 @@ public class World1 extends BasicGameState {
     		
         	g.setColor(Color.white);
 			g.setFont(fontEnd);
-        	g.drawString("IL N'Y A PAS DE GAGNANTS DANS UNE GUERRE...", 550, 350);
+        	g.drawString("IL N'Y A PAS DE GAGNANT DANS UNE GUERRE...", 550, 350);
     	} else {
     		
     		g.drawImage(fondGoodEnd,0,0);
     		
         	g.setColor(Color.white);
 			g.setFont(fontEnd);
-        	g.drawString("PEACE", 550, 350);
+        	g.drawString("La liaison féroviaire à l'initiative du joueur " + (etat - 2) + " à instauré la paix", 550, 350);
     	}
     }
 

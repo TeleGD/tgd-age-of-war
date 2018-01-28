@@ -142,8 +142,8 @@ public class Player {
 		temps ++;
 		paix ++;
     	if (paix/60 > 10) {
-    		World1.etat = 3;
-    		goodMusic.loop();
+    		World1.etat = 2 + ID;
+    		goodMusic.loop(1, (float)0.2);
     		
     	}
 		if (temps >= 90) {
