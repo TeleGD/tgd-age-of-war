@@ -16,6 +16,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import aow.World1;
 import aow.entity.minions.Minion;
+import aow.entity.minions.Sort;
 
 public class Player {
 	
@@ -101,8 +102,18 @@ public class Player {
 	
 	public void augmenteXp(int inc)
 	{
-		if (age < 2) {
+		if (age < 3) {
 			xp+=inc;
+		}
+	}
+	
+	private boolean removeXp(int toRemove) {
+		if((xp-toRemove)<0 )return false;
+		
+		else
+		{
+			xp-=toRemove;
+			return true;
 		}
 	}
 	
@@ -129,10 +140,24 @@ public class Player {
 		}
 	}
 	
+	public void castSpell() {
+	
+		if (ID==1) { //Teste si case de spawn vide
+			if (World1.p1.removeXp(250*age)) { // teste si le joueur peut payer et l'encaisse si oui
+				World1.spells.add(new Sort(ID, age));
+			}
+		} else {
+			if (World1.p2.removeXp(250*age)) {
+				World1.spells.add(new Sort(ID, age));
+			}
+		}
+	}
+	
+
 	public void update(GameContainer container,StateBasedGame game, int delta) throws SlickException
 	{
 		// update de age, xpMax, pv, pvmax ;
-		if(xp>=xpMax && age < 2)
+		if(xp>=xpMax && age < 3)
 		{
 			age++;
 			xpMax=(int)(xpMax*3);
@@ -235,7 +260,7 @@ public class Player {
 		return false;
 	}
 	
-	private boolean aPress,zPress,ePress,iPress,oPress,pPress = false;
+	private boolean aPress,zPress,ePress,iPress,oPress,pPress,sPress,lPress = false;
 	
 	public void keyPressed(int key, char c) {
 		switch (key){
@@ -251,6 +276,10 @@ public class Player {
 			ePress = true;
 			World1.p1.achatMinion(3);
 			break;
+		case Input.KEY_S:
+			lPress = true;
+			World1.p1.castSpell();
+			break;
 		case Input.KEY_I:
 			iPress = true;
 			World1.p2.achatMinion(1);
@@ -262,6 +291,10 @@ public class Player {
 		case Input.KEY_P:
 			pPress = true;
 			World1.p2.achatMinion(3);
+			break;
+		case Input.KEY_L:
+			lPress = true;
+			World1.p2.castSpell();
 			break;
 		}
 	}
@@ -277,6 +310,9 @@ public class Player {
 		case Input.KEY_E:
 			ePress = false;
 			break;
+		case Input.KEY_S:
+			sPress = false;
+			break;
 		case Input.KEY_I:
 			iPress = false;
 			break;
@@ -285,6 +321,9 @@ public class Player {
 			break;
 		case Input.KEY_P:
 			pPress = false;
+			break;
+		case Input.KEY_L:
+			lPress = false;
 			break;
 		}
 	}

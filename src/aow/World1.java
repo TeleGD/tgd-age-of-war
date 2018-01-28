@@ -17,6 +17,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import aow.entity.Player;
 import aow.entity.Train;
 import aow.entity.minions.Minion;
+import aow.entity.minions.Sort;
 
 import java.awt.Font;
 import java.util.*;
@@ -44,6 +45,7 @@ public class World1 extends BasicGameState {
 	
 	protected TrueTypeFont fontEnd;
 
+	public static ArrayList<Sort> spells;
 	
 	public static Board board = new Board(tailleBoard,130,1150);
 
@@ -85,6 +87,10 @@ public class World1 extends BasicGameState {
 	    	t1.render(container, game, g);
 	    	t2.render(container, game, g);
 	    	
+	    	for(Sort s : spells){
+				s.render(container, game, g);
+			}
+	    	
 	    	for(Minion m : minions){
 				m.render(container,game,g);
 			}
@@ -125,6 +131,15 @@ public class World1 extends BasicGameState {
 	    	for(Minion m : minions){
 				m.fluidMove();
 			}
+	    	for(Sort s : spells){
+				s.update(container, game, delta);
+	    	}		
+	    	for (int i=0;i<spells.size();i++){
+				if(spells.get(i).getI()==63){
+					spells.remove(i);
+				}
+			}
+	    	
     	} else {
     		
     	}
@@ -142,9 +157,9 @@ public class World1 extends BasicGameState {
 
     }
     
-    public static void reset() {
-       
-    }
+    public static void reset(){
+		spells = new ArrayList<Sort>();
+	}
     
     public void keyPressed(int key, char c){
 		p1.keyPressed(key, c);

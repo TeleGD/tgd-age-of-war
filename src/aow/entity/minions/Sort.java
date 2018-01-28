@@ -30,7 +30,6 @@ public class Sort {
 	public Sort(int numplayer, int age)
 	{
 		numJoueur=numplayer;
-		System.out.println("pente :"+pente);
 		if(age==1)
 		{
 			power=15;
@@ -63,6 +62,10 @@ public class Sort {
 						// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 						e.printStackTrace();
 					}
+					if (numJoueur==2) {
+						picture = picture.getFlippedCopy(true, false);
+					}
+					picture = picture.getScaledCopy((float) 0.4);
 					
 				}
 		}// initialise puissance
@@ -96,9 +99,6 @@ public class Sort {
 			}
 		}
 		
-		if (i>63) {
-			y=-100;
-		}
 	}
 	
 	
@@ -147,11 +147,15 @@ public class Sort {
 	public void hitEnemies()
 	{
 		int cible=1;
-		if(numJoueur==1)cible=2; // maj de cible
+		if(numJoueur==1) {
+			cible=2; // maj de cible
+		}
 		
-		for(int i=0 ; i<World1.tailleBoard-1 ; i++ )
+		for(int k=0 ; k<World1.tailleBoard ; k++ )
 		{
-			if(World1.board.getCase(i)==cible) World1.minions[i].takeDamage(power);
+			if(World1.board.getCase(k)==cible) {
+				World1.minions[k].takeDamage(power);
+			}
 		}
 			
 			
