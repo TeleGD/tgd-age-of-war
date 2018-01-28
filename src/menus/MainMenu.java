@@ -45,6 +45,12 @@ public class MainMenu extends Menu{
 			}
 	    	pegi.play(1,1);
 	    	try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	try {
 				musique = new Music("musics/game1/stress.ogg");
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
