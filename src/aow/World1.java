@@ -30,7 +30,7 @@ public class World1 extends BasicGameState {
 
 	public static int damageDefault = 5;
 	public static int HPminion = 15;
-	public static int priceMinion = 10 ;
+	public static int priceMinion = 20 ;
 	public static int goldInit = 50;
 	public static int HPInit = 100;
 	public static int tailleBoard = 20;

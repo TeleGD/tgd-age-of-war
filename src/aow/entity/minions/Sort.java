@@ -25,15 +25,17 @@ public class Sort {
 	private double pente=(30.0-350.0)/((World1.board.getX(World1.tailleBoard-1)-World1.board.getX(0))/2); //difference de hauteur / longueur axe des x  ; 15 sera la hauteur max
 	private int i=0; //compteur d explosion
 	private double speed = 5;
+	private int basePower = 20;
 	
 	
 	/* constructeur : -initialise power en fonction de l'age */
 	public Sort(int numplayer, int age)
 	{
 		numJoueur=numplayer;
+		power = basePower * age;
+		
 		if(age==1)
 		{
-			power=15;
 			try {
 				picture=new Image("images/game1/rock.png"); // a faire le nom
 			} catch (SlickException e) {
@@ -45,7 +47,6 @@ public class Sort {
 		{
 			if(age==2)
 			{
-				power=30;
 				try {
 					picture=new Image("images/game1/bullet.png"); // a faire le nom
 				} catch (SlickException e) {
@@ -56,7 +57,6 @@ public class Sort {
 			else
 				if(age==3)
 				{
-					power=45;
 					try {
 						picture=new Image("images/game1/rocket.png"); // a faire le nom
 					} catch (SlickException e) {

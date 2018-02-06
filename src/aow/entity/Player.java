@@ -102,9 +102,7 @@ public class Player {
 	
 	public void augmenteXp(int inc)
 	{
-		if (age < 3) {
-			xp+=inc;
-		}
+		xp+=inc;
 	}
 	
 	private boolean removeXp(int toRemove) {
@@ -119,23 +117,25 @@ public class Player {
 	
 	public void achatMinion(int type) {
 		
+		int price = World1.priceMinion * type * age;
+		
 		if (ID==1 && World1.board.getCase(0)==0 ) { //Teste si case de spawn vide
-			if (World1.p1.removeGold(15*age*type)) { // teste si le joueur peut payer et l'encaisse si oui
+			if (World1.p1.removeGold(price)) { // teste si le joueur peut payer et l'encaisse si oui
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(1, age, type);
 				World1.board.setMinionToCase(1,0);
-				World1.t1.removeRail(3); // Le joueur recrute, il perd des rails
+				World1.t1.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		} else if (ID==2 && World1.board.getCase(boardLength-1) == 0) {
-			if (World1.p2.removeGold(15*age*type)) {
+			if (World1.p2.removeGold(price)) {
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(2, age, type);
 				World1.board.setMinionToCase(2, boardLength -1);	
-				World1.t2.removeRail(3); // Le joueur recrute, il perd des rails
+				World1.t2.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		}
 	}
@@ -160,7 +160,8 @@ public class Player {
 		if(xp>=xpMax && age < 3)
 		{
 			age++;
-			xpMax=(int)(xpMax*3);
+			xp = 0; // On réinitialise l'xp à 0
+			xpMax=(int)(xpMax*2.5);
 			PVMax=(int)(PVMax*1.25);
 			PV=(int)(PV*1.25);
 			base1=new Image("images/game1/base_1_a"+age+".png");
