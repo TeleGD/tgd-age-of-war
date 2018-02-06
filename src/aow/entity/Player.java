@@ -217,6 +217,20 @@ public class Player {
 			g.setColor(Color.white);
 			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 8, 200);
 			
+			// Affichage des coûts des unités :
+			
+			g.setColor(Color.white);
+			g.drawString("[S] SPECIAL : " + (250*age) +" XP", 8, 135);
+			
+			g.setColor(Color.white);
+			g.drawString("[A] Soldat : " + (World1.priceMinion * 1 * age) +" G", 8, 150);
+			
+			g.setColor(Color.white);
+			g.drawString("[Z] Distance : " + (World1.priceMinion * 2 * age) +" G", 8, 165);
+			
+			g.setColor(Color.white);
+			g.drawString("[E] Elite : " + (World1.priceMinion * 3 * age) +" G", 8, 180);
+			
 		}		
 		else // joueur 2
 		{
@@ -245,6 +259,20 @@ public class Player {
 			
 			g.setColor(Color.white);
 			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 1153, 200);
+			
+			// Affichage des coûts des unités :
+			
+			g.setColor(Color.white);
+			g.drawString("[L] SPECIAL : " + (250*age) +" XP", 1100, 134);
+			
+			g.setColor(Color.white);
+			g.drawString("[I] Soldat : " + (World1.priceMinion * 1 * age) +" G", 1100, 150);
+			
+			g.setColor(Color.white);
+			g.drawString("[O] Distance : " + (World1.priceMinion * 2 * age) +" G", 1100, 165);
+			
+			g.setColor(Color.white);
+			g.drawString("[P] Elite : " + (World1.priceMinion * 3 * age) +" G", 1100, 180);
 		}
 	}
 	
