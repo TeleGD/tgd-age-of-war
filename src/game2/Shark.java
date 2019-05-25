@@ -11,29 +11,29 @@ public class Shark {
 	private int posy;
 	private int sens;
 	private double speed;
-	
+
 	private Image shark;
 	private Image shark1;
 	private Image shark2;
 	private String urlShark1 = "images/TetrisPolyBridge/requin1.png";
 	private String urlShark2 = "images/TetrisPolyBridge/requin2.png";
-	
+
 	public Shark(int x, int dir) throws SlickException{
 		posx = x;
 		posy = 652-32;
 		sens = dir;
 		speed = 0.05+Math.random()*0.2;
-		
-		shark1 = new Image(urlShark1);	
+
+		shark1 = new Image(urlShark1);
 		shark2 = new Image(urlShark2);
-		
+
 		if(dir == 1){
 			shark = shark1;
 		}else{
 			shark = shark2;
 		}
 	}
-	
+
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		if(sens == 1){
 			posx += delta*speed;
@@ -49,15 +49,15 @@ public class Shark {
 			}
 		}
 	}
-	
+
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(shark,(float) posx,(float) posy);
 	}
-	
+
 	public int getPosX(){
 		return posx;
 	}
-	
+
 	public int getPosy(){
 		return posy;
 	}

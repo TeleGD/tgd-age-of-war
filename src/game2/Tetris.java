@@ -13,8 +13,8 @@ public class Tetris {
 	private double angle,vx,vy;
 	private String sprite;
 	private boolean[][] matBool=new boolean[4][4];
-	
-	
+
+
 	public Tetris(boolean[][] matBool,String adresse) throws SlickException {
 		this.x=500;
 		for (int i=0;i<4;i++) {
@@ -57,7 +57,7 @@ public class Tetris {
 			}
 		}
 	}
-	
+
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		ycentre+=delta*vy;
 		xcentre+=delta*vx;
@@ -71,7 +71,7 @@ public class Tetris {
 		}
 		rotate(0);
     }
-	
+
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
@@ -81,7 +81,7 @@ public class Tetris {
 			}
 		}
 	}
-	
+
 	public void rotate(double vangle) {
 		angle+=vangle;
 		for (int i=0;i<4;i++) {
@@ -93,7 +93,7 @@ public class Tetris {
 			}
 		}
 	}
-	
+
 	public void moveCentre(int x, int y) {
 		xcentre+=x;
 		ycentre+=y;
@@ -105,7 +105,7 @@ public class Tetris {
 			}
 		}
 	}
-	
+
 	public void teleport(int x, int y) {
 		moveCentre(x-xcentre,y-ycentre);
 	}
@@ -173,6 +173,6 @@ public class Tetris {
 	public void setVy(double vy) {
 		this.vy = vy;
 	}
-	
-	
+
+
 }

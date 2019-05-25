@@ -12,26 +12,26 @@ public class Bulle {
 
 	private Image bulle;
 	private String urlBulle = "images/TetrisPolyBridge/bulle.png";
-	
+
 	public Bulle(int x, int y) throws SlickException{
     	bulle = new Image(urlBulle);
-    	
+
     	posx = x;
     	posy = 720 - y;
 	}
-	
+
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		posy -= 1;
 	}
-	
+
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(bulle,(float) posx,(float) posy);
 	}
-	
+
 	public int getPosX(){
 		return posx;
 	}
-	
+
 	public int getPosy(){
 		return posy;
 	}

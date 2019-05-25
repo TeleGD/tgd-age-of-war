@@ -16,7 +16,7 @@ import game2.Tetris;
 
 public class Player {
 
-	
+
 	private double x ;
 	private double y ;
 	private double jumpSpeed;
@@ -33,8 +33,8 @@ public class Player {
 	private ArrayList<Tetris> tetrisList;
 	private Shape hitBoxChar ;
 	private Image image;
-	
-	
+
+
 	public Player (int x,  int y, Shape hitBoxChar){
 		this.x=x;
 		this.y=y;
@@ -57,25 +57,25 @@ public class Player {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
 		arg2.setColor(Color.green);
 		arg2.drawImage(image, (float)(x-image.getWidth()/2), (float)(y-image.getHeight()/2));
 		arg2.draw(this.hitBoxChar);
-		
+
 	}
-	
-	
-	
+
+
+
 	public void update(GameContainer arg0, StateBasedGame arg1, int delta) throws SlickException {
 		speedY = speedY - gravity*delta;
 		move(delta);
 		collapse(delta);
-		
-		
-	
+
+
+
 	}
-	
+
 	public void collapse(int delta) {
 		collapseOn = false;
 		if (this.x<=100 && this.y<=420 && this.y>=385){
@@ -85,7 +85,7 @@ public class Player {
 			collapseOn=true;
 			isInJump = false;
 		}
-		if (this.y>=556 && this.x<=100){ 
+		if (this.y>=556 && this.x<=100){
 			this.x = 116;
 			this.hitBoxChar.setX((float)this.x-10);
 			this.hitBoxChar.setY((float)this.y-16);
@@ -93,14 +93,14 @@ public class Player {
 			canMoveLeft = false;
 			leftPress=false;
 		}
-		if (this.y>=572){ 
+		if (this.y>=572){
 			this.y = 556;
 			this.hitBoxChar.setX((float)this.x-10);
 			this.hitBoxChar.setY((float)this.y-16);
 			collapseOn=true;
 			isInJump = false;
 		}
-		if (this.y>=556 && this.x >=980){ 
+		if (this.y>=556 && this.x >=980){
 			this.x = 964;
 			this.hitBoxChar.setX((float)this.x-10);
 			this.hitBoxChar.setY((float)this.y-16);
@@ -114,9 +114,9 @@ public class Player {
 			this.hitBoxChar.setY((float)this.y-16);
 			collapseOn=true;
 			isInJump = false;
-		}	
+		}
 		tetrisList = World2.getTetrisList();
-	
+
 		for (int k=0; k < tetrisList.size(); k++){
 			if (Math.abs(tetrisList.get(k).getXcentre()-this.x)<32){
 				for (int i=0; i < tetrisList.get(k).getMatrice().length ; i++){
@@ -124,7 +124,7 @@ public class Player {
 						if (tetrisList.get(k).getMatrice()[i][j] == null)continue;
 						if(this.hitBoxChar.intersects(tetrisList.get(k).getMatrice()[i][j].getHitbox())==true){
 							collapseOn = true;
-							
+
 							if (rightPress == true ){
 								System.out.println("zozo");
 								this.x = this.x - speedX*delta ;
@@ -161,11 +161,11 @@ public class Player {
 								speedY=0;
 							}
 						}
-					
+
 					}
 				}
 			}
-			
+
 		}
 		if (collapseOn == false){
 			isInJump = true;
@@ -173,27 +173,27 @@ public class Player {
 			canMoveRight = true;
 		}
 	}
-	
-	
+
+
 	public void keyPressed (int key, char c) {
 
 			if (key == Input.KEY_RIGHT && leftPress == false ) {
 				rightPress = true;
 			}
-			
+
 			if (key == Input.KEY_LEFT && rightPress == false ) {
 				leftPress = true;
 			}
-			
+
 			if (key == Input.KEY_SPACE && isInJump == false && jumpReleased == true ) {
 				speedY = jumpSpeed;
 				isInJump = true;
 			}
-			
+
 		}
-	
+
 	public void keyReleased(int key, char c) {
-		
+
 		if (key == Input.KEY_RIGHT) {
 			rightPress = false;
 	}
@@ -204,7 +204,7 @@ public class Player {
 			jumpReleased = true;
 		}
 		}
-	
+
 	public void move(double delta) {
 			if (rightPress == true && x<1064 && canMoveRight == true) {
 				this.x = this.x + speedX*delta;
@@ -217,6 +217,6 @@ public class Player {
 		}
 			this.hitBoxChar.setX((float)this.x-10);
 			this.hitBoxChar.setY((float)this.y-16);
-			
+
 	}
-}	
+}

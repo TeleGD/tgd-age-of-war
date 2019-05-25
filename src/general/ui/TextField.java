@@ -16,15 +16,15 @@ import general.utils.FontUtils;
 /**
  * TextField Personnalisable a gogo
  * Constructeur: le gameContainer, la posittion x,y et la taille width height
- * 
- * personnalisable graphisme à gogo via les setters: 
+ *
+ * personnalisable graphisme à gogo via les setters:
  * - couleur/taille de bordure
  * - marges entre les bordures (paddingLeft,paddingTop, ...)s
  * - placeHolder (textSize, textFont, textColor)
  * - text (placeHolderTextSize, placeHolderTextFont, placeHolderTextColor)
  * - curseur (enabled, color, width)
  * - bordure (color, width)
- * 
+ *
  * autres points de personnalisations:
  * - upperCaseLock: Forcer la casse
  * - addUnauthorizeKey (Ajouter des key input, que tu ne veux pas qui soit détecté)
@@ -32,10 +32,10 @@ import general.utils.FontUtils;
  */
 @SuppressWarnings("serial")
 public class TextField extends TGDComponent{
-	
+
 	private String text;
 	private String placeHolder;
-	
+
 	private Color placeHolderColor;
 	private Color textColor;
 	private Color cursorColor;
@@ -54,14 +54,14 @@ public class TextField extends TGDComponent{
 	private int maxNumberOfLetter;
 
 	private ArrayList<Integer> unauthorizedKeys;
-	
+
 	private EnterActionListener listener;
     private boolean onlyFigures;
 
     public TextField(GameContainer container,float x,float y,float width,float height){
 		super(container,x,y,width,height);
 
-		
+
 		unauthorizedKeys=new ArrayList<Integer>();
 		unauthorizedKeys.add(Input.KEY_RIGHT);
 		unauthorizedKeys.add(Input.KEY_LEFT);
@@ -105,23 +105,23 @@ public class TextField extends TGDComponent{
         setOnlyFigures(true);
         setUpperCaseLock(false);
     }
-	
+
 	//SLICK METHOD
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		super.render(container, game, g);
 		if(text.length()>0){
-			
+
 			g.setColor(textColor);
 			g.setFont(textFont);
 			g.drawString(text, x+paddingLeft, y+paddingTop);
-			
-		
+
+
 		}else {
 			g.setColor(placeHolderColor);
 			g.setFont(placeHolderFont);
 			g.drawString(placeHolder, x+paddingLeft, y+paddingTop);
-			
+
 		}
 
 		if(cursorEnabled && (System.currentTimeMillis()-timeInit)%800<400 && hasFocus){
@@ -131,20 +131,20 @@ public class TextField extends TGDComponent{
 
 		g.resetFont();
 	}
-	
+
 	@Override
 	public float getAutomaticWidth(){
 		return Math.max(textFont.getWidth(text),placeHolderFont.getWidth(placeHolder))+paddingLeft+paddingRight;
 	}
-	
+
 	@Override
 	public float getAutomaticHeight(){
 		return Math.max(textFont.getHeight(text),placeHolderFont.getHeight(placeHolder))+paddingTop+paddingBottom;
 	}
-	
-	
-	
-	
+
+
+
+
 	//GETTERS AND SETTERS
 	public String getPlaceHolder() {
 		return placeHolder;
@@ -211,7 +211,7 @@ public class TextField extends TGDComponent{
 		this.textSize = textSize;
 	}
 
-	
+
 	private void setCursorColor(Color color) {
 		this.cursorColor=color;
 	}
@@ -220,8 +220,8 @@ public class TextField extends TGDComponent{
 		this.cursorWidth=width;
 	}
 
-	
-	
+
+
 	public int getCornerRadius() {
 		return cornerRadius;
 	}
@@ -229,14 +229,14 @@ public class TextField extends TGDComponent{
 	public void setCornerRadius(int cornerRadius) {
 		this.cornerRadius = cornerRadius;
 	}
-	
 
-	
+
+
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		if(!hasFocus)return;
-		
+
 		if(key==Input.KEY_BACK){
 			if(text.length()>0)text=text.substring(0, text.length()-1);
 		}else if(key==Input.KEY_ENTER)
@@ -288,7 +288,7 @@ public class TextField extends TGDComponent{
 
 		super.mouseClicked(type, x, y, count);
 	}
-	
+
 	@Override
 	public void keyReleased(int key, char c) {
 		super.keyReleased(key, c);
@@ -301,12 +301,12 @@ public class TextField extends TGDComponent{
 	public void setUpperCaseLock(boolean upperCaseLock) {
 		this.upperCaseLock = upperCaseLock;
 	}
-	
-	
+
+
 	public void addUnauthorizedKey(int key){
 		unauthorizedKeys.add(key);
 	}
-	
+
 	public void removeUnauthorizedKey(int key){
 		unauthorizedKeys.remove((Integer)key);
 	}
@@ -319,11 +319,11 @@ public class TextField extends TGDComponent{
 		this.cursorEnabled = cursorEnabled;
 	}
 
-	
+
 	public void setEnterActionListener(EnterActionListener listener){
 		this.listener=listener;
 	}
-	
+
 	public int getMaxNumberOfLetter() {
 		return maxNumberOfLetter;
 	}
@@ -339,6 +339,6 @@ public class TextField extends TGDComponent{
     public interface EnterActionListener{
 		void onEnterPressed();
 	}
-	
+
 
 }

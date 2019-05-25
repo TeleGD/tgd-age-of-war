@@ -11,19 +11,19 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class MainMenu extends Menu{
 
-	public static int ID = -3;	
-	
+	public static int ID = -3;
+
 	public MainMenu(){
 		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
-		
+
 		super.setItems(aow.World1.name,game2.World2.name,"Scores", "Quitter");
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
 		super.setTempsClignote(400);
 	}
-	
+
 	@Override
 	public void onOptionItemFocusedChanged(int position) {
 		time=System.currentTimeMillis();
@@ -46,7 +46,7 @@ public class MainMenu extends Menu{
 			break;
 		}
 	}
-	
+
 	@Override
 	public int getID() {
 		return ID;

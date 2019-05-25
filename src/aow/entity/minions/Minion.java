@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import aow.World1;
 
 public class Minion {
-	
+
 	private int x;
 	private int y;
 	private int posX;
@@ -32,13 +32,13 @@ public class Minion {
 
 	public Minion(int idOwner, int age, int type) {
 		/*
-		 * posX : num�ro de case du minion dans le board en partant de la gauche
-		 * y :  position en y dans la f�netre, est constant au cours du temps
+		 * posX : numéro de case du minion dans le board en partant de la gauche
+		 * y :  position en y dans la fenêtre, est constant au cours du temps
 		 */
-		
+
 		if (idOwner != 0) {
 			posX =  (World1.tailleBoard -1) * (idOwner - 1);
-			
+
 			xp = 50 * age * type;
 			damage = (int) (World1.damageDefault * age * type);
 			HP = (int) (World1.HPminion * age * type);
@@ -55,7 +55,7 @@ public class Minion {
 			this.currentPosX = posX;
 			this.nextPosX = posX;
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
-			
+
 			try {
 				if (type <= 3) {
 					image=new Image("images/game1/stick_"+type+"_a"+age+".png");
@@ -75,21 +75,21 @@ public class Minion {
 				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 				e.printStackTrace();
 			}
-			
+
 			World1.minions[posX] = this;
 		}
 	}
-	
+
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		if (idOwner != 0) {
 			g.drawImage(image, (float)(x), (float)(y));
 		}
 	}
-	
+
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     }
-    
-    
+
+
     public void takeDamage(int inflictedDamage) {
     	// Inflige les d�gats d'une attaque � ce minion
     	if (idOwner != 0) {
@@ -98,41 +98,41 @@ public class Minion {
     			if (idOwner == 1) {
     				World1.p2.addGold((int) price );
     				World1.p2.augmenteXp((int) xp );
-    				
+
     			}
     			else {
     				World1.p1.addGold((int) price );
     				World1.p1.augmenteXp((int) xp );
     			}
-    			
+
     			World1.minions[posX] = World1.fantom ;
     			bruit.play(1,(float) 0.4);
     		}
     	}
 
     }
-    
+
     public void move() {
     	World1.minions[posX] = World1.fantom ;
     	nextPosX = posX + direction;
     	x = World1.board.getX(posX);
-    	World1.minions[nextPosX] = this; 
+    	World1.minions[nextPosX] = this;
     }
-    
+
     public void fluidMove() {
     	if (posX != nextPosX) {
     		x=x+direction;
     	}
     }
-    
+
     public void setPosX() {
     	this.posX=nextPosX;
     }
-    
+
     public int getDamage() {
     	return damage;
     }
-    
+
     public int getIdOwner() {
     	return idOwner;
     }
@@ -148,7 +148,7 @@ public class Minion {
 	public int getType() {
 		return type;
 	}
-    
-    
+
+
 
 }

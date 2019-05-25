@@ -18,8 +18,8 @@ import general.World;
 
 public class WelcomeMenu extends Menu implements OnClickListener{
 
-	public static int ID = -2;	
-	
+	public static int ID = -2;
+
 	private static final String CONFIRM_TEXT="PRESS ENTER";
 
 	private Image background;
@@ -28,38 +28,38 @@ public class WelcomeMenu extends Menu implements OnClickListener{
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		super.init(container, game);
-		
-		background=new Image("images/LogoTGD_transparent.png");
+
+		background=new Image("images/logo.png");
 	}
-	
+
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
-		
+
 	}
 
 	@Override
 	public void onOptionItemFocusedChanged(int position){
 		time=System.currentTimeMillis();
 	}
-	
+
 	@Override
 	public void onOptionItemSelected(int position) {
 		game.enterState(MainMenu.ID, new FadeOutTransition(),new FadeInTransition());
 	}
-	
+
 	@Override
 	public int getID() {
 		return ID;
 	}
-	
-	
+
+
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//g.drawImage(new Image("img/accueil.png"), 0, 0);
 		g.setColor(Color.white);
 
 		g.drawRect(Main.longueur/2-300,25, 600,37);
-		
+
 		g.setFont(fontConfirmText);
 		int alpha=(int) ((System.currentTimeMillis()/blinkPeriod)%1000);
 		if(alpha>255)alpha=500-alpha;
@@ -67,10 +67,10 @@ public class WelcomeMenu extends Menu implements OnClickListener{
 		g.setColor(new Color(255-alpha,255-alpha,255-alpha));
 		g.drawString(CONFIRM_TEXT, Main.longueur/2-fontConfirmText.getWidth(CONFIRM_TEXT)/2,35);
 		g.drawImage(background,Main.longueur/2-background.getWidth()/2,Main.hauteur/2-background.getHeight()/2);
-		
+
 		g.setColor(Color.white);
 	}
-	
+
 	@Override
 	public void keyPressed(int key, char c) {
 
@@ -82,8 +82,7 @@ public class WelcomeMenu extends Menu implements OnClickListener{
 
 	@Override
 	public void onClick(TGDComponent componenent) {
-		
+
 	}
 
 }
-

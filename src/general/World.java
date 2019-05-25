@@ -12,12 +12,12 @@ public class World extends BasicGameState {
 
 	public static int ID=2;
 
-	
+
 	public void init(GameContainer container, StateBasedGame arg1) throws SlickException {
-		//Ici ne mettre que des initialisations de variables 
-		
+		//Ici ne mettre que des initialisations de variables
+
 		//Il faudra voir s'il faut bouger ces inits dans enter(...) si ca prend trop de temps
-		
+
 
 	}
 
@@ -40,7 +40,7 @@ public class World extends BasicGameState {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+
 	}
 
 	public void keyReleased(int key, char c) {
