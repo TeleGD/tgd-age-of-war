@@ -17,7 +17,7 @@ public class MainMenu extends Menu{
 		super.setTitrePrincipal("TGD - CODING NIGHT DU MEILLEUR BUREAU");
 		super.setTitreSecondaire("CECI EST LE SOUS TITRE SOUS LE TITRE");
 
-		super.setItems(aow.World1.name,game2.World2.name,"Scores", "Quitter");
+		super.setItems(aow.World1.name,"Scores", "Quitter");
 
 		super.setEnableClignote(false);
 		super.setCouleurClignote(Color.red);
@@ -36,11 +36,7 @@ public class MainMenu extends Menu{
 			aow.World1.reset();
 			game.enterState(aow.World1.ID, new FadeOutTransition(),new FadeInTransition());
 			break;
-		case 1:
-			game2.World2.reset();
-			game.enterState(game2.World2.ID, new FadeOutTransition(),new FadeInTransition());
-			break;
-		case 3:
+		case 2:
 			System.out.println("exit");
 			System.exit(0);
 			break;

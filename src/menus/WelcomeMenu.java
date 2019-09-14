@@ -13,7 +13,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import general.ui.TGDComponent;
 import general.ui.TGDComponent.OnClickListener;
 import general.Main;
-import general.World;
 
 
 public class WelcomeMenu extends Menu implements OnClickListener{

@@ -23,4 +23,4 @@ clean:
 	rm -r -f bin/*
 	rm -r -f zip/*
 
-.PHONY: build run archive clean
+.PHONY: build run archive exec clean
