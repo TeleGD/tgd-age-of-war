@@ -1,11 +1,7 @@
-package aow;
+package games.ageOfWar;
 
-import org.newdawn.slick.TrueTypeFont;
 import general.utils.FontUtils;
 
-import general.ui.Button;
-import general.ui.TGDComponent;
-import general.utils.FontUtils;
 import menus.MainMenu;
 
 import org.newdawn.slick.*;
@@ -14,18 +10,18 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import aow.entity.Player;
-import aow.entity.Train;
-import aow.entity.minions.Minion;
-import aow.entity.minions.Sort;
+import games.ageOfWar.entity.Player;
+import games.ageOfWar.entity.Train;
+import games.ageOfWar.entity.minions.Minion;
+import games.ageOfWar.entity.minions.Sort;
 
 import java.awt.Font;
 import java.util.*;
 
-public class World1 extends BasicGameState {
+public class World extends BasicGameState {
 
 	public static int ID=7;
-	public static String name = "Age of War";
+	public static final String GAME_NAME = "Age of War";
 	public static Minion[] minions;
 
 	public static int damageDefault = 5;
@@ -45,7 +41,7 @@ public class World1 extends BasicGameState {
 
 	protected TrueTypeFont fontEnd;
 
-	public static ArrayList<Sort> spells;
+	public static ArrayList<Sort> spells = new ArrayList<>(0);
 
 	public static Board board = new Board(tailleBoard,130,1150);
 
@@ -57,6 +53,8 @@ public class World1 extends BasicGameState {
 	public static Minion fantom = new Minion(0, 1, 1);
 
 	private int incr=0;
+	private boolean backMenu = false;
+	private boolean escapePress = false;
 	public static int etat = 0;
 
     @Override
@@ -69,11 +67,11 @@ public class World1 extends BasicGameState {
 
     	// Minion m1 = new Minion(1, 1, 1);
     	// Minion m2 = new Minion(2, 1, 1);
-    	fond = new Image("images/game1/fond.png");
-    	fondBadEnd = new Image("images/game1/yoda.png");
-    	fondGoodEnd = new Image("images/game1/goodEnd.png");
-    	music1=new Music("musics/game1/age1.ogg");
-    	pegi = new Sound("musics/game1/pegi18.ogg");
+    	fond = new Image("images/ageOfWar/fond.png");
+    	fondBadEnd = new Image("images/ageOfWar/yoda.png");
+    	fondGoodEnd = new Image("images/ageOfWar/goodEnd.png");
+    	music1=new Music("musics/ageOfWar/age1.ogg");
+    	pegi = new Sound("musics/ageOfWar/pegi18.ogg");
     }
 
     @Override
@@ -139,9 +137,9 @@ public class World1 extends BasicGameState {
 					spells.remove(i);
 				}
 			}
-
-    	} else {
-
+    	}
+    	if (backMenu) {
+    		game.enterState(MainMenu.ID, new FadeOutTransition(),new FadeInTransition());
     	}
     	if (debut) {
     		debut=false;
@@ -161,13 +159,27 @@ public class World1 extends BasicGameState {
 		spells = new ArrayList<Sort>();
 	}
 
-    public void keyPressed(int key, char c){
+    @Override
+	public void keyPressed(int key, char c){
 		p1.keyPressed(key, c);
+		if (key == Input.KEY_ESCAPE) {
+			escapePress=true;
+			backMenu=true;
+		}
+		if ((key == Input.KEY_ENTER || key == Input.KEY_ESCAPE ) && etat>=1 ) {
+			escapePress = true;
+			backMenu  = true;
+		}
 	}
 
+	@Override
 	public void keyReleased(int key, char c){
+		if (key == Input.KEY_ENTER || key == Input.KEY_ESCAPE) {
+			escapePress = false;
+		}
 		p1.keyReleased(key, c);
 	}
+
 
 	@Override
 	public int getID() {

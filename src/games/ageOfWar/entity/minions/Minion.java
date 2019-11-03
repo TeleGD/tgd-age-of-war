@@ -1,6 +1,5 @@
-package aow.entity.minions;
+package games.ageOfWar.entity.minions;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,7 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 
-import aow.World1;
+import games.ageOfWar.World;
 
 public class Minion {
 
@@ -37,35 +36,35 @@ public class Minion {
 		 */
 
 		if (idOwner != 0) {
-			posX =  (World1.tailleBoard -1) * (idOwner - 1);
+			posX =  (World.tailleBoard -1) * (idOwner - 1);
 
 			xp = 50 * age * type;
-			damage = (int) (World1.damageDefault * age * type);
-			HP = (int) (World1.HPminion * age * type);
-			price = (int) (World1.priceMinion * age * type * 1.05);
+			damage = World.damageDefault * age * type;
+			HP = World.HPminion * age * type;
+			price = (int) (World.priceMinion * age * type * 1.05);
 			try {
-				surprise=new Sound("musics/game1/surprise.ogg");
+				surprise=new Sound("musics/ageOfWar/surprise.ogg");
 			} catch (SlickException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			this.idOwner = idOwner;
-			this.x = World1.board.getX(posX);
-			this.y= World1.yMinion;
+			this.x = World.board.getX(posX);
+			this.y= World.yMinion;
 			this.currentPosX = posX;
 			this.nextPosX = posX;
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
 
 			try {
 				if (type <= 3) {
-					image=new Image("images/game1/stick_"+type+"_a"+age+".png");
-					this.bruit=new Sound("musics/game1/criWilhelm.ogg");
+					image=new Image("images/ageOfWar/stick_"+type+"_a"+age+".png");
+					this.bruit=new Sound("musics/ageOfWar/criWilhelm.ogg");
 				}
 				if (type >= 4 ) {
-					image=new Image("images/game1/stick_"+ (type - 3) +"_a"+age+".png");
-					image=image.getScaledCopy((float) 2);
+					image=new Image("images/ageOfWar/stick_"+ (type - 3) +"_a"+age+".png");
+					image=image.getScaledCopy(2);
 					this.y -= 90;
-					this.bruit=new Sound("musics/game1/headshot.ogg");
+					this.bruit=new Sound("musics/ageOfWar/headshot.ogg");
 					surprise.play(1,(float) 0.5);
 				}
 				if (idOwner==2) {
@@ -76,13 +75,13 @@ public class Minion {
 				e.printStackTrace();
 			}
 
-			World1.minions[posX] = this;
+			World.minions[posX] = this;
 		}
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		if (idOwner != 0) {
-			g.drawImage(image, (float)(x), (float)(y));
+			g.drawImage(image, (x), (y));
 		}
 	}
 
@@ -91,21 +90,21 @@ public class Minion {
 
 
     public void takeDamage(int inflictedDamage) {
-    	// Inflige les d�gats d'une attaque � ce minion
+    	// Inflige les dégats d'une attaque à ce minion
     	if (idOwner != 0) {
         	HP -= inflictedDamage;
     		if (this.HP<=0) {
     			if (idOwner == 1) {
-    				World1.p2.addGold((int) price );
-    				World1.p2.augmenteXp((int) xp );
+    				World.p2.addGold(price );
+    				World.p2.augmenteXp(xp );
 
     			}
     			else {
-    				World1.p1.addGold((int) price );
-    				World1.p1.augmenteXp((int) xp );
+    				World.p1.addGold(price );
+    				World.p1.augmenteXp(xp );
     			}
 
-    			World1.minions[posX] = World1.fantom ;
+    			World.minions[posX] = World.fantom ;
     			bruit.play(1,(float) 0.4);
     		}
     	}
@@ -113,10 +112,10 @@ public class Minion {
     }
 
     public void move() {
-    	World1.minions[posX] = World1.fantom ;
+    	World.minions[posX] = World.fantom ;
     	nextPosX = posX + direction;
-    	x = World1.board.getX(posX);
-    	World1.minions[nextPosX] = this;
+    	x = World.board.getX(posX);
+    	World.minions[nextPosX] = this;
     }
 
     public void fluidMove() {

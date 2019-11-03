@@ -1,6 +1,4 @@
-package aow.entity;
-
-import java.awt.Font;
+package games.ageOfWar.entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -9,14 +7,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import aow.World1;
-import aow.entity.minions.Minion;
-import aow.entity.minions.Sort;
+import games.ageOfWar.World;
+import games.ageOfWar.entity.minions.Minion;
+import games.ageOfWar.entity.minions.Sort;
 
 public class Player {
 
@@ -28,7 +23,7 @@ public class Player {
 	private int xp;
 	private int xpMax = 3000;
 	private int age = 1;
-	private int boardLength = World1.tailleBoard;
+	private int boardLength = World.tailleBoard;
 	private int temps = 0;
 	private Image base1;
 	private Image base2;
@@ -41,8 +36,8 @@ public class Player {
 	{
 		ID=num;
 		try {
-			sadMusic=new Music("musics/game1/sadMusic.ogg");
-			goodMusic = new Music("musics/game1/I_LIKE_TRAINS.ogg");
+			sadMusic=new Music("musics/ageOfWar/sadMusic.ogg");
+			goodMusic = new Music("musics/ageOfWar/I_LIKE_TRAINS.ogg");
 
 		} catch (SlickException e1) {
 			// TODO Auto-generated catch block
@@ -52,8 +47,8 @@ public class Player {
 		PV=HP;
 		PVMax=HP;
 		try {
-			base1=new Image("images/game1/base_1_a1.png");
-			base2=new Image("images/game1/base_2_a1.png");
+			base1=new Image("images/ageOfWar/base_1_a1.png");
+			base2=new Image("images/ageOfWar/base_2_a1.png");
 		} catch (SlickException e) {
 			// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 			e.printStackTrace();
@@ -64,7 +59,7 @@ public class Player {
 		PV=PV-degat;
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
-			World1.etat = 1;
+			World.etat = 1;
 			sadMusic.loop();
 //			System.exit(0);
 		}
@@ -117,25 +112,25 @@ public class Player {
 
 	public void achatMinion(int type) {
 
-		int price = World1.priceMinion * type * age;
+		int price = World.priceMinion * type * age;
 
-		if (ID==1 && World1.board.getCase(0)==0 ) { //Teste si case de spawn vide
-			if (World1.p1.removeGold(price)) { // teste si le joueur peut payer et l'encaisse si oui
+		if (ID==1 && World.board.getCase(0)==0 ) { //Teste si case de spawn vide
+			if (World.p1.removeGold(price)) { // teste si le joueur peut payer et l'encaisse si oui
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(1, age, type);
-				World1.board.setMinionToCase(1,0);
-				World1.t1.removeRail(2); // Le joueur recrute, il perd des rails
+				World.board.setMinionToCase(1,0);
+				World.t1.removeRail(2); // Le joueur recrute, il perd des rails
 			}
-		} else if (ID==2 && World1.board.getCase(boardLength-1) == 0) {
-			if (World1.p2.removeGold(price)) {
+		} else if (ID==2 && World.board.getCase(boardLength-1) == 0) {
+			if (World.p2.removeGold(price)) {
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
 				Minion m = new Minion(2, age, type);
-				World1.board.setMinionToCase(2, boardLength -1);
-				World1.t2.removeRail(2); // Le joueur recrute, il perd des rails
+				World.board.setMinionToCase(2, boardLength -1);
+				World.t2.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		}
 	}
@@ -143,12 +138,12 @@ public class Player {
 	public void castSpell() {
 
 		if (ID==1) { //Teste si case de spawn vide
-			if (World1.p1.removeXp(250*age)) { // teste si le joueur peut payer et l'encaisse si oui
-				World1.spells.add(new Sort(ID, age));
+			if (World.p1.removeXp(250*age)) { // teste si le joueur peut payer et l'encaisse si oui
+				World.spells.add(new Sort(ID, age));
 			}
 		} else {
-			if (World1.p2.removeXp(250*age)) {
-				World1.spells.add(new Sort(ID, age));
+			if (World.p2.removeXp(250*age)) {
+				World.spells.add(new Sort(ID, age));
 			}
 		}
 	}
@@ -164,13 +159,13 @@ public class Player {
 			xpMax=(int)(xpMax*2.5);
 			PVMax=(int)(PVMax*1.25);
 			PV=(int)(PV*1.25);
-			base1=new Image("images/game1/base_1_a"+age+".png");
-			base2=new Image("images/game1/base_2_a"+age+".png");
+			base1=new Image("images/ageOfWar/base_1_a"+age+".png");
+			base2=new Image("images/ageOfWar/base_2_a"+age+".png");
 
 			// Gestion musique du fond sonore : vérifie qu'il est le premier à lancer cette musique, sinon ne fait rien
 			if (needMusic()) {
 				try {
-					musicAge =new Music("musics/game1/age" + age + ".ogg");
+					musicAge =new Music("musics/ageOfWar/age" + age + ".ogg");
 
 				} catch (SlickException e1) {
 					// TODO Auto-generated catch block
@@ -203,19 +198,24 @@ public class Player {
 			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 8, 229);
 
 			g.setColor(Color.yellow);
-			g.drawString((int)(gold) + " gold", 8, 255);
+			g.drawString((gold) + " gold", 8, 255);
 
 			g.setColor(Color.magenta);
-			g.drawString("Age : " + (int)(age), 8, 280);
+			g.drawString("Age : " + (age), 8, 280);
 
-			g.setColor(new Color(0,153,0));
-			g.fillRect(6, 200, 120, 18);
+			if (age<3) {
+				g.setColor(new Color(0,153,0));
+				g.fillRect(6, 200, 120, 18);
 
-			g.setColor(new Color(0,255,0));
-			g.fillRect(6, 200, (int)(120*(double)(xp)/xpMax), 18);
+				g.setColor(new Color(0,255,0));
+				g.fillRect(6, 200, (int)(120*(double)(xp)/xpMax), 18);
 
-			g.setColor(Color.white);
-			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 8, 200);
+				g.setColor(Color.white);
+				g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 8, 200);
+			} else {
+				g.setColor(Color.white);
+				g.drawString(""+xp+" xp", 8, 200);
+			}
 
 			// Affichage des coûts des unités :
 
@@ -223,13 +223,13 @@ public class Player {
 			g.drawString("[S] SPECIAL : " + (250*age) +" XP", 8, 135);
 
 			g.setColor(Color.white);
-			g.drawString("[A] Soldat : " + (World1.priceMinion * 1 * age) +" G", 8, 150);
+			g.drawString("[A] Soldat : " + (World.priceMinion * 1 * age) +" G", 8, 150);
 
 			g.setColor(Color.white);
-			g.drawString("[Z] Distance : " + (World1.priceMinion * 2 * age) +" G", 8, 165);
+			g.drawString("[Z] Distance : " + (World.priceMinion * 2 * age) +" G", 8, 165);
 
 			g.setColor(Color.white);
-			g.drawString("[E] Elite : " + (World1.priceMinion * 3 * age) +" G", 8, 180);
+			g.drawString("[E] Elite : " + (World.priceMinion * 3 * age) +" G", 8, 180);
 
 		}
 		else // joueur 2
@@ -246,19 +246,24 @@ public class Player {
 			g.drawString(""+(int)(((double)(PV)/PVMax)*100)+" %", 1153, 229);
 
 			g.setColor(Color.yellow);
-			g.drawString((int)(gold) + " gold", 1153, 255);
+			g.drawString((gold) + " gold", 1153, 255);
 
 			g.setColor(Color.magenta);
-			g.drawString("Age : " + (int)(age), 1153, 280);
+			g.drawString("Age : " + (age), 1153, 280);
 
-			g.setColor(new Color(0,153,0));
-			g.fillRect(1151, 200, 120, 18);
+			if (age<3) {
+				g.setColor(new Color(0,153,0));
+				g.fillRect(1151, 200, 120, 18);
 
-			g.setColor(new Color(0,255,0));
-			g.fillRect(1151, 200, (int)(120*(double)(xp)/xpMax), 18);
+				g.setColor(new Color(0,255,0));
+				g.fillRect(1151, 200, (int)(120*(double)(xp)/xpMax), 18);
 
-			g.setColor(Color.white);
-			g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 1153, 200);
+				g.setColor(Color.white);
+				g.drawString(""+(int)(((double)(xp)/xpMax)*100)+" %", 1153, 200);
+			} else {
+				g.setColor(Color.white);
+				g.drawString(""+xp+" xp", 1153, 200);
+			}
 
 			// Affichage des coûts des unités :
 
@@ -266,23 +271,23 @@ public class Player {
 			g.drawString("[L] SPECIAL : " + (250*age) +" XP", 1100, 134);
 
 			g.setColor(Color.white);
-			g.drawString("[I] Soldat : " + (World1.priceMinion * 1 * age) +" G", 1100, 150);
+			g.drawString("[I] Soldat : " + (World.priceMinion * 1 * age) +" G", 1100, 150);
 
 			g.setColor(Color.white);
-			g.drawString("[O] Distance : " + (World1.priceMinion * 2 * age) +" G", 1100, 165);
+			g.drawString("[O] Distance : " + (World.priceMinion * 2 * age) +" G", 1100, 165);
 
 			g.setColor(Color.white);
-			g.drawString("[P] Elite : " + (World1.priceMinion * 3 * age) +" G", 1100, 180);
+			g.drawString("[P] Elite : " + (World.priceMinion * 3 * age) +" G", 1100, 180);
 		}
 	}
 
 	private boolean needMusic() {
 		if (ID ==1) {
-			if (age > World1.p2.getAge() ) {
+			if (age > World.p2.getAge() ) {
 				return true;
 			}
 		} else {
-			if (age > World1.p1.getAge() ) {
+			if (age > World.p1.getAge() ) {
 				return true;
 			}
 		}
@@ -295,35 +300,35 @@ public class Player {
 		switch (key){
 		case Input.KEY_A:
 			aPress = true;
-			World1.p1.achatMinion(1);
+			World.p1.achatMinion(1);
 			break;
 		case Input.KEY_Z:
 			zPress = true;
-			World1.p1.achatMinion(2);
+			World.p1.achatMinion(2);
 			break;
 		case Input.KEY_E:
 			ePress = true;
-			World1.p1.achatMinion(3);
+			World.p1.achatMinion(3);
 			break;
 		case Input.KEY_S:
 			lPress = true;
-			World1.p1.castSpell();
+			World.p1.castSpell();
 			break;
 		case Input.KEY_I:
 			iPress = true;
-			World1.p2.achatMinion(1);
+			World.p2.achatMinion(1);
 			break;
 		case Input.KEY_O:
 			oPress = true;
-			World1.p2.achatMinion(2);
+			World.p2.achatMinion(2);
 			break;
 		case Input.KEY_P:
 			pPress = true;
-			World1.p2.achatMinion(3);
+			World.p2.achatMinion(3);
 			break;
 		case Input.KEY_L:
 			lPress = true;
-			World1.p2.castSpell();
+			World.p2.castSpell();
 			break;
 		}
 	}

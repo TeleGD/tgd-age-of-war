@@ -1,7 +1,5 @@
 package general;
 
-import java.io.File;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -9,7 +7,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import menus.MainMenu;
 import menus.WelcomeMenu;
-
 
 public class Main extends StateBasedGame{
 
@@ -35,7 +32,7 @@ public class Main extends StateBasedGame{
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new WelcomeMenu());
 		addState(new MainMenu());
-		addState(new aow.World1());
+		addState(new games.ageOfWar.World());
 
 		this.enterState(WelcomeMenu.ID);
 	}

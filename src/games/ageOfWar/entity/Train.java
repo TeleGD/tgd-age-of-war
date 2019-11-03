@@ -1,16 +1,17 @@
 /* au fil du temps, ligne de chemin de fer se construit */
 /*  */
 
-package aow.entity;
+package games.ageOfWar.entity;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
+
+import games.ageOfWar.World;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-
-import aow.World1;
 
 public class Train {
 
@@ -36,14 +37,14 @@ public class Train {
 			numJoueur=idOwner;
 			numRail=0;
 			try {
-				goodMusic = new Music("musics/game1/I_LIKE_TRAINS.ogg");
+				goodMusic = new Music("musics/ageOfWar/I_LIKE_TRAINS.ogg");
 
 			} catch (SlickException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
-				picture=new Image("images/game1/track.png"); // a faire le nom
+				picture=new Image("images/ageOfWar/track.png"); // a faire le nom
 			} catch (SlickException e) {
 				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
 				e.printStackTrace();
@@ -83,7 +84,7 @@ public class Train {
 
 				if(numRail==nbrail) // arrives
 				{
-		    		World1.etat = 2 + numJoueur;
+		    		World.etat = 2 + numJoueur;
 		    		goodMusic.loop(1, (float)0.2);
 
 				}
@@ -110,7 +111,7 @@ public class Train {
 			{
 				for(int x=0 ; x<numRail ; x+=1)// le fait numRail fois
 				{
-					g.drawImage(picture, (float)(x*LONG_RAIL), (float)(663));
+					g.drawImage(picture, x*LONG_RAIL, (663));
 				}
 			}
 
@@ -118,7 +119,7 @@ public class Train {
 			{
 				for(int x=0 ; x<numRail ; x++)
 				{
-					g.drawImage(picture, (float)(1280-x*LONG_RAIL-LONG_RAIL), (float)(600));
+					g.drawImage(picture, 1280-x*LONG_RAIL-LONG_RAIL, (600));
 				}
 
 			}
