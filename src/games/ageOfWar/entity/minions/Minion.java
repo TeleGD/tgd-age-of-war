@@ -3,14 +3,16 @@ package games.ageOfWar.entity.minions;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.state.StateBasedGame;
+
+import app.AppLoader;
 
 import games.ageOfWar.World;
 
 public class Minion {
 
+	private World world;
 	private int x;
 	private int y;
 	private int posX;
@@ -26,15 +28,15 @@ public class Minion {
 	private int price;
 	private Image image;
 	private int xp;
-	private Sound bruit;
-	private Sound surprise;
+	private Audio bruit;
+	private Audio surprise;
 
-	public Minion(int idOwner, int age, int type) {
+	public Minion(World world, int idOwner, int age, int type) {
 		/*
 		 * posX : numéro de case du minion dans le board en partant de la gauche
 		 * y :  position en y dans la fenêtre, est constant au cours du temps
 		 */
-
+		this.world = world;
 		if (idOwner != 0) {
 			posX =  (World.tailleBoard -1) * (idOwner - 1);
 
@@ -42,40 +44,30 @@ public class Minion {
 			damage = World.damageDefault * age * type;
 			HP = World.HPminion * age * type;
 			price = (int) (World.priceMinion * age * type * 1.05);
-			try {
-				surprise=new Sound("musics/ageOfWar/surprise.ogg");
-			} catch (SlickException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			surprise=AppLoader.loadAudio("/sounds/ageOfWar/surprise.ogg");
 			this.idOwner = idOwner;
-			this.x = World.board.getX(posX);
+			this.x = this.world.board.getX(posX);
 			this.y= World.yMinion;
 			this.currentPosX = posX;
 			this.nextPosX = posX;
 			this.direction = -2 * idOwner + 3 ; // = 1 si joueur1, = -1 si joueur2
 
-			try {
-				if (type <= 3) {
-					image=new Image("images/ageOfWar/stick_"+type+"_a"+age+".png");
-					this.bruit=new Sound("musics/ageOfWar/criWilhelm.ogg");
-				}
-				if (type >= 4 ) {
-					image=new Image("images/ageOfWar/stick_"+ (type - 3) +"_a"+age+".png");
-					image=image.getScaledCopy(2);
-					this.y -= 90;
-					this.bruit=new Sound("musics/ageOfWar/headshot.ogg");
-					surprise.play(1,(float) 0.5);
-				}
-				if (idOwner==2) {
-					image=image.getFlippedCopy(true, false);
-				}
-			} catch (SlickException e) {
-				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-				e.printStackTrace();
+			if (type <= 3) {
+				image=AppLoader.loadPicture("/images/ageOfWar/stick_"+type+"_a"+age+".png");
+				this.bruit=AppLoader.loadAudio("/sounds/ageOfWar/criWilhelm.ogg");
+			}
+			if (type >= 4 ) {
+				image=AppLoader.loadPicture("/images/ageOfWar/stick_"+ (type - 3) +"_a"+age+".png");
+				image=image.getScaledCopy(2);
+				this.y -= 90;
+				this.bruit=AppLoader.loadAudio("/sounds/ageOfWar/headshot.ogg");
+				surprise.playAsSoundEffect(1f, .5f, false);
+			}
+			if (idOwner==2) {
+				image=image.getFlippedCopy(true, false);
 			}
 
-			World.minions[posX] = this;
+			this.world.minions[posX] = this;
 		}
 	}
 
@@ -85,7 +77,7 @@ public class Minion {
 		}
 	}
 
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
     }
 
 
@@ -95,27 +87,27 @@ public class Minion {
         	HP -= inflictedDamage;
     		if (this.HP<=0) {
     			if (idOwner == 1) {
-    				World.p2.addGold(price );
-    				World.p2.augmenteXp(xp );
+    				this.world.p2.addGold(price );
+    				this.world.p2.augmenteXp(xp );
 
     			}
     			else {
-    				World.p1.addGold(price );
-    				World.p1.augmenteXp(xp );
+    				this.world.p1.addGold(price );
+    				this.world.p1.augmenteXp(xp );
     			}
 
-    			World.minions[posX] = World.fantom ;
-    			bruit.play(1,(float) 0.4);
+    			this.world.minions[posX] = this.world.fantom ;
+    			bruit.playAsSoundEffect(1f, .4f, false);
     		}
     	}
 
     }
 
     public void move() {
-    	World.minions[posX] = World.fantom ;
+    	this.world.minions[posX] = this.world.fantom ;
     	nextPosX = posX + direction;
-    	x = World.board.getX(posX);
-    	World.minions[nextPosX] = this;
+    	x = this.world.board.getX(posX);
+    	this.world.minions[nextPosX] = this;
     }
 
     public void fluidMove() {

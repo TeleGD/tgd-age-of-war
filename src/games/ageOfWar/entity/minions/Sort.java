@@ -6,60 +6,47 @@ package games.ageOfWar.entity.minions;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
+
+import app.AppLoader;
 
 import games.ageOfWar.World;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
 public class Sort {
 
-
+	private World world;
 	private int power; // puissance du sort
 	private int numJoueur; // de quel cote est le sort
 	private Image picture; // les images du sort associees à chaque epoque
 	private double x,y; // ira jusqu'au point culminant centre
-	private double pente=(30.0-350.0)/((World.board.getX(World.tailleBoard-1)-World.board.getX(0))/2); //difference de hauteur / longueur axe des x  ; 15 sera la hauteur max
+	private double pente; //difference de hauteur / longueur axe des x  ; 15 sera la hauteur max
 	private int i=0; //compteur d explosion
 	private double speed = 5;
 	private int basePower = 20;
 
 	/* constructeur : -initialise power en fonction de l'age */
-	public Sort(int numplayer, int age)
+	public Sort(World world, int numplayer, int age)
 	{
+		this.world = world;
+		pente = (30.0-350.0)/((this.world.board.getX(World.tailleBoard-1)-this.world.board.getX(0))/2);
 		numJoueur=numplayer;
 		power = basePower * age;
 
 		if(age==1)
 		{
-			try {
-				picture=new Image("images/ageOfWar/rock.png"); // a faire le nom
-			} catch (SlickException e) {
-				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-				e.printStackTrace();
-			}
+			picture=AppLoader.loadPicture("/images/ageOfWar/rock.png"); // a faire le nom
 		}
 		else
 		{
 			if(age==2)
 			{
-				try {
-					picture=new Image("images/ageOfWar/bullet.png"); // a faire le nom
-				} catch (SlickException e) {
-					// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-					e.printStackTrace();
-				}
+				picture=AppLoader.loadPicture("/images/ageOfWar/bullet.png"); // a faire le nom
 			}
 			else
 				if(age==3)
 				{
-					try {
-						picture=new Image("images/ageOfWar/rocket.png"); // a faire le nom
-					} catch (SlickException e) {
-						// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-						e.printStackTrace();
-					}
+					picture=AppLoader.loadPicture("/images/ageOfWar/rocket.png"); // a faire le nom
 					if (numJoueur==2) {
 						picture = picture.getFlippedCopy(true, false);
 					}
@@ -75,7 +62,7 @@ public class Sort {
 		}
 		else
 		{
-			x=World.board.getX(World.tailleBoard-1)+50; // n taille du Damier
+			x=this.world.board.getX(World.tailleBoard-1)+50; // n taille du Damier
 			y=350;
 		}// initialise les coordonnees
 
@@ -124,12 +111,7 @@ public class Sort {
 
 			if(y<=30) // explosion declenchee et des images a afficher
 			{
-				try {
-					picture=new Image("images/ageOfWar/boom"+((i/8)+1)+".png");
-				} catch (SlickException e) {
-					// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-					e.printStackTrace();
-				}
+				picture=AppLoader.loadPicture("/images/ageOfWar/boom"+((i/8)+1)+".png");
 			}
 			}
 
@@ -151,8 +133,8 @@ public class Sort {
 
 		for(int k=0 ; k<World.tailleBoard ; k++ )
 		{
-			if(World.board.getCase(k)==cible) {
-				World.minions[k].takeDamage(power);
+			if(this.world.board.getCase(k)==cible) {
+				this.world.minions[k].takeDamage(power);
 			}
 		}
 

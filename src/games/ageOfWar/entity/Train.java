@@ -3,18 +3,19 @@
 
 package games.ageOfWar.entity;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.state.StateBasedGame;
+
+import app.AppLoader;
 
 import games.ageOfWar.World;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-
 public class Train {
 
+		private World world;
 		private int LONG_RAIL=48;
 		private int numJoueur; // la hauteur et le placement dependent de ceci
 		private int x; // où se situe le train sur la carte graphiquement
@@ -25,30 +26,20 @@ public class Train {
 		private boolean end; // vaut true quand on a atteint l'autre base
 		private boolean proche; // vaut true si proches de base
 		private Image picture;
-		private Music goodMusic;
+		private Audio goodMusic;
 		private boolean toMove; // dit s'il faut faire avancer le rail (un update sur deux
 
 
 		/* constructeur, il faut faire commencer en décalant de longueur une ligne de train*/
-		public Train(int idOwner)
+		public Train(World world, int idOwner)
 		{
+			this.world = world;
 			end=false;
 			proche=false;
 			numJoueur=idOwner;
 			numRail=0;
-			try {
-				goodMusic = new Music("musics/ageOfWar/I_LIKE_TRAINS.ogg");
-
-			} catch (SlickException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				picture=new Image("images/ageOfWar/track.png"); // a faire le nom
-			} catch (SlickException e) {
-				// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-				e.printStackTrace();
-			}
+			goodMusic = AppLoader.loadAudio("/musics/ageOfWar/I_LIKE_TRAINS.ogg");
+			picture=AppLoader.loadPicture("/images/ageOfWar/track.png"); // a faire le nom
 			if(numJoueur==1)x=0;
 			else
 			{
@@ -84,8 +75,8 @@ public class Train {
 
 				if(numRail==nbrail) // arrives
 				{
-		    		World.etat = 2 + numJoueur;
-		    		goodMusic.loop(1, (float)0.2);
+		    		this.world.etat = 2 + numJoueur;
+		    		goodMusic.playAsMusic(1f, .2f, true);
 
 				}
 			} else {

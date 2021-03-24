@@ -4,10 +4,10 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.state.StateBasedGame;
+
+import app.AppLoader;
 
 import games.ageOfWar.World;
 import games.ageOfWar.entity.minions.Minion;
@@ -15,7 +15,7 @@ import games.ageOfWar.entity.minions.Sort;
 
 public class Player {
 
-
+	private World world;
 	private int PV; //pts de vie de la base
 	private int PVMax;
 	private int gold;
@@ -27,40 +27,30 @@ public class Player {
 	private int temps = 0;
 	private Image base1;
 	private Image base2;
-	private Music sadMusic;
-	private Music goodMusic;
-	private Music musicAge;
+	private Audio sadMusic;
+	private Audio goodMusic;
+	private Audio musicAge;
 
 	//constructeur
-	public Player(int num, int gold, int HP ) // init num joueur, or et pv
+	public Player(World world, int num, int gold, int HP ) // init num joueur, or et pv
 	{
+		this.world = world;
 		ID=num;
-		try {
-			sadMusic=new Music("musics/ageOfWar/sadMusic.ogg");
-			goodMusic = new Music("musics/ageOfWar/I_LIKE_TRAINS.ogg");
-
-		} catch (SlickException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		sadMusic=AppLoader.loadAudio("/musics/ageOfWar/sadMusic.ogg");
+		goodMusic = AppLoader.loadAudio("/musics/ageOfWar/I_LIKE_TRAINS.ogg");
 		this.gold=gold;
 		PV=HP;
 		PVMax=HP;
-		try {
-			base1=new Image("images/ageOfWar/base_1_a1.png");
-			base2=new Image("images/ageOfWar/base_2_a1.png");
-		} catch (SlickException e) {
-			// nous donne la trace de l'erreur si on ne peut charger l'image correctement
-			e.printStackTrace();
-		}
+		base1=AppLoader.loadPicture("/images/ageOfWar/base_1_a1.png");
+		base2=AppLoader.loadPicture("/images/ageOfWar/base_2_a1.png");
 	}
 
 	public void takeDamage(int degat) {
 		PV=PV-degat;
 		if (PV<=0) {
 			System.out.println("Défaite du joueur "+ID);
-			World.etat = 1;
-			sadMusic.loop();
+			this.world.etat = 1;
+			sadMusic.playAsMusic(1f, .3f, true);
 //			System.exit(0);
 		}
 	}
@@ -114,23 +104,23 @@ public class Player {
 
 		int price = World.priceMinion * type * age;
 
-		if (ID==1 && World.board.getCase(0)==0 ) { //Teste si case de spawn vide
-			if (World.p1.removeGold(price)) { // teste si le joueur peut payer et l'encaisse si oui
+		if (ID==1 && this.world.board.getCase(0)==0 ) { //Teste si case de spawn vide
+			if (this.world.p1.removeGold(price)) { // teste si le joueur peut payer et l'encaisse si oui
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
-				Minion m = new Minion(1, age, type);
-				World.board.setMinionToCase(1,0);
-				World.t1.removeRail(2); // Le joueur recrute, il perd des rails
+				Minion m = new Minion(this.world, 1, age, type);
+				this.world.board.setMinionToCase(1,0);
+				this.world.t1.removeRail(2); // Le joueur recrute, il perd des rails
 			}
-		} else if (ID==2 && World.board.getCase(boardLength-1) == 0) {
-			if (World.p2.removeGold(price)) {
+		} else if (ID==2 && this.world.board.getCase(boardLength-1) == 0) {
+			if (this.world.p2.removeGold(price)) {
 				if (Math.random() > 0.95) {
 					type += 3;
 				}
-				Minion m = new Minion(2, age, type);
-				World.board.setMinionToCase(2, boardLength -1);
-				World.t2.removeRail(2); // Le joueur recrute, il perd des rails
+				Minion m = new Minion(this.world, 2, age, type);
+				this.world.board.setMinionToCase(2, boardLength -1);
+				this.world.t2.removeRail(2); // Le joueur recrute, il perd des rails
 			}
 		}
 	}
@@ -138,19 +128,18 @@ public class Player {
 	public void castSpell() {
 
 		if (ID==1) { //Teste si case de spawn vide
-			if (World.p1.removeXp(250*age)) { // teste si le joueur peut payer et l'encaisse si oui
-				World.spells.add(new Sort(ID, age));
+			if (this.world.p1.removeXp(250*age)) { // teste si le joueur peut payer et l'encaisse si oui
+				this.world.spells.add(new Sort(this.world, ID, age));
 			}
 		} else {
-			if (World.p2.removeXp(250*age)) {
-				World.spells.add(new Sort(ID, age));
+			if (this.world.p2.removeXp(250*age)) {
+				this.world.spells.add(new Sort(this.world, ID, age));
 			}
 		}
 	}
 
 
-	public void update(GameContainer container,StateBasedGame game, int delta) throws SlickException
-	{
+	public void update(GameContainer container,StateBasedGame game, int delta) {
 		// update de age, xpMax, pv, pvmax ;
 		if(xp>=xpMax && age < 3)
 		{
@@ -159,19 +148,13 @@ public class Player {
 			xpMax=(int)(xpMax*2.5);
 			PVMax=(int)(PVMax*1.25);
 			PV=(int)(PV*1.25);
-			base1=new Image("images/ageOfWar/base_1_a"+age+".png");
-			base2=new Image("images/ageOfWar/base_2_a"+age+".png");
+			base1=AppLoader.loadPicture("/images/ageOfWar/base_1_a"+age+".png");
+			base2=AppLoader.loadPicture("/images/ageOfWar/base_2_a"+age+".png");
 
 			// Gestion musique du fond sonore : vérifie qu'il est le premier à lancer cette musique, sinon ne fait rien
 			if (needMusic()) {
-				try {
-					musicAge =new Music("musics/ageOfWar/age" + age + ".ogg");
-
-				} catch (SlickException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				musicAge.loop();
+				musicAge =AppLoader.loadAudio("/musics/ageOfWar/age" + age + ".ogg");
+				musicAge.playAsMusic(1f, .3f, true);
 			}
 		}
 
@@ -182,8 +165,7 @@ public class Player {
 		}
 	}
 
-	public void render(GameContainer container,StateBasedGame game, Graphics g) throws SlickException
-	{
+	public void render(GameContainer container,StateBasedGame game, Graphics g) {
 		if(ID==1)
 		{
 			g.drawImage(base1, 6, 250);
@@ -283,83 +265,15 @@ public class Player {
 
 	private boolean needMusic() {
 		if (ID ==1) {
-			if (age > World.p2.getAge() ) {
+			if (age > this.world.p2.getAge() ) {
 				return true;
 			}
 		} else {
-			if (age > World.p1.getAge() ) {
+			if (age > this.world.p1.getAge() ) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-	private boolean aPress,zPress,ePress,iPress,oPress,pPress,sPress,lPress = false;
-
-	public void keyPressed(int key, char c) {
-		switch (key){
-		case Input.KEY_A:
-			aPress = true;
-			World.p1.achatMinion(1);
-			break;
-		case Input.KEY_Z:
-			zPress = true;
-			World.p1.achatMinion(2);
-			break;
-		case Input.KEY_E:
-			ePress = true;
-			World.p1.achatMinion(3);
-			break;
-		case Input.KEY_S:
-			lPress = true;
-			World.p1.castSpell();
-			break;
-		case Input.KEY_I:
-			iPress = true;
-			World.p2.achatMinion(1);
-			break;
-		case Input.KEY_O:
-			oPress = true;
-			World.p2.achatMinion(2);
-			break;
-		case Input.KEY_P:
-			pPress = true;
-			World.p2.achatMinion(3);
-			break;
-		case Input.KEY_L:
-			lPress = true;
-			World.p2.castSpell();
-			break;
-		}
-	}
-
-	public void keyReleased(int key, char c) {
-		switch (key){
-		case Input.KEY_A:
-			aPress = false;
-			break;
-		case Input.KEY_Z:
-			zPress = false;
-			break;
-		case Input.KEY_E:
-			ePress = false;
-			break;
-		case Input.KEY_S:
-			sPress = false;
-			break;
-		case Input.KEY_I:
-			iPress = false;
-			break;
-		case Input.KEY_O:
-			oPress = false;
-			break;
-		case Input.KEY_P:
-			pPress = false;
-			break;
-		case Input.KEY_L:
-			lPress = false;
-			break;
-		}
 	}
 
 }
