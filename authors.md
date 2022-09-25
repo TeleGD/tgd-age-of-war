@@ -1,4 +1,4 @@
-- Alexis El Mrini (@alexis-elmrini)
+- Alexis El Mrini (@dspiricate)
 - Arthur Canal (@canalarthur)
 - Amos George (@AmosGeorge)
 - Clémence Picquet (@FlamantRose)
